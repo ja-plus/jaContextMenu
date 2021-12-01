@@ -32,110 +32,110 @@
 
     const myContextMenu = new ContextMenu();
     let menu1 = myContextMenu.create({
-        items: [
+      items: [
+        {
+          label: '返回',
+          tip: '返回上一页',
+          disabled: true,
+          onclick() {
+            console.log('item1 click');
+          },
+        },
+        {
+          label: '前进',
+          tip: '提示文字',
+          onclick(e, payload) {
+            console.log('item2 click', payload);
+          },
+        },
+        {
+          type: 'divide',
+        },
+        {
+          label: '更多',
+          tip: 'more',
+          children: [
             {
-                label: '返回',
-                tip: '返回上一页',
-                disabled: true,
-                onclick() {
-                    console.log('item1 click');
-                }
+              label: '二级菜单1',
+              disabled: true,
+              onclick() {
+                console.log('二级菜单被点击');
+              },
+            },
+            { type: 'divide' },
+            {
+              label: '二级菜单2',
+              onclick(e, payload) {
+                console.log('二级菜单2被点击', payload);
+              },
+            },
+          ],
+        },
+        {
+          label: '更多2',
+          children: [
+            {
+              label: '二级菜单2-1',
+              onclick() {
+                console.log('二级菜单2-1被点击');
+              },
             },
             {
-                label: '前进',
-                tip: '提示文字',
-                onclick(e, payload) {
-                    console.log('item2 click', payload);
-                }
+              label: '二级菜单2-2',
+              onclick() {
+                console.log('二级菜单2-2被点击');
+              },
             },
-            {
-                type: 'divide',
-            },
-            {
-                label: '更多',
-                tip: 'more',
-                children: [
-                    {
-                        label: '二级菜单1',
-                        disabled: true,
-                        onclick() {
-                            console.log('二级菜单被点击');
-                        }
-                    },
-                    { type: 'divide' },
-                    {
-                        label: '二级菜单2',
-                        onclick(e, payload) {
-                            console.log('二级菜单2被点击', payload);
-                        }
-                    },
-                ]
-            },
-            {
-                label: '更多2',
-                children: [
-                    {
-                        label: '二级菜单2-1',
-                        onclick() {
-                            console.log('二级菜单2-1被点击');
-                        }
-                    },
-                    {
-                        label: '二级菜单2-2',
-                        onclick() {
-                            console.log('二级菜单2-2被点击');
-                        }
-                    },
-                ]
-            }
-        ]
+          ],
+        },
+      ],
     });
     let menu2 = myContextMenu.create({
-        items: [
-            {
-                label: '第一',
-                onclick() {
-                    console.log('ggggg');
-                }
-            },
-            {
-                label: '第二',
-                onclick() {
-                    console.log('aaaaa');
-                }
-            },
-        ]
+      items: [
+        {
+          label: '第一',
+          onclick() {
+            console.log('ggggg');
+          },
+        },
+        {
+          label: '第二',
+          onclick() {
+            console.log('aaaaa');
+          },
+        },
+      ],
     });
     let menu3 = myContextMenu.create({
-        items: [
+      items: [
+        {
+          label: 'body1',
+          onclick() {
+            console.log('body1');
+          },
+        },
+        {
+          label: 'body2',
+          onclick() {
+            console.log('body2');
+          },
+          children: [
             {
-                label: 'body1',
-                onclick() {
-                    console.log('body1');
-                }
+              label: '二级菜单1',
+              onclick() {
+                console.log('二级菜单被点击');
+              },
             },
+            { type: '------------' },
             {
-                label: 'body2',
-                onclick() {
-                    console.log('body2');
-                },
-                children: [
-                    {
-                        label: '二级菜单1',
-                        onclick() {
-                            console.log('二级菜单被点击');
-                        }
-                    },
-                    { type: '------------' },
-                    {
-                        label: '二级菜单2',
-                        onclick() {
-                            console.log('二级菜单2被点击');
-                        }
-                    },
-                ]
+              label: '二级菜单2',
+              onclick() {
+                console.log('二级菜单2被点击');
+              },
             },
-        ]
+          ],
+        },
+      ],
     });
     content.oncontextmenu = myContextMenu.showContextMenuFunc(menu1, 'datadata');
     content2.oncontextmenu = myContextMenu.showContextMenuFunc(menu2);

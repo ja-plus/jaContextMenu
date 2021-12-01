@@ -1,0 +1,26 @@
+{
+  "name": "ja-context-menu",
+  "version": "1.0.0",
+  "description": "js contextmenu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/chenja123/ja-context-menu.git"
+  },
+  "keywords": [
+    "contextmenu-js"
+  ],
+  "author": "JA+",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-html": "^6.2.0"
+  },
+  "dependencies": {
+    
+  }
+}

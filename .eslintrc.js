@@ -11,6 +11,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'prettier/prettier': 1,
     quotes: [1, 'single'], // 使用单引号
     semi: [1, 'always'], // 使用分号结尾
     'no-unused-vars': 1,

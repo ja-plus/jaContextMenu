@@ -5,10 +5,12 @@
  */
 import h from './utils/h.js';
 import debounce from './utils/debounce.js';
-const _wrapperClassName = 'jacontextmenu';
-const _mainMenuWidth = 200;
-const _childMenuWidth = 150;
-const _menuItemHeight = 24;
+import config from './config.js';
+const _wrapperClassName = config.wrapperClassName;
+const _mainMenuWidth = config.mainMenuWidth;
+const _childMenuWidth = config.childMenuWidth;
+const _menuItemHeight = config.menuItemHeight;
+
 const _cssStr = `
     .${_wrapperClassName}, .${_wrapperClassName} *{
         box-sizing: border-box;

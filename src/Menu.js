@@ -10,7 +10,7 @@ export class Item {
   /** @type {Menu} */
   childMenu;
   constructor(level, item, parentMenu) {
-    console.log(parentMenu);
+    // console.log(parentMenu);
     this.parentMenu = parentMenu;
     this.level = level;
     this.init(item);
@@ -34,10 +34,10 @@ export class Item {
           //   : () => this.#hideChildMenu(contextMenuEle),
           onmouseenter: item.children?.length
             ? (e) => {
-                this.childMenu?.show();
+                this.showChildMenu(e);
               }
             : () => {
-                this.childMenu?.hide();
+                this.hidenOtherChildMenu(); // 移除所有子菜单
               },
         },
         [h('span.label', item.label), item.tip && h('span.tip', item.tip), item.children && h('span.right-arrow')]
@@ -45,11 +45,21 @@ export class Item {
     }
     if (item.children) {
       this.childMenu = new Menu(this.level + 1, item.children);
-      this.el.appendChild(this.childMenu.el);
     }
   }
+  // 展示子菜单
+  showChildMenu(e) {
+    this.el.appendChild(this.childMenu.el);
+  }
+  hidenOtherChildMenu() {
+    this.parentMenu?.removeChildMenus(); // 移除所有子菜单
+  }
 }
-export class Menu {
+/**
+ * 第一层menu保留el，使用display控制显示隐藏
+ * 第二层后的menu使用remove来控制显示隐藏
+ */
+export default class Menu {
   /** @type {Number} 0 1*/
   level;
   /** @type {HTMLElement} element*/
@@ -67,7 +77,8 @@ export class Menu {
     this.addChildren(items);
   }
   init() {
-    this.el = h(`ul.${config.wrapperClassName}`, {
+    // 生成最外层元素
+    this.el = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
       onclick: (e) => e.stopPropagation(),
       oncontextmenu: (e) => {
         e.stopPropagation();
@@ -79,14 +90,38 @@ export class Menu {
     for (const it of items) {
       this.children.push(new Item(this.level, it, this));
     }
+    // 挂载li
     this.children.forEach((item) => {
       this.el.appendChild(item.el);
     });
   }
-  show() {
+  // 展示菜单
+  show(e) {
+    e.preventDefault();
+    e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.el.style.display = 'block';
+    const menuHeight = parseFloat(getComputedStyle(this.el).height);
+    let translateX = e.pageX;
+    let translateY = e.pageY;
+    if (window.innerWidth - e.pageX < config.mainMenuWidth) {
+      // right not have enough space
+      translateX = e.pageX - config.mainMenuWidth;
+    }
+    if (window.innerHeight - e.pageY < menuHeight) {
+      // bottom not have enough space
+      translateY = e.pageY - menuHeight;
+    }
+    this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
   }
+  // 隐藏菜单
   hide() {
     this.el.style.display = 'none';
+  }
+  // 移除所有子菜单
+  removeChildMenus() {
+    let childMenus = document.querySelectorAll(`.${config.wrapperClassName}-lv${this.level + 1}`);
+    childMenus.forEach((menu) => {
+      menu.remove();
+    });
   }
 }

@@ -15,15 +15,18 @@
   
 </body>
 <script type="module">
-  import { Menu } from './src/Menu.js';
-  let menu = new Menu(0, [
+  // import { Menu } from './src/Menu.js';
+  import ContextMenu from './src/jaContextMenu2.js';
+  let contextMenu = new ContextMenu();
+  let menu = contextMenu.create([
     { label: 'aaa' },
-    { label: '222', children: [{ label: '2-1' }, { label: '2-2' }] },
+    { label: '222', children: [{ label: '2-1' }, { type: '---' }, { label: '2-3->', children: [{ label: '3-1' }] }] },
     { label: '333' },
   ]);
-  document.body.appendChild(menu.el);
+
+  // document.body.appendChild(menu.el);
   document.body.oncontextmenu = (e) => {
-    menu.show();
+    menu.show(e);
   };
 </script>
 </html>

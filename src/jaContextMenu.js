@@ -1,7 +1,6 @@
 /**
  * 右键菜单功能
  * 问题，多次new 会一直向dom中添加元素
- * TODO: 图标
  */
 import h from './utils/h.js';
 import debounce from './utils/debounce.js';

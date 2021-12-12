@@ -1,5 +1,18 @@
 import h from './utils/h.js';
 import config from './config.js';
+class Base {
+  hideAllMenus() {
+    let menus = document.querySelectorAll(`.${config.wrapperClassName}`);
+    menus.forEach((menu) => {
+      let level = menu.dataset.lv;
+      if (level > 0) {
+        menu.remove();
+      } else {
+        menu.style.display = 'none';
+      }
+    });
+  }
+}
 export class Item {
   /** @type {Menu} */
   parentMenu;
@@ -26,7 +39,7 @@ export class Item {
           onclick: (e) => {
             if (!item.disabled) {
               item.onclick && item.onclick(e /* , contextMenuEle.payload */);
-              if (!item.children) this.parentMenu.hide();
+              if (!item.children) this.parentMenu.hideAllMenus();
             }
           },
           // onmouseenter: it.children?.length
@@ -49,21 +62,44 @@ export class Item {
   }
   // 展示子菜单
   showChildMenu(e) {
-    this.el.appendChild(this.childMenu.el);
+    const childMenuEle = this.childMenu.el;
+    // if childMenuEle is hidden
+    if (!e.target.contains(childMenuEle)) {
+      e.target.classList.add(config.wrapperClassName + '_hover');
+      childMenuEle.style.display = 'block';
+
+      const childMenuHeight = parseFloat(getComputedStyle(childMenuEle).height);
+      const liPosition = e.target.getBoundingClientRect();
+      let translateX = config.mainMenuWidth - 5;
+      let translateY = -2; // paddingTop
+      // right avaliable space
+      if (window.innerWidth - liPosition.x - config.mainMenuWidth < config.childMenuWidth) {
+        translateX = -config.childMenuWidth + 5;
+      }
+      // bottom avaliable space
+      if (window.innerWidth - liPosition.y + 2 < childMenuHeight) {
+        translateY = -childMenuHeight + config.menuItemHeight + 2 + 1; // 1px border
+      }
+      childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    }
+    this.el.appendChild(childMenuEle);
   }
   hidenOtherChildMenu() {
     this.parentMenu?.removeChildMenus(); // 移除所有子菜单
+    this.parentMenu?.removeItemHover(); // 取消hover状态
   }
 }
 /**
  * 第一层menu保留el，使用display控制显示隐藏
  * 第二层后的menu使用remove来控制显示隐藏
  */
-export default class Menu {
+export default class Menu extends Base {
   /** @type {Number} 0 1*/
   level;
   /** @type {HTMLElement} element*/
   el;
+  /** @type {Number} menu width TODO:set width*/
+  width = config.mainMenuWidth;
   /** @type {Array} config*/
   items;
   /** @type {Array<Item>} */
@@ -71,6 +107,7 @@ export default class Menu {
   /** @type {Menu} */
   childMenu;
   constructor(level, items) {
+    super();
     this.level = level;
     this.items = items;
     this.init();
@@ -79,6 +116,9 @@ export default class Menu {
   init() {
     // 生成最外层元素
     this.el = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
+      dataset: {
+        lv: this.level,
+      },
       onclick: (e) => e.stopPropagation(),
       oncontextmenu: (e) => {
         e.stopPropagation();
@@ -99,16 +139,17 @@ export default class Menu {
   show(e) {
     e.preventDefault();
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
+    this.removeChildMenus(); // 打开的时候不会展示任何子菜单
     this.el.style.display = 'block';
     const menuHeight = parseFloat(getComputedStyle(this.el).height);
     let translateX = e.pageX;
     let translateY = e.pageY;
+    // right not have enough space
     if (window.innerWidth - e.pageX < config.mainMenuWidth) {
-      // right not have enough space
       translateX = e.pageX - config.mainMenuWidth;
     }
+    // bottom not have enough space
     if (window.innerHeight - e.pageY < menuHeight) {
-      // bottom not have enough space
       translateY = e.pageY - menuHeight;
     }
     this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
@@ -119,9 +160,15 @@ export default class Menu {
   }
   // 移除所有子菜单
   removeChildMenus() {
-    let childMenus = document.querySelectorAll(`.${config.wrapperClassName}-lv${this.level + 1}`);
+    const childMenus = document.querySelectorAll(`.${config.wrapperClassName}-lv${this.level + 1}`);
     childMenus.forEach((menu) => {
       menu.remove();
+    });
+  }
+  // 移除选项hover
+  removeItemHover() {
+    this.children.forEach((childItem) => {
+      childItem.el.classList.remove(`${config.wrapperClassName}_hover`);
     });
   }
 }

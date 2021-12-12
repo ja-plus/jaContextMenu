@@ -1,7 +1,7 @@
 import h from './utils/h.js';
-import debounce from './utils/debounce.js';
+// import debounce from './utils/debounce.js';
 import config from './config.js';
-import store from './store.js';
+// import store from './store.js';
 import Menu from './Menu.js';
 
 const _cssStr = `

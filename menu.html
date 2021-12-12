@@ -19,7 +19,12 @@
   import ContextMenu from './src/jaContextMenu2.js';
   let contextMenu = new ContextMenu();
   let menu = contextMenu.create([
-    { label: 'aaa' },
+    {
+      label: 'aaa',
+      onclick: () => {
+        console.log('aaa click');
+      },
+  },
     { label: '222', children: [{ label: '2-1' }, { type: '---' }, { label: '2-3->', children: [{ label: '3-1' }] }] },
     { label: '333' },
   ]);

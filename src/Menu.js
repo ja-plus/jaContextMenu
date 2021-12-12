@@ -38,7 +38,8 @@ export class Item {
           classList: item.disabled ? ['disabled'] : [],
           onclick: (e) => {
             if (!item.disabled) {
-              item.onclick && item.onclick(e /* , contextMenuEle.payload */);
+              const payload = this.parentMenu.payload;
+              item.onclick && item.onclick(e, payload);
               if (!item.children) this.parentMenu.hideAllMenus();
             }
           },
@@ -70,11 +71,11 @@ export class Item {
 
       const childMenuHeight = parseFloat(getComputedStyle(childMenuEle).height);
       const liPosition = e.target.getBoundingClientRect();
-      let translateX = config.mainMenuWidth - 5;
+      let translateX = this.parentMenu.width - 5;
       let translateY = -2; // paddingTop
       // right avaliable space
-      if (window.innerWidth - liPosition.x - config.mainMenuWidth < config.childMenuWidth) {
-        translateX = -config.childMenuWidth + 5;
+      if (window.innerWidth - liPosition.x - this.parentMenu.width < this.parentMenu.width) {
+        translateX = -this.parentMenu.width + 5;
       }
       // bottom avaliable space
       if (window.innerWidth - liPosition.y + 2 < childMenuHeight) {
@@ -83,6 +84,7 @@ export class Item {
       childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
     }
     this.el.appendChild(childMenuEle);
+    this.childMenu.payload = this.parentMenu.payload;
   }
   hidenOtherChildMenu() {
     this.parentMenu?.removeChildMenus(); // 移除所有子菜单
@@ -104,8 +106,8 @@ export default class Menu extends Base {
   items;
   /** @type {Array<Item>} */
   children = [];
-  /** @type {Menu} */
-  childMenu;
+  /** @type {any} 传入的参数 */
+  payload;
   constructor(level, items) {
     super();
     this.level = level;
@@ -118,6 +120,9 @@ export default class Menu extends Base {
     this.el = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
       dataset: {
         lv: this.level,
+      },
+      style: {
+        zIndex: +config.baseZIndex + this.level,
       },
       onclick: (e) => e.stopPropagation(),
       oncontextmenu: (e) => {
@@ -136,23 +141,27 @@ export default class Menu extends Base {
     });
   }
   // 展示菜单
-  show(e) {
+  show(e, payload) {
+    this.payload = payload;
     e.preventDefault();
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
+    // ------ START calc menu position code block
+    {
+      const menuHeight = parseFloat(getComputedStyle(this.el).height);
+      let translateX = e.pageX;
+      let translateY = e.pageY;
+      // right not have enough space
+      if (window.innerWidth - e.pageX < this.width) {
+        translateX = e.pageX - this.width;
+      }
+      // bottom not have enough space
+      if (window.innerHeight - e.pageY < menuHeight) {
+        translateY = e.pageY - menuHeight;
+      }
+      this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
+    }
     this.el.style.display = 'block';
-    const menuHeight = parseFloat(getComputedStyle(this.el).height);
-    let translateX = e.pageX;
-    let translateY = e.pageY;
-    // right not have enough space
-    if (window.innerWidth - e.pageX < config.mainMenuWidth) {
-      translateX = e.pageX - config.mainMenuWidth;
-    }
-    // bottom not have enough space
-    if (window.innerHeight - e.pageY < menuHeight) {
-      translateY = e.pageY - menuHeight;
-    }
-    this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
   }
   // 隐藏菜单
   hide() {

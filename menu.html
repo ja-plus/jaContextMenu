@@ -21,17 +21,40 @@
   let menu = contextMenu.create([
     {
       label: 'aaa',
-      onclick: () => {
-        console.log('aaa click');
+      onclick: (e, payload) => {
+        console.log('aaa click', payload);
       },
-  },
-    { label: '222', children: [{ label: '2-1' }, { type: '---' }, { label: '2-3->', children: [{ label: '3-1' }] }] },
+    },
+    {
+      label: '222',
+      children: [
+        {
+          label: '2-1',
+          onclick: (e, payload) => {
+            console.log('222 click,', payload);
+          },
+        },
+        { type: '---' },
+        {
+          label: '2-3->',
+          children: [
+            {
+              label: '3-1',
+              onclick: (e, payload) => {
+                console.log('3-1 click,', payload);
+              },
+            },
+          ],
+        },
+      ],
+    },
     { label: '333' },
   ]);
 
   // document.body.appendChild(menu.el);
   document.body.oncontextmenu = (e) => {
-    menu.show(e);
+    let payload = 'payload data: callback when click items';
+    menu.show(e, payload);
   };
 </script>
 </html>

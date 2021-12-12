@@ -126,6 +126,9 @@ export default class ContextMenu {
    */
   contextMenuFunc(menu) {
     // TODO: 隐藏其他菜单
+    return function (e) {
+      menu.show(e);
+    };
   }
   hideAllMenu() {
     this.storeMenus.forEach((menu) => {

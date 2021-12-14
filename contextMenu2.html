@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  body {
+    height: 100vh;
+  }
+</style>
+<body>
+  <div id="block1" style="height:100px;width:100px;background-color:antiquewhite">right click here</div>
+</body>
+<script type="module">
+  // import { Menu } from './src/Menu.js';
+  import ContextMenu from './src/jaContextMenu2.js';
+  let contextMenu = new ContextMenu();
+  let menu = contextMenu.create({
+    items: [
+      {
+        label: 'aaa',
+        onclick: (e, payload) => {
+          console.log('aaa click', payload);
+        },
+      },
+      {
+        label: '222',
+        children: {
+          width: 120,
+          items: [
+            {
+              label: '2-1',
+              onclick: (e, payload) => {
+                console.log('222 click,', payload);
+              },
+            },
+            { type: '---' },
+            {
+              label: '2-3->',
+              children: {
+                items: [
+                  {
+                    label: '3-1',
+                    onclick: (e, payload) => {
+                      console.log('3-1 click,', payload);
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      { label: '333' },
+    ],
+  });
+  let menu2 = contextMenu.create({
+    items: [
+      { label: '菜单1', tip: '提示1' },
+      { label: '菜单2', tip: '提示2' },
+    ],
+});
+
+  // document.body.appendChild(menu.el);
+  document.body.oncontextmenu = (e) => {
+    let payload = 'payload data: callback when click items';
+    // menu.show(e, payload);
+    contextMenu.showMenu(e, menu, payload);
+  };
+  let block = document.querySelector('#block1');
+  block.addEventListener('contextmenu', (e) => {
+    contextMenu.showMenu(e, menu2);
+  });
+</script>
+</html>

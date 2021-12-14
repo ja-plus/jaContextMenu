@@ -20,15 +20,19 @@ export class Item {
   level;
   /** @type {HTMLElement} element*/
   el;
+  /** @type {Object} item option*/
+  itemOption;
   /** @type {Menu} */
   childMenu;
   constructor(level, item, parentMenu) {
     // console.log(parentMenu);
     this.parentMenu = parentMenu;
     this.level = level;
-    this.init(item);
+    this.itemOption = item; // save option
+    this.init();
   }
-  init(item) {
+  init() {
+    const item = this.itemOption;
     if (item.type === 'divide' || item.type?.indexOf('--') === 0) {
       this.el = h('li.divide');
     } else {
@@ -46,12 +50,12 @@ export class Item {
           // onmouseenter: it.children?.length
           //   ? (e) => this.#showChildMenu(e, it.children, contextMenuEle)
           //   : () => this.#hideChildMenu(contextMenuEle),
-          onmouseenter: item.children?.length
+          onmouseenter: item.children
             ? (e) => {
                 this.showChildMenu(e);
               }
             : () => {
-                this.hidenOtherChildMenu(); // 移除所有子菜单
+                this.hideOtherChildMenu(); // 移除所有子菜单
               },
         },
         [h('span.label', item.label), item.tip && h('span.tip', item.tip), item.children && h('span.right-arrow')]
@@ -74,19 +78,21 @@ export class Item {
       let translateX = this.parentMenu.width - 5;
       let translateY = -2; // paddingTop
       // right avaliable space
-      if (window.innerWidth - liPosition.x - this.parentMenu.width < this.parentMenu.width) {
-        translateX = -this.parentMenu.width + 5;
+      if (window.innerWidth - liPosition.x - this.parentMenu.width < this.childMenu.width) {
+        translateX = -this.childMenu.width + 5;
       }
       // bottom avaliable space
       if (window.innerWidth - liPosition.y + 2 < childMenuHeight) {
         translateY = -childMenuHeight + config.menuItemHeight + 2 + 1; // 1px border
       }
+      this.childMenu.removeChildMenus();
       childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
     }
     this.el.appendChild(childMenuEle);
-    this.childMenu.payload = this.parentMenu.payload;
+    this.childMenu.removeAllHover(); // 取消hover
+    this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
   }
-  hidenOtherChildMenu() {
+  hideOtherChildMenu() {
     this.parentMenu?.removeChildMenus(); // 移除所有子菜单
     this.parentMenu?.removeItemHover(); // 取消hover状态
   }
@@ -100,20 +106,21 @@ export default class Menu extends Base {
   level;
   /** @type {HTMLElement} element*/
   el;
-  /** @type {Number} menu width TODO:set width*/
-  width = config.mainMenuWidth;
+  /** @type {Number} menu width 传百分比就不好计算 */
+  width;
   /** @type {Array} config*/
   items;
   /** @type {Array<Item>} */
   children = [];
   /** @type {any} 传入的参数 */
   payload;
-  constructor(level, items) {
+  constructor(level, option) {
     super();
     this.level = level;
-    this.items = items;
+    this.items = option.items;
+    this.width = option.width || config.mainMenuWidth;
     this.init();
-    this.addChildren(items);
+    this.addChildren(option.items);
   }
   init() {
     // 生成最外层元素
@@ -122,6 +129,7 @@ export default class Menu extends Base {
         lv: this.level,
       },
       style: {
+        width: this.width + 'px',
         zIndex: +config.baseZIndex + this.level,
       },
       onclick: (e) => e.stopPropagation(),
@@ -132,6 +140,9 @@ export default class Menu extends Base {
     });
   }
   addChildren(items) {
+    if (!Array.isArray(items)) {
+      return console.error('option.items is not type of array');
+    }
     for (const it of items) {
       this.children.push(new Item(this.level, it, this));
     }
@@ -145,6 +156,7 @@ export default class Menu extends Base {
     this.payload = payload;
     e.preventDefault();
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
+    this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
     // ------ START calc menu position code block
     {
@@ -167,11 +179,16 @@ export default class Menu extends Base {
   hide() {
     this.el.style.display = 'none';
   }
+  // 移除所有hover
+  removeAllHover() {
+    this.children.forEach((item) => {
+      item.el.classList.remove(`${config.wrapperClassName}_hover`);
+    });
+  }
   // 移除所有子菜单
   removeChildMenus() {
-    const childMenus = document.querySelectorAll(`.${config.wrapperClassName}-lv${this.level + 1}`);
-    childMenus.forEach((menu) => {
-      menu.remove();
+    this.children.forEach((item) => {
+      item.childMenu?.el.remove();
     });
   }
   // 移除选项hover

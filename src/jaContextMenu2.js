@@ -103,8 +103,8 @@ export default class ContextMenu {
    * @param {Array<Object>} items 配置
    * @returns
    */
-  create(items) {
-    const mainMenu = new Menu(0, items);
+  create(option) {
+    const mainMenu = new Menu(0, option);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return mainMenu;
@@ -124,11 +124,12 @@ export default class ContextMenu {
    * 展示菜单
    * @param {Menu} menu
    */
-  contextMenuFunc(menu) {
-    // TODO: 隐藏其他菜单
-    return function (e) {
-      menu.show(e);
-    };
+  showMenu(e, menu, payload) {
+    // 隐藏其他菜单
+    this.storeMenus.forEach((item) => {
+      item.hide();
+    });
+    menu.show(e, payload);
   }
   hideAllMenu() {
     this.storeMenus.forEach((menu) => {

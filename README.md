@@ -7,7 +7,7 @@ TODO:
     默认样式通过js插入style标签完成，注意命名空间
 ### 使用方式
 ```javascript
-import ContextMenu from './src/jaContextMenu.js';  
+import ContextMenu from './lib/index.esm.js';  
 let contextMenu = new ContextMenu();
 let option = {
     items: [
@@ -45,7 +45,7 @@ document.body.oncontextmenu = (e) => {
 ### option 取值
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| width?: number| 150 | 菜单宽度，子菜单不配置，则继承父菜单宽度 |
+| width?: number| 200 | 菜单宽度，子菜单不配置，则继承父菜单宽度 |
 | items: object |    | 列表配置 |
 ### items Object
 | param: type | default | desc |

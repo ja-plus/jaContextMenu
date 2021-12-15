@@ -9,6 +9,8 @@ const _cssStr = `
     box-sizing: border-box;
   }
   .${config.wrapperClassName}{
+    -webkit-user-select:none;
+    user-select: none;
     border: 1px solid #ddd;
     position: absolute;
     left: 0;top:0;
@@ -16,7 +18,7 @@ const _cssStr = `
     padding: 2px 0 2px 0px;
     margin: 0;
     cursor: default;
-    width: ${config.mainMenuWidth}px;
+    width: ${config.defaultMenuWidth}px;
     display: none;
   }
   .${config.wrapperClassName} .divide{
@@ -73,12 +75,12 @@ export default class ContextMenu {
   /** @type {Function} */
   clickEventFunc;
   constructor() {
-    this.#injectCss();
+    this.injectCss();
     // this.#onPageResize();
-    this.#hideMenuEventListener();
+    this.hideMenuEventListener();
   }
   // 注入css
-  #injectCss() {
+  injectCss() {
     let style = document.querySelector(`#${config.cssId}`);
     if (!style) {
       // if not be injected
@@ -89,7 +91,7 @@ export default class ContextMenu {
     }
   }
   /** click and close menu listener */
-  #hideMenuEventListener() {
+  hideMenuEventListener() {
     // add once event
     if (!this.clickEventFunc) {
       this.clickEventFunc = () => {

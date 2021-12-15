@@ -33,7 +33,7 @@ export class Item {
   }
   init() {
     const item = this.itemOption;
-    if (item.type === 'divide' || item.type?.indexOf('--') === 0) {
+    if (item.type === 'divide' || item.type?.indexOf('---') === 0) {
       this.el = h('li.divide');
     } else {
       this.el = h(
@@ -62,6 +62,7 @@ export class Item {
       );
     }
     if (item.children) {
+      if (!item.children.width) item.children.width = this.parentMenu.width; // 不设置宽度则继承父菜单宽度
       this.childMenu = new Menu(this.level + 1, item.children);
     }
   }

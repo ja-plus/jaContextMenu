@@ -12,7 +12,6 @@ const _cssStr = `
     -webkit-user-select:none;
     user-select: none;
     border: 1px solid #ddd;
-    position: absolute;
     left: 0;top:0;
     background-color: #fff;
     padding: 2px 0 2px 0px;
@@ -21,8 +20,16 @@ const _cssStr = `
     width: ${config.defaultMenuWidth}px;
     display: none;
   }
+  /*主菜单*/
+  .${config.wrapperClassName}[data-lv="0"]{ 
+    position: fixed;
+  }
+  /*子菜单*/
+  .${config.wrapperClassName} .${config.wrapperClassName}{ 
+    position: absolute;
+  }
   .${config.wrapperClassName} .divide{
-    margin: 5px 0;
+    margin: ${config.menuItemDivideLineMargin}px 0;
     height: 1px;
     background-color: #ddd;
   }
@@ -74,10 +81,15 @@ export default class ContextMenu {
   storeMenus = [];
   /** @type {Function} */
   clickEventFunc;
-  constructor() {
+  /** @type {Object} */
+  config;
+  constructor(config) {
     this.injectCss();
     // this.#onPageResize();
     this.hideMenuEventListener();
+    if (config?.hideMenuWhenScroll) {
+      this.scrollListener();
+    }
   }
   // 注入css
   injectCss() {
@@ -99,6 +111,12 @@ export default class ContextMenu {
       };
       window.addEventListener('click', this.clickEventFunc);
     }
+  }
+  /** if scroll hide all menu */
+  scrollListener() {
+    window.addEventListener('scroll', () => {
+      this.hideAllMenu();
+    });
   }
   /**
    *

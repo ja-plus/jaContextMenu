@@ -28,5 +28,7 @@
     "prettier": "^2.5.0",
     "rollup": "^2.61.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1"
+  }
 }

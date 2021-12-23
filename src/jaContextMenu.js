@@ -95,7 +95,10 @@ export default class ContextMenu {
     // add once event
     if (!this.clickEventFunc) {
       this.clickEventFunc = () => {
-        this.hideAllMenu();
+        if (this.storeMenus.some((it) => it.el.style.display === 'block')) {
+          // 存在打开的菜单才关闭
+          this.hideAllMenu();
+        }
       };
       window.addEventListener('click', this.clickEventFunc);
     }

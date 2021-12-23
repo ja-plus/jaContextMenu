@@ -96,6 +96,8 @@ export default class Menu {
   el;
   /** @type {Number} menu width 传百分比就不好计算 */
   width;
+  /** @type {Number} menu height 计算得出的菜单高度 */
+  height = 0;
   /** @type {Array} config*/
   items;
   /** @type {Array<MenuItem>} */
@@ -145,22 +147,22 @@ export default class Menu {
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
+    this.el.style.display = 'block';
     // ------ START calc menu position code block
     {
-      const menuHeight = parseFloat(getComputedStyle(this.el).height);
-      let translateX = e.pageX;
-      let translateY = e.pageY;
+      this.height = parseFloat(getComputedStyle(this.el).height);
+      let translateX = e.clientX;
+      let translateY = e.clientY;
       // right not have enough space
-      if (window.innerWidth - e.pageX < this.width) {
-        translateX = e.pageX - this.width;
+      if (window.innerWidth - e.clientX < this.width) {
+        translateX = e.clientX - this.width;
       }
       // bottom not have enough space
-      if (window.innerHeight - e.pageY < menuHeight) {
-        translateY = e.pageY - menuHeight;
+      if (window.innerHeight - e.clientY < this.height) {
+        translateY = e.clientY - this.height;
       }
       this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
     }
-    this.el.style.display = 'block';
   }
   // 隐藏菜单
   hide() {

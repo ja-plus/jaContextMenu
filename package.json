@@ -5,7 +5,7 @@
   "main": "lib/index.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rollup -c"
+    "bd": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,10 @@
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.0",
-    "rollup": "^2.61.1"
+    "rollup": "^2.61.1",
+    "rollup-plugin-uglify": "^6.0.4"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.12.1"
+    "core-js": "^3.20.1"
   }
 }

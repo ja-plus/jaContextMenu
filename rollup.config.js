@@ -1,4 +1,5 @@
-import { default as babel, getBabelOutputPlugin } from '@rollup/plugin-babel';
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 import { uglify } from 'rollup-plugin-uglify'; // 代码压缩
 export default {
   input: 'src/index.js',
@@ -6,15 +7,18 @@ export default {
     {
       file: 'lib/index.esm.js',
       format: 'esm',
+      sourcemap: true,
     },
     {
       file: 'lib/index.esm.min.js',
       format: 'esm',
+      sourcemap: true,
       plugins: [uglify()],
     },
     {
       file: 'lib/index.es5.js',
       format: 'esm',
+      sourcemap: true,
       plugins: [
         getBabelOutputPlugin({
           presets: ['@babel/preset-env'],
@@ -24,6 +28,7 @@ export default {
     {
       file: 'lib/index.es5.min.js',
       format: 'esm',
+      sourcemap: true,
       plugins: [
         getBabelOutputPlugin({
           presets: ['@babel/preset-env'],
@@ -33,6 +38,7 @@ export default {
     },
   ],
   plugins: [
+    typescript(),
     // getBabelOutputPlugin({
     //   presets: ['@babel/preset-env'],
     // }),

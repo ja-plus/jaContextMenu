@@ -1,4 +1,4 @@
-import h from './utils/h.js';
+import h from './utils/h.ts';
 // import debounce from './utils/debounce.js';
 import config from './config.js';
 // import store from './store.js';

@@ -1,4 +1,4 @@
-import h from './utils/h.js';
+import h from './utils/h.ts';
 import config from './config.js';
 export class MenuItem {
   /** @type {Menu} */

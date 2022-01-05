@@ -5,12 +5,14 @@ module.exports = {
     node: true,
   },
   extends: ['eslint:recommended', 'plugin:prettier/recommended'],
-  plugins: ['html', 'prettier'],
+  plugins: ['html', 'prettier', '@typescript-eslint'],
   parserOptions: {
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 13,
     sourceType: 'module',
   },
   rules: {
+    '@typescript-eslint/no-var-requires': 0,
     'prettier/prettier': 1,
     quotes: [1, 'single'], // 使用单引号
     semi: [1, 'always'], // 使用分号结尾

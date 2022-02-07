@@ -150,15 +150,16 @@ export default class Menu {
     this.el.style.display = 'block';
     // ------ START calc menu position code block
     {
+      const scrollWidth = window.outerWidth - window.innerWidth;
       this.height = parseFloat(getComputedStyle(this.el).height);
       let translateX = e.clientX;
       let translateY = e.clientY;
       // right not have enough space
-      if (window.innerWidth - e.clientX < this.width) {
+      if (window.innerWidth - e.clientX - scrollWidth < this.width) {
         translateX = e.clientX - this.width;
       }
       // bottom not have enough space
-      if (window.innerHeight - e.clientY < this.height) {
+      if (window.innerHeight - e.clientY - scrollWidth < this.height) {
         translateY = e.clientY - this.height;
       }
       this.el.style.transform = `translate(${translateX}px,${translateY}px)`;

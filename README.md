@@ -5,8 +5,8 @@ TODO:
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
 ## jaContextMenu
-    js右键菜单封装  
-    默认样式通过js插入style标签完成，注意命名空间
+js右键菜单封装  
+默认样式通过js插入style标签完成，注意命名空间
 ## 使用方式
 ```javascript
 import ContextMenu from './lib/index.esm.js';  
@@ -45,14 +45,15 @@ document.body.oncontextmenu = (e) => {
   };
  ```
 ## contextMenu constructure 构造函数
-    new ContextMenu(config);
+> new ContextMenu(config);
+
 config
 | key | type | default | desc |
 | ---- | ---- | ---- | ---- |
 | hideMenuWhenScroll | Boolean | false | 滚动时是否关闭菜单 |
 ## contextMenu instance function 实例方法
 ### 1.contextMenu.create(option: object): Menu
-    创建一个菜单，返回一个Menu对象
+创建一个菜单，返回一个Menu对象
 **option 取值**
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -67,5 +68,5 @@ config
 | type?: string |     | 取值 '---' 或 'divide'为分割线| 
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
 ### 2.contextMenu.showMenu(e: mouseEvent, menu: Menu, payload?: any)
-    展示菜单  
-    payload参数在点击菜单的onclick回调中返回
+展示菜单  
+payload参数在点击菜单的onclick回调中返回

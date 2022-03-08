@@ -16,7 +16,7 @@
 </body>
 <script type="module">
   // import { Menu } from './src/Menu.js';
-  // import ContextMenu from './src/jaContextMenu.js';
+  // import ContextMenu from './src/ContextMenu.js';
   import ContextMenu from './lib/index.esm.js';
   let contextMenu = new ContextMenu({
     hideMenuWhenScroll: true, // 滚动页面时关闭菜单
@@ -92,11 +92,11 @@
   document.body.oncontextmenu = (e) => {
     let payload = 'payload data: callback when click items';
     // menu.show(e, payload);
-    contextMenu.showMenu(e, menu, payload);
+    menu.show(e, payload);
   };
   let block = document.querySelector('#block1');
   block.addEventListener('contextmenu', (e) => {
-    contextMenu.showMenu(e, menu2, 'payload');
+    menu2.show(e, 'payload');
   });
 </script>
 </html>

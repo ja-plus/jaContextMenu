@@ -130,7 +130,11 @@ export default class ContextMenu {
     const mainMenu = new Menu(0, option);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
-    return mainMenu;
+    return {
+      show: (e, payload) => {
+        this.showMenu(e, mainMenu, payload);
+      },
+    };
   }
   /** 监听窗口 */
   // #onPageResize() {

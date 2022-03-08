@@ -1,7 +1,7 @@
 TODO: 
-- [] 图标 
-- [] 支持配置css 类名
-- [] 支持增加css 类名
+- [ ] 图标 
+- [ ] 支持配置css 类名
+- [ ] 支持增加css 类名
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
 ## jaContextMenu
@@ -42,6 +42,8 @@ let menu = contextMenu.create(option);
 document.body.oncontextmenu = (e) => {
     let payload = 'payload data: callback when click items';
     contextMenu.showMenu(e, menu, payload);
+    // or
+    menu.show(e,payload)
   };
  ```
 ## contextMenu constructure 构造函数

@@ -21,10 +21,13 @@ export default class Menu {
   children = [];
   /** @type {any} 传入的参数 */
   payload;
-  constructor(level, option) {
+  /** @type {{position:String}} */
+  innerOption;
+  constructor(level, option, innerOption) {
     this.level = level;
     this.items = option.items;
     this.width = option.width || config.defaultMenuWidth;
+    this.innerOption = innerOption;
     this.init();
     this.addChildren(option.items);
   }
@@ -37,6 +40,7 @@ export default class Menu {
       style: {
         width: this.width + 'px',
         zIndex: +config.baseZIndex + this.level,
+        position: this.innerOption?.position, // fix
       },
       onclick: (e) => e.stopPropagation(),
       oncontextmenu: (e) => {
@@ -64,23 +68,24 @@ export default class Menu {
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
+    this.calcPosition(e);
     this.el.style.display = 'block';
-    // ------ START calc menu position code block
-    {
-      const scrollWidth = window.outerWidth - window.innerWidth;
-      this.height = parseFloat(getComputedStyle(this.el).height);
-      let translateX = e.clientX;
-      let translateY = e.clientY;
-      // right not have enough space
-      if (window.innerWidth - e.clientX - scrollWidth < this.width) {
-        translateX = e.clientX - this.width;
-      }
-      // bottom not have enough space
-      if (window.innerHeight - e.clientY - scrollWidth < this.height) {
-        translateY = e.clientY - this.height;
-      }
-      this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
+  }
+  // 计算出现的位置
+  calcPosition(e) {
+    const scrollWidth = window.outerWidth - window.innerWidth;
+    this.height = parseFloat(getComputedStyle(this.el).height);
+    let translateX = e.clientX;
+    let translateY = e.clientY + (this.level === 0 && !this.innerOption.position ? window.scrollY : 0);
+    // right not have enough space
+    if (window.innerWidth - e.clientX - scrollWidth < this.width) {
+      translateX = e.clientX - this.width;
     }
+    // bottom not have enough space
+    if (window.innerHeight - e.clientY - scrollWidth < this.height) {
+      translateY = e.clientY - this.height;
+    }
+    this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
   }
   // 隐藏菜单
   hide() {

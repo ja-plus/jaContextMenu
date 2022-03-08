@@ -22,7 +22,7 @@ const _cssStr = `
   }
   /*主菜单*/
   .${config.wrapperClassName}[data-lv="0"]{ 
-    position: fixed;
+    position: absolute;
   }
   /*子菜单*/
   .${config.wrapperClassName} .${config.wrapperClassName}{ 
@@ -81,13 +81,18 @@ export default class ContextMenu {
   storeMenus = [];
   /** @type {Function} */
   clickEventFunc;
-  /** @type {Object} */
+  /** @type {{fixMenuWhenScroll:Boolean, hideMenuWhenScroll:Boolean}} */
   config;
   constructor(config) {
     this.injectCss();
     // this.#onPageResize();
     this.hideMenuEventListener();
-    if (config?.hideMenuWhenScroll) {
+    const defaultConfig = {
+      fixMenuWhenScroll: true,
+      hideMenuWhenScroll: false,
+    };
+    this.config = Object.assign(defaultConfig, config);
+    if (this.config.hideMenuWhenScroll) {
       this.scrollListener();
     }
   }
@@ -127,7 +132,11 @@ export default class ContextMenu {
    * @returns
    */
   create(option) {
-    const mainMenu = new Menu(0, option);
+    let innerOptiton = {};
+    if (this.config.fixMenuWhenScroll) {
+      innerOptiton.position = 'fixed';
+    }
+    const mainMenu = new Menu(0, option, innerOptiton);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {

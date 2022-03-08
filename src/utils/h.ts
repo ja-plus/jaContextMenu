@@ -28,31 +28,31 @@ export default function h(
 
   let elem: any = document.createElement(tag);
   if (id) elem.id = id[0].substring(1);
-  if (classArr) elem.classList.add(...classArr);
 
   if (Array.isArray(attrs)) {
     children = attrs;
-  } else if (typeof attrs === "object" && attrs !== null) {
+  } else if (typeof attrs === 'object' && attrs !== null) {
     for (const attr in attrs) {
-      if (attr === "style" || attr === "dataset") {
+      if (attr === 'style' || attr === 'dataset') {
         for (const key in attrs[attr]) {
           elem[attr][key] = attrs[attr][key];
         }
-      } else if (attr === "classList" && Array.isArray(attrs[attr])) {
+      } else if (attr === 'classList' && Array.isArray(attrs[attr])) {
         classArr = classArr.concat(attrs[attr]);
       } else {
         elem[attr] = attrs[attr];
       }
     }
-  } else if (typeof attrs === "string" || typeof attrs === "number") {
+  } else if (typeof attrs === 'string' || typeof attrs === 'number') {
     elem.textContent = String(attrs);
   }
 
+  if (classArr) elem.classList.add(...classArr);
   if (children) {
     children.forEach((child) => {
       if (child instanceof HTMLElement) elem.appendChild(child);
       else if (child !== null && child !== undefined)
-        console.error(child, "not instance of HTMLElement");
+        console.error(child, 'not instance of HTMLElement');
     });
   }
 

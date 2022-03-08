@@ -19,7 +19,8 @@
   // import ContextMenu from './src/ContextMenu.js';
   import ContextMenu from './lib/index.esm.js';
   let contextMenu = new ContextMenu({
-    hideMenuWhenScroll: true, // 滚动页面时关闭菜单
+    fixMenuWhenScroll: false, // 滚动时会跟随滚动
+    // hideMenuWhenScroll: true, // 滚动页面时关闭菜单
   });
   let menu = contextMenu.create({
     items: [

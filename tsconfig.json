@@ -1,16 +1,17 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "target": "ES2015",
+    "module": "ES2015",
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "allowJs": false,
+    "allowJs": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["node_modules","lib"]
+  "include": ["src"]
 }

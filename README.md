@@ -52,8 +52,8 @@ document.body.oncontextmenu = (e) => {
 ### config
 | key | type | default | desc |
 | ---- | ---- | ---- | ---- |
-| hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 | fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
+| hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 ## contextMenu instance function 实例方法
 ### 1.contextMenu.create(option: object): Menu
 创建一个菜单，返回一个Menu对象

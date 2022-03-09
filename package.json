@@ -4,6 +4,7 @@
   "description": "js contextmenu",
   "main": "lib/index.esm.js",
   "scripts": {
+    "dev": "parcel demo.html",
     "bd": "rollup -c"
   },
   "repository": {
@@ -11,7 +12,7 @@
     "url": "https://gitee.com/chenja123/ja-context-menu.git"
   },
   "keywords": [
-    "contextmenu-js"
+    "contextmenu"
   ],
   "author": "JA+",
   "license": "MIT",
@@ -27,6 +28,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "parcel-bundler": "^1.12.5",
     "prettier": "^2.5.0",
     "rollup": "^2.61.1",
     "rollup-plugin-uglify": "^6.0.4",

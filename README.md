@@ -7,29 +7,29 @@ TODO:
 ## jaContextMenu
 js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间
-## 使用方式
+## Usage 使用方式
 ```javascript
 import ContextMenu from './lib/index.esm.js';  
 let contextMenu = new ContextMenu();
 let option = {
   items: [
     { 
-      label: '菜单1', 
-      tip: '提示1', 
+      label: 'menu1', 
+      tip: 'tip1', 
       onclick(e, payload) {
-        console.log('菜单1被按下', payload);
+        console.log('menu1 click', payload);
       },
     },
     { 
-      label: '菜单2', 
-      tip: '提示2',
+      label: 'menu2', 
+      tip: 'tip2',
       children: {
         width: 120,
         items: [
           {
-            label: '子菜单1',
+            label: 'sub menu1',
             onclick(e,payload){
-              console.log('子菜单被按下', payload)
+              console.log('sub menu click', payload)
             }
           }
         ]
@@ -55,8 +55,8 @@ document.body.oncontextmenu = (e) => {
 | fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
 | hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 ## contextMenu instance function 实例方法
-### 1.contextMenu.create(option: object): Menu
-创建一个菜单，返回一个Menu对象
+### 1.contextMenu.create(option: object): MenuWrapper
+创建一个菜单，返回一个MenuWrapper对象
 **option 取值**
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -68,8 +68,8 @@ document.body.oncontextmenu = (e) => {
 | ---- | ---- | ---- |
 | label?: string |    |  选项文字 |
 | tip?: string |    | 选项右侧提示文字 |
-| type?: string |     | 取值 '---' 或 'divide'为分割线| 
+| type?: string |     | 取值 '---' \|\| 'divide'为分割线| 
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
-### 2.contextMenu.showMenu(e: mouseEvent, menu: Menu, payload?: any)
+### 2.MenuWrapper.show(e: mouseEvent, payload?: any)
 展示菜单  
 payload参数在点击菜单的onclick回调中返回

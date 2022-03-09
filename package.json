@@ -1,7 +1,7 @@
 {
-  "name": "ja-context-menu",
+  "name": "ja-contextmenu",
   "version": "1.0.0",
-  "description": "js contextmenu",
+  "description": "VanillaJS contextmenu 原生js右键菜单",
   "main": "lib/index.esm.js",
   "scripts": {
     "dev": "parcel demo.html",
@@ -12,7 +12,8 @@
     "url": "https://gitee.com/chenja123/ja-context-menu.git"
   },
   "keywords": [
-    "contextmenu"
+    "contextmenu",
+    "vanilla"
   ],
   "author": "JA+",
   "license": "MIT",

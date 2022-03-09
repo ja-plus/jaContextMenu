@@ -2,11 +2,10 @@
 import ContextMenu from './src/index.ts';
 // import ContextMenu from './lib/index.esm.js';
 let contextMenu = new ContextMenu({
-  // fixMenuWhenScroll: false, // 滚动时会跟随滚动
-  // hideMenuWhenScroll: true, // 滚动页面时关闭菜单
+  fixMenuWhenScroll: false, // 滚动时会跟随滚动
+  hideMenuWhenScroll: false, // 滚动页面时关闭菜单
 });
 let menu = contextMenu.create({
-  width: 120,
   items: [
     {
       label: 'aaa',
@@ -17,6 +16,7 @@ let menu = contextMenu.create({
     {
       label: '222',
       children: {
+        width: 120,
         items: [
           {
             label: '2-1',

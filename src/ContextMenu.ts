@@ -77,6 +77,10 @@ const _cssStr = `
   .${config.wrapperClassName}_child{
   }
   `;
+
+interface MenuWrapper{
+  show(e:MouseEvent,payload:any):void
+}
 export default class ContextMenu {
   /**保存生成的菜单,便于统一管理 */
   storeMenus: Menu[] = [];
@@ -131,7 +135,7 @@ export default class ContextMenu {
    * @param {Array<Object>} items 配置
    * @returns
    */
-  create(option: MenuOption) {
+  create(option: MenuOption):MenuWrapper {
     let innerOptiton: InnerOption = {};
     if (this.option.fixMenuWhenScroll) {
       innerOptiton.position = 'fixed';
@@ -140,7 +144,7 @@ export default class ContextMenu {
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {
-      show: (e: Event, payload: any) => {
+      show: (e: MouseEvent, payload: any) => {
         this.showMenu(e, mainMenu, payload);
       },
     };
@@ -160,12 +164,12 @@ export default class ContextMenu {
    * 展示菜单
    * @param {Menu} menu
    */
-  showMenu(e: Event, menu: Menu, payload: any) {
+  showMenu(e: MouseEvent, menu: Menu, payload: any) {
     // 隐藏其他菜单
     this.storeMenus.forEach((item) => {
       item.hide();
     });
-    menu.show(e as MouseEvent, payload);
+    menu.show(e, payload);
   }
   hideAllMenu() {
     this.storeMenus.forEach((menu) => {

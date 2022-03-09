@@ -47,16 +47,16 @@ document.body.oncontextmenu = (e) => {
   };
  ```
 ## contextMenu constructure 构造函数
-> new ContextMenu(config);
+> new ContextMenu(option);
 
-### config
+### option
 | key | type | default | desc |
 | ---- | ---- | ---- | ---- |
 | fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
 | hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 ## contextMenu instance function 实例方法
 ### 1.contextMenu.create(option: object): MenuWrapper
-创建一个菜单，返回一个MenuWrapper对象
+创建一个菜单，返回一个MenuWrapper对象  
 **option 取值**
 | param: type | default | desc |
 | ---- | ---- | ---- |

@@ -3,6 +3,7 @@ import config from './config.js';
 import MenuItem from './MenuItem';
 import MenuItemOption from './interface/MenuItemOption';
 import MenuOption from './interface/MenuOption';
+import { getClientScrollSize } from './utils/utils';
 
 export interface InnerOption{
   position?:string;
@@ -71,22 +72,28 @@ export default class Menu {
     e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
-    this.calcPosition(e);
     this.el.style.display = 'block';
+    this.calcPosition(e);
   }
   // 计算出现的位置
   calcPosition(e:MouseEvent) {
-    const scrollWidth = window.outerWidth - window.innerWidth;
     this.height = parseFloat(getComputedStyle(this.el).height);
+    const scrollSize = getClientScrollSize()
     let translateX = e.clientX;
-    let translateY = e.clientY + (this.level === 0 && !this.innerOption.position ? window.scrollY : 0);
+    let translateY = e.clientY;
+
     // right not have enough space
-    if (window.innerWidth - e.clientX - scrollWidth < this.width) {
-      translateX = e.clientX - this.width;
+    if (window.innerWidth - e.clientX - scrollSize.width < this.width) {
+      translateX = scrollSize.htmlEl.clientWidth - this.width;
     }
     // bottom not have enough space
-    if (window.innerHeight - e.clientY - scrollWidth < this.height) {
-      translateY = e.clientY - this.height;
+    if (window.innerHeight - e.clientY - scrollSize.height < this.height) {
+      translateY = e.clientY - this.height 
+    }
+    // add scrollX scrollY if page has scroll bar
+    if(this.level === 0 && this.innerOption.position !== 'fixed'){
+      translateX += window.scrollX
+      translateY += window.scrollY;
     }
     this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
   }

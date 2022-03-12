@@ -15,6 +15,9 @@ let menu = contextMenu.create({
     },
     {
       label: '222',
+    },
+    {
+      label: '333',
       children: {
         width: 120,
         items: [
@@ -25,9 +28,11 @@ let menu = contextMenu.create({
             },
           },
           { type: '---' },
+          { label: '2-2' },
           {
             label: '2-3->',
             children: {
+              width: 200,
               items: [
                 {
                   label: '3-1',
@@ -35,13 +40,15 @@ let menu = contextMenu.create({
                     console.log('3-1 click,', payload);
                   },
                 },
+                {
+                  label: '3-2',
+                },
               ],
             },
           },
         ],
       },
     },
-    { label: '333' },
   ],
 });
 let menu2Option = {

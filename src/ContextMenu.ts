@@ -78,11 +78,11 @@ const _cssStr = `
   }
   `;
 
-interface MenuWrapper{
-  show(e:MouseEvent,payload:any):void
+interface MenuWrapper {
+  show(e: MouseEvent, payload: any): void;
 }
 export default class ContextMenu {
-  /**保存生成的菜单,便于统一管理 */
+  /** 保存生成的菜单,便于统一管理 */
   storeMenus: Menu[] = [];
   clickEventFunc: () => void;
 
@@ -91,7 +91,7 @@ export default class ContextMenu {
     this.injectCss();
     // this.#onPageResize();
     this.hideMenuEventListener();
-    let defaultConfig = {
+    const defaultConfig = {
       fixMenuWhenScroll: false,
       hideMenuWhenScroll: true,
     };
@@ -116,7 +116,7 @@ export default class ContextMenu {
     // add once event
     if (!this.clickEventFunc) {
       this.clickEventFunc = () => {
-        if (this.storeMenus.some((it) => it.el.style.display === 'block')) {
+        if (this.storeMenus.some(it => it.el.style.display === 'block')) {
           // 存在打开的菜单才关闭
           this.hideAllMenu();
         }
@@ -135,8 +135,8 @@ export default class ContextMenu {
    * @param {Array<Object>} items 配置
    * @returns
    */
-  create(option: MenuOption):MenuWrapper {
-    let innerOptiton: InnerOption = {};
+  create(option: MenuOption): MenuWrapper {
+    const innerOptiton: InnerOption = {};
     if (this.option.fixMenuWhenScroll) {
       innerOptiton.position = 'fixed';
     }
@@ -166,13 +166,13 @@ export default class ContextMenu {
    */
   showMenu(e: MouseEvent, menu: Menu, payload: any) {
     // 隐藏其他菜单
-    this.storeMenus.forEach((item) => {
+    this.storeMenus.forEach(item => {
       item.hide();
     });
     menu.show(e, payload);
   }
   hideAllMenu() {
-    this.storeMenus.forEach((menu) => {
+    this.storeMenus.forEach(menu => {
       menu.el.style.display = 'none';
     });
   }

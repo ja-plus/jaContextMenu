@@ -1,15 +1,18 @@
 TODO: 
 - [ ] 图标 
 - [ ] 支持配置css 类名
-- [ ] 支持增加css 类名
+- [ ] 有子菜单的项不能点击
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
 ## jaContextMenu
 js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间
 ## Usage 使用方式
+> npm i ja-contextmenu
 ```javascript
-import ContextMenu from './lib/index.esm.js';  
+import ContextMenu from 'ja-contextmenu';
+// or typescript
+// import ContextMenu from 'ja-contextmenu/src/index.ts'  
 let contextMenu = new ContextMenu();
 let option = {
   items: [

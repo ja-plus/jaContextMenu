@@ -1,16 +1,34 @@
-
-interface ScrollSize{
+interface WindowSize {
+  /** <html> element */
   htmlEl: HTMLElement;
-  width: number;
-  height: number;
+  /** window.innerWidth - html.clientWidth */
+  scrollWidth: number;
+  /** window.innerHeight - html.clientHeight */
+  scrollHeight: number;
+  /** 减去滚动条的宽度 html.clientWidth*/
+  clientWidth: number;
+  /** 减去滚动条的高度 html.clientHeight */
+  clientHeight: number;
 }
-/**获取滚动条宽度 */
-export function getClientScrollSize():ScrollSize{
-  let html = document.querySelector("html");
-  let ss = {
-    htmlEl:html,
-    width: window.innerWidth - html.clientWidth,
-    height: window.innerHeight - html.clientHeight
-  }
-  return ss 
+let _storeWindowSize: WindowSize;
+/** 获取界面大小 */
+export function getWindowSize(): WindowSize {
+  const html = document.querySelector('html');
+  const ss = {
+    htmlEl: html,
+    scrollWidth: window.innerWidth - html.clientWidth,
+    scrollHeight: window.innerHeight - html.clientHeight,
+    clientWidth: html.clientWidth,
+    clientHeight: html.clientHeight,
+  };
+  _storeWindowSize = ss; // store
+  return ss;
 }
+
+getWindowSize();
+window.addEventListener('resize', () => {
+  console.log('get getWindowSize');
+  getWindowSize();
+});
+
+export { _storeWindowSize as windowSize };

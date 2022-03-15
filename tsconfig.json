@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    // "strict":true,
+    "forceConsistentCasingInFileNames":true,//  强制区分文件名大小写
     "target": "ES2015",
     "module": "ES2015",
     "noImplicitAny": true,
@@ -9,6 +11,7 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
+    // "checkJs": true, // 在 .js文件中报告错误。与 --allowJs配合使用。
     "paths": {
       "@/*": ["./src/*"]
     }

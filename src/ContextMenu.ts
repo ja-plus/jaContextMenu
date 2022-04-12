@@ -78,7 +78,7 @@ const _cssStr = `
   }
   `;
 
-interface MenuWrapper {
+export interface MenuWrapper {
   show(e: MouseEvent, payload: any): void;
 }
 export default class ContextMenu {
@@ -87,7 +87,7 @@ export default class ContextMenu {
   clickEventFunc: () => void;
 
   option: ContextMenuOption;
-  constructor(option: ContextMenuOption) {
+  constructor(option: ContextMenuOption = {}) {
     this.injectCss();
     // this.#onPageResize();
     this.hideMenuEventListener();

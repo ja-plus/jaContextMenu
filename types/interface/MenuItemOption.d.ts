@@ -1,5 +1,5 @@
 import MenuOption from './MenuOption';
-export declare type MenuItemType = 'divide' | '---';
+export declare type MenuItemType = 'hr' | '---';
 export default interface MenuItemOption {
     label?: string;
     tip?: string;

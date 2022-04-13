@@ -21,7 +21,7 @@ export default class MenuItem {
   }
   init() {
     const item = this.itemOption;
-    if (item.type === 'divide' || item.type === '---') {
+    if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
       this.el = h(

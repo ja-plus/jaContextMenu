@@ -1,6 +1,6 @@
 import MenuOption from './MenuOption';
 
-export type MenuItemType = 'divide' | '---';
+export type MenuItemType = 'hr' | '---';
 export default interface MenuItemOption {
   /** 选项文字 */
   label?: string;

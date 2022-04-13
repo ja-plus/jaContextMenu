@@ -3,7 +3,7 @@ import MenuOption from './MenuOption';
 export type MenuItemType = 'divide' | '---';
 export default interface MenuItemOption {
   /** 选项文字 */
-  label: string;
+  label?: string;
   /** 选项右侧文字提示 */
   tip?: string;
   /** 是否禁用 */

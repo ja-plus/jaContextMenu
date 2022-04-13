@@ -1,6 +1,7 @@
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import { uglify } from 'rollup-plugin-uglify'; // 代码压缩
+import dts from 'rollup-plugin-dts';
 export default {
   input: 'src/index.ts',
   output: [
@@ -35,6 +36,11 @@ export default {
         }),
         uglify(),
       ],
+    },
+    // 输出声明文件
+    {
+      file: 'types/index.d.ts',
+      plugins: [dts()],
     },
   ],
   plugins: [

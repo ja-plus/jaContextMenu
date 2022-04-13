@@ -1,0 +1,6 @@
+.prettierignore
+.prettierrc.js
+demo_old.html
+demo.html
+demo.js
+tsconfig.json

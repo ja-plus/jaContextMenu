@@ -1,4 +1,4 @@
-import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+// import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import { uglify } from 'rollup-plugin-uglify'; // 代码压缩
 export default {

@@ -3,48 +3,37 @@ import config from './config.js';
 import MenuItem from './MenuItem';
 import MenuItemOption from './interface/MenuItemOption';
 import MenuOption from './interface/MenuOption';
-import { windowSize } from './utils/utils';
+import Panel, { PanelOption } from './Panel';
 
-export interface InnerOption {
-  position?: string;
-}
 /**
  * 第一层menu保留el，使用display控制显示隐藏
  * 第二层后的menu使用remove来控制显示隐藏
  */
-export default class Menu {
+export default class Menu extends Panel {
+  /** 列表元素 */
+  ul: HTMLElement;
   /** 0 1*/
   level: number;
-  /** element*/
-  el: HTMLElement;
-  /** menu width 传百分比就不好计算 */
-  width: number;
-  /** menu height 计算得出的菜单高度 */
-  height = 0;
   /** config*/
   items: MenuItemOption[];
   children: MenuItem[] = [];
   /** 传入的参数 */
   payload: any;
-  innerOption: InnerOption;
-  constructor(level: number, option: MenuOption, innerOption?: InnerOption) {
+
+  constructor(level: number, option: MenuOption, panelOption?: PanelOption) {
+    super(option, panelOption);
     this.level = level;
     this.items = option.items;
-    this.width = option.width || config.defaultMenuWidth;
-    this.innerOption = innerOption;
     this.init();
     this.addChildren(option.items);
   }
   init() {
-    // 生成最外层元素
-    this.el = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
+    this.ul = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
       dataset: {
         lv: this.level,
       },
       style: {
-        width: this.width + 'px',
         zIndex: +config.baseZIndex + this.level,
-        position: this.innerOption?.position, // fix
       },
       onclick: e => e.stopPropagation(),
       oncontextmenu: e => {
@@ -52,6 +41,8 @@ export default class Menu {
         e.preventDefault();
       },
     });
+    // 向panel中增加列表元素
+    this.el.appendChild(this.ul);
   }
   addChildren(items: MenuItemOption[]) {
     if (!Array.isArray(items)) {
@@ -62,44 +53,33 @@ export default class Menu {
     }
     // 挂载li
     this.children.forEach(item => {
-      this.el.appendChild(item.el);
+      this.ul.appendChild(item.el);
     });
   }
-  // 展示菜单
-  show(e: MouseEvent, payload: any) {
+  /**
+   * 展示菜单
+   * @override
+   */
+  show(e: MouseEvent, payload?: any) {
     this.payload = payload;
-    e.preventDefault();
-    e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
-    this.el.style.display = 'block';
-    this.calcPosition(e);
+    super.show(e);
   }
-  // 计算出现的位置
+  /**
+   * 计算出现的位置
+   * @override
+   */
   calcPosition(e: MouseEvent) {
-    this.height = parseFloat(getComputedStyle(this.el).height);
-    let translateX = e.clientX;
-    let translateY = e.clientY;
-
-    // right not have enough space
-    if (windowSize.clientWidth - e.clientX < this.width) {
-      translateX = windowSize.clientWidth - this.width;
-    }
-    // bottom not have enough space
-    if (windowSize.clientHeight - e.clientY < this.height) {
-      translateY = e.clientY - this.height;
-    }
+    let { x, y } = super.calcPosition(e);
     // add scrollX scrollY if page has scroll bar
-    if (this.level === 0 && this.innerOption.position !== 'fixed') {
-      translateX += window.scrollX;
-      translateY += window.scrollY;
+    if (this.level === 0 && this.panelOption.position !== 'fixed') {
+      x += window.scrollX;
+      y += window.scrollY;
     }
-    this.el.style.transform = `translate(${translateX}px,${translateY}px)`;
+    return { x, y };
   }
-  // 隐藏菜单
-  hide() {
-    this.el.style.display = 'none';
-  }
+
   // 移除所有hover
   removeAllHover() {
     this.children.forEach(item => {
@@ -120,7 +100,7 @@ export default class Menu {
   }
   // 关闭所有菜单
   closeAllMenus() {
-    const menus = document.querySelectorAll(`.${config.wrapperClassName}`);
+    const menus = document.querySelectorAll(`.${config.panelClassName}`);
     menus.forEach((menu: HTMLElement) => {
       const level = menu.dataset.lv;
       if (+level > 0) {

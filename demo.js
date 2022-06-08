@@ -1,5 +1,5 @@
 // import { Menu } from './src/Menu.js';
-import ContextMenu from './src/index.ts';
+import ContextMenu, { Panel } from './src/index.ts';
 // import ContextMenu from './lib/index.esm.js';
 let contextMenu = new ContextMenu({
   fixMenuWhenScroll: false, // 滚动时会跟随滚动
@@ -24,7 +24,7 @@ let menu = contextMenu.create({
           {
             label: '2-1',
             onclick: (e, payload) => {
-              console.log('222 click,', payload);
+              console.log('2-1 click,', payload);
             },
           },
           { type: '---' },
@@ -79,12 +79,20 @@ let menu2Option = {
 let menu2 = contextMenu.create(menu2Option);
 
 // document.body.appendChild(menu.el);
-document.body.oncontextmenu = (e) => {
+document.body.oncontextmenu = e => {
   let payload = 'payload data: callback when click items';
   // menu.show(e, payload);
   menu.show(e, payload);
 };
 let block = document.querySelector('#block1');
-block.addEventListener('contextmenu', (e) => {
+block.addEventListener('contextmenu', e => {
   menu2.show(e, 'payload');
+});
+
+let block2 = document.querySelector('#block2');
+let panel = new Panel();
+panel.el.innerHTML = '<div>hehehehe</div>';
+document.body.appendChild(panel.el);
+block2.addEventListener('contextmenu', e => {
+  panel.show(e);
 });

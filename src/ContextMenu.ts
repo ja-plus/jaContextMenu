@@ -2,81 +2,11 @@ import h from './utils/h';
 // import debounce from './utils/debounce.js';
 import config from './config.js';
 // import store from './store.js';
-import Menu, { InnerOption } from './Menu';
+import Menu from './Menu';
 import ContextMenuOption from './interface/ContextMenuOption';
 import MenuOption from './interface/MenuOption';
-
-const _cssStr = `
-  .${config.wrapperClassName}, .${config.wrapperClassName} *{
-    box-sizing: border-box;
-  }
-  .${config.wrapperClassName}{
-    -webkit-user-select:none;
-    user-select: none;
-    border: 1px solid #ddd;
-    left: 0;top:0;
-    background-color: #fff;
-    padding: 2px 0 2px 0px;
-    margin: 0;
-    cursor: default;
-    width: ${config.defaultMenuWidth}px;
-    display: none;
-  }
-  /*主菜单*/
-  .${config.wrapperClassName}[data-lv="0"]{ 
-    position: absolute;
-  }
-  /*子菜单*/
-  .${config.wrapperClassName} .${config.wrapperClassName}{ 
-    position: absolute;
-  }
-  .${config.wrapperClassName} .divide{
-    margin: ${config.menuItemDivideLineMargin}px 0;
-    height: 1px;
-    background-color: #ddd;
-  }
-  .${config.wrapperClassName} li {
-    position: relative;
-    padding: 0 30px 0 30px;
-    list-style: none;
-    line-height: ${config.menuItemHeight}px;
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
-  .${config.wrapperClassName} li.disabled{
-    color: #aaa;
-    pointer-events: none;
-  }
-  .${config.wrapperClassName} li span.label {
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .${config.wrapperClassName} li span.tip{
-    color:#aaa;
-    font-size: 12px;
-  }
-  .${config.wrapperClassName} li:hover:not(.divide):not(.disabled),
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover{
-    background-color: #eee;
-  }
-  .${config.wrapperClassName} li:hover:not(.divide):not(.disabled) .tip,
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover .tip{
-    color: #000;
-  }
-  .${config.wrapperClassName} li .right-arrow {
-    position: absolute;
-    right: 8px;
-    top: 9px;
-    border-top: 4px solid rgba(0,0,0,0);
-    border-left: 4px solid #000;
-    border-right: 4px solid rgba(0,0,0,0);
-    border-bottom: 4px solid rgba(0,0,0,0);
-  }
-  .${config.wrapperClassName}_child{
-  }
-  `;
+import { contextMenuStyle, panelStyle } from './style';
+import { PanelOption } from './Panel';
 
 export interface MenuWrapper {
   show(e: MouseEvent, payload: any): void;
@@ -106,7 +36,7 @@ export default class ContextMenu {
     if (!style) {
       // if not be injected
       style = h(`style#${config.cssId}`, {
-        innerHTML: _cssStr,
+        innerHTML: panelStyle + contextMenuStyle,
       });
       document.head.appendChild(style);
     }
@@ -136,11 +66,11 @@ export default class ContextMenu {
    * @returns
    */
   create(option: MenuOption): MenuWrapper {
-    const innerOptiton: InnerOption = {};
+    const panelOption: PanelOption = {};
     if (this.option.fixMenuWhenScroll) {
-      innerOptiton.position = 'fixed';
+      panelOption.position = 'fixed';
     }
-    const mainMenu = new Menu(0, option, innerOptiton);
+    const mainMenu = new Menu(0, option, panelOption);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {
@@ -161,7 +91,8 @@ export default class ContextMenu {
   //   window.addEventListener('resize', resizeFunc);
   // }
   /**
-   * 展示菜单
+   * 封装展示菜单
+   * 因为要把其他菜单隐藏
    * @param {Menu} menu
    */
   showMenu(e: MouseEvent, menu: Menu, payload: any) {

@@ -1,3 +1,5 @@
+## v1.2.0
+*  change: ja-panel, ja-contextmenu extends ja-panel
 ## v1.1.0
 * package.json add typescript d.ts support
 * update readme.md

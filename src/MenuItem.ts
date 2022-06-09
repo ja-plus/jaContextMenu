@@ -54,7 +54,9 @@ export default class MenuItem {
       this.childMenu = new Menu(this.level + 1, item.children);
     }
   }
-  // 展示子菜单
+  /**
+   * 展示子菜单
+   */
   showChildMenu(e: MouseEvent) {
     const childMenuEle = this.childMenu.el;
     // if childMenuEle is hidden

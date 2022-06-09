@@ -89,10 +89,14 @@ block.addEventListener('contextmenu', e => {
   menu2.show(e, 'payload');
 });
 
+// create panel demo
 let block2 = document.querySelector('#block2');
 let panel = new Panel();
 panel.el.innerHTML = '<div>hehehehe</div>';
 document.body.appendChild(panel.el);
+window.addEventListener('click', e => {
+  panel.hide();
+});
 block2.addEventListener('contextmenu', e => {
   panel.show(e);
 });

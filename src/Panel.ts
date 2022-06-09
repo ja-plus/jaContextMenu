@@ -28,6 +28,14 @@ export default class Panel {
         position: this.panelOption?.position, // fix
       },
     });
+    this.el.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+    this.el.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
   }
   /**
    * 展示菜单

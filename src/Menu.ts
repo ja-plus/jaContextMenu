@@ -80,25 +80,33 @@ export default class Menu extends Panel {
     return { x, y };
   }
 
-  // 移除所有hover
+  /**
+   * 移除所有hover
+   */
   removeAllHover() {
     this.children.forEach(item => {
       item.el.classList.remove(`${config.wrapperClassName}_hover`);
     });
   }
-  // 移除所有子菜单
+  /**
+   * 移除所有子菜单
+   */
   removeChildMenus() {
     this.children.forEach(item => {
       item.childMenu?.el.remove();
     });
   }
-  // 移除选项hover
+  /**
+   * 移除选项hover
+   */
   removeItemHover() {
     this.children.forEach(childItem => {
       childItem.el.classList.remove(`${config.wrapperClassName}_hover`);
     });
   }
-  // 关闭所有菜单
+  /**
+   * 关闭所有菜单
+   */
   closeAllMenus() {
     const menus = document.querySelectorAll(`.${config.panelClassName}`);
     menus.forEach((menu: HTMLElement) => {

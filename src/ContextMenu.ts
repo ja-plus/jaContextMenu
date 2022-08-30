@@ -10,6 +10,7 @@ import { PanelOption } from './Panel';
 
 export interface MenuWrapper {
   show(e: MouseEvent, payload: any): void;
+  destroy(): void;
 }
 export default class ContextMenu {
   /** 保存生成的菜单,便于统一管理 */
@@ -77,6 +78,9 @@ export default class ContextMenu {
       show: (e: MouseEvent, payload: any) => {
         this.showMenu(e, mainMenu, payload);
       },
+      destroy: () => {
+        this.destroy(mainMenu);
+      },
     };
   }
   /** 监听窗口 */
@@ -106,5 +110,16 @@ export default class ContextMenu {
     this.storeMenus.forEach(menu => {
       menu.el.style.display = 'none';
     });
+  }
+  destroy(menu: Menu) {
+    menu.destroy();
+    for (let i = 0; i < this.storeMenus.length; i++) {
+      const m = this.storeMenus[i];
+      if (m === menu) {
+        this.storeMenus[i] = null;
+        break;
+      }
+    }
+    this.storeMenus = this.storeMenus.filter(Boolean);
   }
 }

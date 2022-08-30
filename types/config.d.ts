@@ -1,5 +1,6 @@
 declare namespace _default {
     const cssId: string;
+    const panelClassName: string;
     const wrapperClassName: string;
     const defaultMenuWidth: number;
     const menuItemHeight: number;

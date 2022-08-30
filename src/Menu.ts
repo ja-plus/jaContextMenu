@@ -118,4 +118,12 @@ export default class Menu extends Panel {
       }
     });
   }
+  /** 移除 */
+  destroy() {
+    this.el.remove();
+    this.el = null;
+    this.items = [];
+    this.children = [];
+    this.payload = null;
+  }
 }

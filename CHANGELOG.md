@@ -1,3 +1,6 @@
+## v1.2.1
+* MenuWrapper add destroy function to release DOM
+* fix: panel position error when scrollPage
 ## v1.2.0
 *  change: ja-panel, ja-contextmenu extends ja-panel
 ## v1.1.0

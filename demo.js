@@ -51,13 +51,16 @@ let menu = contextMenu.create({
     },
   ],
 });
+let menu2;
 let menu2Option = {
   items: [
     {
-      label: '菜单1',
+      label: '移除menu1',
       tip: '提示1',
       onclick(e, payload) {
         console.log('菜单1被按下', payload);
+        menu.destroy();
+        menu = null;
       },
     },
     {
@@ -66,9 +69,10 @@ let menu2Option = {
       children: {
         items: [
           {
-            label: '子菜单1',
+            label: '移除本菜单',
             onclick(e, payload) {
               console.log('子菜单被按下', payload);
+              menu2.destroy();
             },
           },
         ],
@@ -76,7 +80,7 @@ let menu2Option = {
     },
   ],
 };
-let menu2 = contextMenu.create(menu2Option);
+menu2 = contextMenu.create(menu2Option);
 
 // document.body.appendChild(menu.el);
 document.body.oncontextmenu = e => {

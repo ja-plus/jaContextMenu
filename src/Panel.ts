@@ -6,6 +6,7 @@ import config from './config';
 import MenuOption from './interface/MenuOption';
 import { windowSize } from './utils/utils';
 
+/** panel 的配置 */
 export interface PanelOption {
   position?: string;
 }
@@ -63,11 +64,6 @@ export default class Panel {
     if (windowSize.clientHeight - e.clientY < this.height) {
       y = e.clientY - this.height;
     }
-    // add scrollX scrollY if page has scroll bar
-    if (this.panelOption?.position !== 'fixed') {
-      x += window.scrollX;
-      y += window.scrollY;
-    }
     return { x, y };
   }
   /**
@@ -75,5 +71,10 @@ export default class Panel {
    */
   hide() {
     this.el.style.display = 'none';
+  }
+  /** 移除dom */
+  destroy() {
+    this.el.remove();
+    this.el = null;
   }
 }

@@ -31,7 +31,7 @@ export default class MenuItem {
         'li',
         {
           classList: item.disabled ? ['disabled'] : [],
-          onclick: (e) => {
+          onclick: e => {
             if (!item.disabled) {
               const payload = this.parentMenu.payload;
               item.onclick && item.onclick(e, payload);
@@ -42,14 +42,19 @@ export default class MenuItem {
           //   ? (e) => this.#showChildMenu(e, it.children, contextMenuEle)
           //   : () => this.#hideChildMenu(contextMenuEle),
           onmouseenter: item.children
-            ? (e) => {
+            ? e => {
                 this.showChildMenu(e);
               }
             : () => {
                 this.hideOtherChildMenu(); // 移除所有子菜单
               },
         },
-        [h('span.label', item.label), item.tip && h('span.tip', item.tip), item.children && h('span.right-arrow')]
+        [
+          item.icon && h('span.icon', `<img src="${item.icon}"/>`),
+          h('span.label', item.label + 'xxx'),
+          item.tip && h('span.tip', item.tip),
+          item.children && h('span.right-arrow'),
+        ],
       );
     }
     if (item.children) {

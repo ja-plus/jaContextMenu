@@ -24,6 +24,9 @@ export default class MenuItem {
     if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
+      // const img = document.createElement('img');
+      // img.src = item.icon;
+      // img.className = 'ja-icon';
       this.el = h(
         'li',
         {
@@ -46,7 +49,11 @@ export default class MenuItem {
                 this.hideOtherChildMenu(); // 移除所有子菜单
               },
         },
-        [h('span.label', item.label), item.tip && h('span.tip', item.tip), item.children && h('span.right-arrow')],
+        [
+          h('span.label', '', [item.icon && h('img', { src: item.icon, className: 'ja-icon' }), h('span', item.label)]),
+          item.tip && h('span.tip', item.tip),
+          item.children && h('span.right-arrow'),
+        ],
       );
     }
     if (item.children) {

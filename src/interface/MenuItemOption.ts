@@ -2,6 +2,8 @@ import MenuOption from './MenuOption';
 
 export type MenuItemType = 'hr' | '---';
 export default interface MenuItemOption {
+  /** 图标 */
+  icon?: string;
   /** 选项文字 */
   label?: string;
   /** 选项右侧文字提示 */

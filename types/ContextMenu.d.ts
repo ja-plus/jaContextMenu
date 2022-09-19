@@ -1,8 +1,9 @@
 import Menu from './Menu';
 import ContextMenuOption from './interface/ContextMenuOption';
 import MenuOption from './interface/MenuOption';
+import { PanelPosition } from './Panel';
 export interface MenuWrapper {
-    show(e: MouseEvent, payload: any): void;
+    show(position: PanelPosition, payload: any): void;
     destroy(): void;
 }
 export default class ContextMenu {
@@ -14,7 +15,7 @@ export default class ContextMenu {
     hideMenuEventListener(): void;
     scrollListener(): void;
     create(option: MenuOption): MenuWrapper;
-    showMenu(e: MouseEvent, menu: Menu, payload: any): void;
+    showMenu(position: PanelPosition, menu: Menu, payload: any): void;
     hideAllMenu(): void;
     destroy(menu: Menu): void;
 }

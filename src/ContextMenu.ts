@@ -6,10 +6,10 @@ import Menu from './Menu';
 import ContextMenuOption from './interface/ContextMenuOption';
 import MenuOption from './interface/MenuOption';
 import { contextMenuStyle, panelStyle } from './style';
-import { PanelOption } from './Panel';
+import { PanelOption, PanelPosition } from './Panel';
 
 export interface MenuWrapper {
-  show(e: MouseEvent, payload: any): void;
+  show(position: PanelPosition, payload: any): void;
   destroy(): void;
 }
 export default class ContextMenu {
@@ -23,6 +23,7 @@ export default class ContextMenu {
     // this.#onPageResize();
     this.hideMenuEventListener();
     const defaultConfig = {
+      width: config.defaultMenuWidth,
       fixMenuWhenScroll: false,
       hideMenuWhenScroll: true,
     };
@@ -71,12 +72,15 @@ export default class ContextMenu {
     if (this.option.fixMenuWhenScroll) {
       panelOption.position = 'fixed';
     }
+    if (this.option.width) {
+      option.width = this.option.width;
+    }
     const mainMenu = new Menu(0, option, panelOption);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {
-      show: (e: MouseEvent, payload: any) => {
-        this.showMenu(e, mainMenu, payload);
+      show: (position: PanelPosition, payload: any) => {
+        this.showMenu(position, mainMenu, payload);
       },
       destroy: () => {
         this.destroy(mainMenu);
@@ -99,12 +103,12 @@ export default class ContextMenu {
    * 因为要把其他菜单隐藏
    * @param {Menu} menu
    */
-  showMenu(e: MouseEvent, menu: Menu, payload: any) {
+  showMenu(position: PanelPosition, menu: Menu, payload: any) {
     // 隐藏其他菜单
     this.storeMenus.forEach(item => {
       item.hide();
     });
-    menu.show(e, payload);
+    menu.show(position, payload);
   }
   hideAllMenu() {
     this.storeMenus.forEach(menu => {

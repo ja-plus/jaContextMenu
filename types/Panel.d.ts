@@ -1,4 +1,8 @@
 import MenuOption from './interface/MenuOption';
+export declare type PanelPosition = MouseEvent | {
+    x: number;
+    y: number;
+};
 export interface PanelOption {
     position?: string;
 }
@@ -8,8 +12,8 @@ export default class Panel {
     height: number;
     panelOption: PanelOption;
     constructor(option: MenuOption, panelOption?: PanelOption);
-    show(e: MouseEvent): void;
-    calcPosition(e: MouseEvent): {
+    show(e: PanelPosition): void;
+    calcPosition(e: PanelPosition): {
         x: number;
         y: number;
     };

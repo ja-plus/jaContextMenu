@@ -6,6 +6,7 @@ import config from './config';
 import MenuOption from './interface/MenuOption';
 import { windowSize } from './utils/utils';
 
+export type PanelPosition = MouseEvent | { x: number; y: number };
 /** panel 的配置 */
 export interface PanelOption {
   position?: string;
@@ -41,9 +42,11 @@ export default class Panel {
   /**
    * 展示菜单
    */
-  show(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
+  show(e: PanelPosition) {
+    if (e instanceof MouseEvent) {
+      e.preventDefault();
+      e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
+    }
     this.el.style.display = 'block';
     const { x, y } = this.calcPosition(e);
     this.el.style.transform = `translate(${x}px,${y}px)`;
@@ -51,18 +54,18 @@ export default class Panel {
   /**
    * 计算菜单的位置 x,y
    */
-  calcPosition(e: MouseEvent) {
+  calcPosition(e: PanelPosition) {
     this.height = parseFloat(getComputedStyle(this.el).height);
-    let x = e.clientX;
-    let y = e.clientY;
+    let x = e.x;
+    let y = e.y;
 
     // right not have enough space
-    if (windowSize.clientWidth - e.clientX < this.width) {
+    if (windowSize.clientWidth - e.x < this.width) {
       x = windowSize.clientWidth - this.width;
     }
     // bottom not have enough space
-    if (windowSize.clientHeight - e.clientY < this.height) {
-      y = e.clientY - this.height;
+    if (windowSize.clientHeight - e.y < this.height) {
+      y = e.y - this.height;
     }
     return { x, y };
   }

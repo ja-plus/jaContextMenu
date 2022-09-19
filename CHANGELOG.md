@@ -1,3 +1,7 @@
+## v1.2.2
+* MenuWrapper 支持传入position，不一定要MouseEvent
+* `ContextMenuOption` 支持传入默认width
+
 ## v1.2.1
 * MenuWrapper add destroy function to release DOM
 * fix: panel position error when scrollPage

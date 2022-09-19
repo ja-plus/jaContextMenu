@@ -3,7 +3,7 @@ import config from './config.js';
 import MenuItem from './MenuItem';
 import MenuItemOption from './interface/MenuItemOption';
 import MenuOption from './interface/MenuOption';
-import Panel, { PanelOption } from './Panel';
+import Panel, { PanelOption, PanelPosition } from './Panel';
 
 /**
  * 第一层menu保留el，使用display控制显示隐藏
@@ -60,7 +60,7 @@ export default class Menu extends Panel {
    * 展示菜单
    * @override
    */
-  show(e: MouseEvent, payload?: any) {
+  show(e: PanelPosition, payload?: any) {
     this.payload = payload;
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单

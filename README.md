@@ -12,7 +12,11 @@ js右键菜单封装
 ```javascript
 import ContextMenu from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
-const contextMenu = new ContextMenu();
+const contextMenu = new ContextMenu({
+  width: 200,
+  fixMenuWhenScroll: false,
+  hideMenuWhenScroll: true
+});
 const option = {
   items: [
     { 
@@ -55,6 +59,7 @@ document.body.oncontextmenu = (e) => {
 ### ContextMenuOption
 | key | type | default | desc |
 | ---- | ---- | ---- | ---- |
+| width | Number | 200 | 菜单宽度 |
 | fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
 | hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
@@ -75,8 +80,8 @@ document.body.oncontextmenu = (e) => {
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
 | children?: `MenuOption` |     | 子菜单配置
 ## MenuWrapper 方法
-### show(e: `MouseEvent`, payload?: any)
+### 1.show(e: `MouseEvent` | { x: number, y:number }, payload?: any)
 展示菜单  
 payload参数在点击菜单的onclick回调中返回
-### destroy()
+### 2.destroy()
 销毁菜单

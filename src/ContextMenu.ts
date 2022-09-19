@@ -32,15 +32,22 @@ export default class ContextMenu {
       this.scrollListener();
     }
   }
-  // 注入css
+  /**
+   * 创建style标签，注入css
+   */
   injectCss() {
+    const titleTag = document.querySelector('head title');
     let style = document.querySelector(`#${config.cssId}`);
     if (!style) {
       // if not be injected
       style = h(`style#${config.cssId}`, {
         innerHTML: panelStyle + contextMenuStyle,
       });
-      document.head.appendChild(style);
+      if (titleTag) {
+        document.head.insertBefore(style, titleTag.nextElementSibling);
+      } else {
+        document.head.appendChild(style);
+      }
     }
   }
   /** click and close menu listener */

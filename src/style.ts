@@ -65,10 +65,10 @@ export const contextMenuStyle = `
     position: absolute;
     right: 8px;
     top: 9px;
-    border-top: 4px solid rgba(0,0,0,0);
+    border-top: 4px solid transparent;
     border-left: 4px solid #000;
-    border-right: 4px solid rgba(0,0,0,0);
-    border-bottom: 4px solid rgba(0,0,0,0);
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid transparent;
   }
   .${config.wrapperClassName}_child{
   }

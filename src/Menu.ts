@@ -9,18 +9,18 @@ import Panel, { PanelOption, PanelPosition } from './Panel';
  * 第一层menu保留el，使用display控制显示隐藏
  * 第二层后的menu使用remove来控制显示隐藏
  */
-export default class Menu extends Panel {
+export default class Menu<Payload> extends Panel {
   /** 列表元素 */
   ul: HTMLElement;
   /** 0 1*/
   level: number;
   /** config*/
-  items: MenuItemOption[];
+  items: MenuItemOption<Payload>[];
   children: MenuItem[] = [];
   /** 传入的参数 */
   payload: any;
 
-  constructor(level: number, option: MenuOption, panelOption?: PanelOption) {
+  constructor(level: number, option: MenuOption<Payload>, panelOption?: PanelOption) {
     super(option, panelOption);
     this.level = level;
     this.items = option.items;
@@ -44,7 +44,7 @@ export default class Menu extends Panel {
     // 向panel中增加列表元素
     this.el.appendChild(this.ul);
   }
-  addChildren(items: MenuItemOption[]) {
+  addChildren(items: MenuItemOption<Payload>[]) {
     if (!Array.isArray(items)) {
       return console.error('option.items is not type of array');
     }

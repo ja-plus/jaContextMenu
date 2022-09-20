@@ -1,7 +1,7 @@
 import MenuOption from './MenuOption';
 
 export type MenuItemType = 'hr' | '---';
-export default interface MenuItemOption {
+export default interface MenuItemOption<Payload> {
   /** 选项文字 */
   label?: string;
   /** 选项右侧文字提示 */
@@ -15,6 +15,6 @@ export default interface MenuItemOption {
    * @param {Event} e 鼠标事件
    * @param {any} payload 点击时传入的数据
    */
-  onclick?(e: Event, payload: any): void;
-  children?: MenuOption;
+  onclick?(e: Event, payload: Payload): void;
+  children?: MenuOption<Payload>;
 }

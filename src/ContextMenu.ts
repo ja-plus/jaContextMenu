@@ -8,13 +8,13 @@ import MenuOption from './interface/MenuOption';
 import { contextMenuStyle, panelStyle } from './style';
 import { PanelOption, PanelPosition } from './Panel';
 
-export interface MenuWrapper {
-  show(position: PanelPosition, payload: any): void;
+export interface MenuWrapper<T> {
+  show(position: PanelPosition, payload?: T): void;
   destroy(): void;
 }
 export default class ContextMenu {
   /** 保存生成的菜单,便于统一管理 */
-  storeMenus: Menu[] = [];
+  storeMenus: Menu<any>[] = [];
   clickEventFunc: () => void;
 
   option: ContextMenuOption;
@@ -72,9 +72,10 @@ export default class ContextMenu {
   /**
    *
    * @param {Array<Object>} items 配置
+   * @template Payload payload type
    * @returns
    */
-  create(option: MenuOption): MenuWrapper {
+  create<Payload>(option: MenuOption<Payload>): MenuWrapper<Payload> {
     const panelOption: PanelOption = {};
     if (this.option.fixMenuWhenScroll) {
       panelOption.position = 'fixed';
@@ -86,7 +87,7 @@ export default class ContextMenu {
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {
-      show: (position: PanelPosition, payload: any) => {
+      show: (position, payload) => {
         this.showMenu(position, mainMenu, payload);
       },
       destroy: () => {
@@ -110,7 +111,7 @@ export default class ContextMenu {
    * 因为要把其他菜单隐藏
    * @param {Menu} menu
    */
-  showMenu(position: PanelPosition, menu: Menu, payload: any) {
+  showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T) {
     // 隐藏其他菜单
     this.storeMenus.forEach(item => {
       item.hide();
@@ -122,7 +123,7 @@ export default class ContextMenu {
       menu.el.style.display = 'none';
     });
   }
-  destroy(menu: Menu) {
+  destroy(menu: Menu<any>) {
     menu.destroy();
     for (let i = 0; i < this.storeMenus.length; i++) {
       const m = this.storeMenus[i];

@@ -63,8 +63,9 @@ document.body.oncontextmenu = (e) => {
 | fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
 | hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
-### create(option: `MenuOption`): `MenuWrapper`
+### create<PayloadType>(option: `MenuOption`): `MenuWrapper`
 创建一个菜单，返回一个MenuWrapper对象  
+泛型`PayloadType` 为payload的类型  
 #### MenuOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -85,3 +86,25 @@ document.body.oncontextmenu = (e) => {
 payload参数在点击菜单的onclick回调中返回
 ### 2.destroy()
 销毁菜单
+
+## Typescript Demo
+```ts
+import ContextMenu from 'ja-contextmenu';
+const contextMenu = new ContextMenu();
+// Generic - PayloadType
+const menu = contextMenu.create<number>({
+  width: 100,
+  items: [
+    {
+      label: 'label',
+      onclick(e, payload:number) { // type
+        console.log(payload);
+      },
+    },
+  ],
+});
+
+menu.show({x: 100,y:100}, 1) // payload type :number
+//menu.show({x: 100,y:100}, '2') // payload type error not number
+
+```

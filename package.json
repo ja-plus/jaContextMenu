@@ -18,6 +18,8 @@
     "contextmenu",
     "vanilla",
     "js",
+    "ts",
+    "typescript",
     "ESModule"
   ],
   "author": "JA+",

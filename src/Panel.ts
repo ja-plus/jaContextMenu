@@ -20,7 +20,7 @@ export default class Panel {
   /** panel height 计算得出的菜单高度 */
   height = 0;
   panelOption: PanelOption;
-  constructor(option: MenuOption, panelOption?: PanelOption) {
+  constructor(option: MenuOption<any>, panelOption?: PanelOption) {
     this.width = option?.width || config.defaultMenuWidth;
     this.panelOption = panelOption;
     this.el = h(`div.${config.panelClassName}`, {

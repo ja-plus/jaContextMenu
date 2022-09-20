@@ -16,7 +16,7 @@ export default class Menu<Payload> extends Panel {
   level: number;
   /** config*/
   items: MenuItemOption<Payload>[];
-  children: MenuItem[] = [];
+  children: MenuItem<Payload>[] = [];
   /** 传入的参数 */
   payload: any;
 

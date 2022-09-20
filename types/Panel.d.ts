@@ -11,7 +11,7 @@ export default class Panel {
     width: number;
     height: number;
     panelOption: PanelOption;
-    constructor(option: MenuOption, panelOption?: PanelOption);
+    constructor(option: MenuOption<any>, panelOption?: PanelOption);
     show(e: PanelPosition): void;
     calcPosition(e: PanelPosition): {
         x: number;

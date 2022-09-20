@@ -6,7 +6,7 @@ export default class Menu<Payload> extends Panel {
     ul: HTMLElement;
     level: number;
     items: MenuItemOption<Payload>[];
-    children: MenuItem[];
+    children: MenuItem<Payload>[];
     payload: any;
     constructor(level: number, option: MenuOption<Payload>, panelOption?: PanelOption);
     init(): void;

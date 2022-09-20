@@ -6,13 +6,13 @@ import { windowSize } from './utils/utils';
 /**
  * Menu item
  */
-export default class MenuItem {
-  parentMenu: Menu;
+export default class MenuItem<T> {
+  parentMenu: Menu<T>;
   level: number;
   el: HTMLElement;
-  itemOption: MenuItemOption;
-  childMenu: Menu;
-  constructor(level: number, item: MenuItemOption, parentMenu: Menu) {
+  itemOption: MenuItemOption<T>;
+  childMenu: Menu<T>;
+  constructor(level: number, item: MenuItemOption<T>, parentMenu: Menu<T>) {
     // console.log(parentMenu);
     this.parentMenu = parentMenu;
     this.level = level;

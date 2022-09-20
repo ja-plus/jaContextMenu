@@ -11,4 +11,4 @@ const menu = contextMenu.create<number>({
     },
   ],
 });
-menu.show({ x: 1, y: 1 }, 's');
+// menu.show({ x: 1, y: 1 }, 's');

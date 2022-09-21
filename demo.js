@@ -2,13 +2,15 @@
 import ContextMenu, { Panel } from './src/index.ts';
 // import ContextMenu from './lib/index.esm.js';
 let contextMenu = new ContextMenu({
+  width: 200,
   fixMenuWhenScroll: false, // 滚动时会跟随滚动
   hideMenuWhenScroll: false, // 滚动页面时关闭菜单
 });
 let menu = contextMenu.create({
+  width: 150,
   items: [
     {
-      label: 'aaa',
+      label: 'width:150',
       onclick: (e, payload) => {
         console.log('aaa click', payload);
       },
@@ -19,8 +21,9 @@ let menu = contextMenu.create({
     {
       label: '333',
       children: {
-        width: 120,
+        width: 100,
         items: [
+          { label: 'w:100' },
           {
             label: '2-1',
             onclick: (e, payload) => {
@@ -34,6 +37,7 @@ let menu = contextMenu.create({
             children: {
               width: 200,
               items: [
+                { label: 'width:200' },
                 {
                   label: '3-1',
                   onclick: (e, payload) => {
@@ -96,7 +100,7 @@ block.addEventListener('contextmenu', e => {
 // create panel demo
 let block2 = document.querySelector('#block2');
 let panel = new Panel();
-panel.el.innerHTML = '<div>hehehehe</div>';
+panel.el.innerHTML = '<div style="padding:5px 10px;"> 自定义Panel</div>';
 document.body.appendChild(panel.el);
 window.addEventListener('click', e => {
   panel.hide();

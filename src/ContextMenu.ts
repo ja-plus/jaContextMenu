@@ -17,7 +17,7 @@ export default class ContextMenu {
   storeMenus: Menu<any>[] = [];
   clickEventFunc: () => void;
 
-  option: ContextMenuOption;
+  contextMenuOption: ContextMenuOption;
   constructor(option: ContextMenuOption = {}) {
     this.injectCss();
     // this.#onPageResize();
@@ -27,8 +27,8 @@ export default class ContextMenu {
       fixMenuWhenScroll: false,
       hideMenuWhenScroll: true,
     };
-    this.option = Object.assign(defaultConfig, option);
-    if (this.option.hideMenuWhenScroll) {
+    this.contextMenuOption = Object.assign(defaultConfig, option);
+    if (this.contextMenuOption.hideMenuWhenScroll) {
       this.scrollListener();
     }
   }
@@ -77,11 +77,12 @@ export default class ContextMenu {
    */
   create<Payload>(option: MenuOption<Payload>): MenuWrapper<Payload> {
     const panelOption: PanelOption = {};
-    if (this.option.fixMenuWhenScroll) {
+    if (this.contextMenuOption.fixMenuWhenScroll) {
       panelOption.position = 'fixed';
     }
-    if (this.option.width) {
-      option.width = this.option.width;
+    // if not pass width ,use default width
+    if (!option.width) {
+      option.width = this.contextMenuOption.width;
     }
     const mainMenu = new Menu(0, option, panelOption);
     this.storeMenus.push(mainMenu);

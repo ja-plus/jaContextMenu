@@ -1,3 +1,5 @@
+## v1.2.3
+* fix: `ContextMenu.create` option passed `MenuOption.width` not work.
 ## v1.2.2
 * MenuWrapper 支持传入position，不一定要MouseEvent
 * `ContextMenuOption` 支持传入默认width

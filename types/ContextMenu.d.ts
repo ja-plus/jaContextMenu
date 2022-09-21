@@ -9,7 +9,7 @@ export interface MenuWrapper<T> {
 export default class ContextMenu {
     storeMenus: Menu<any>[];
     clickEventFunc: () => void;
-    option: ContextMenuOption;
+    contextMenuOption: ContextMenuOption;
     constructor(option?: ContextMenuOption);
     injectCss(): void;
     hideMenuEventListener(): void;

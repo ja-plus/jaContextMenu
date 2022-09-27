@@ -25,7 +25,7 @@ export default class Menu<Payload> extends Panel {
     this.level = level;
     this.items = option.items;
     this.init();
-    this.addChildren(option.items);
+    this.renderMenuItem();
   }
   init() {
     this.ul = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
@@ -44,11 +44,17 @@ export default class Menu<Payload> extends Panel {
     // 向panel中增加列表元素
     this.el.appendChild(this.ul);
   }
-  addChildren(items: MenuItemOption<Payload>[]) {
-    if (!Array.isArray(items)) {
+  renderMenuItem() {
+    if (!Array.isArray(this.items)) {
       return console.error('option.items is not type of array');
     }
-    for (const it of items) {
+    this.children = [];
+    // 移除原有menuItem
+    let menuItemEl: ChildNode;
+    while ((menuItemEl = this.ul.lastChild)) {
+      menuItemEl.remove();
+    }
+    for (const it of this.items) {
       this.children.push(new MenuItem(this.level, it, this));
     }
     // 挂载li
@@ -64,6 +70,7 @@ export default class Menu<Payload> extends Panel {
     this.payload = payload;
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
+    this.renderMenuItem();
     super.show(e);
   }
   /**

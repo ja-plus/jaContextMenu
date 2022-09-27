@@ -4,6 +4,7 @@ TODO:
 - [ ] 有子菜单的项不能点击
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
+- [x] 支持title/tip formatter
 # jaContextMenu
 js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。

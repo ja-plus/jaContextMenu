@@ -1,11 +1,12 @@
 import MenuOption from './MenuOption';
 
 export type MenuItemType = 'hr' | '---';
+export type TextFormatter<T> = (payload: T) => string;
 export default interface MenuItemOption<Payload> {
   /** 选项文字 */
-  label?: string;
+  label?: string | TextFormatter<Payload>;
   /** 选项右侧文字提示 */
-  tip?: string;
+  tip?: string | TextFormatter<Payload>;
   /** 是否禁用 */
   disabled?: boolean;
   /** */

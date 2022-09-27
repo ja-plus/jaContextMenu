@@ -46,7 +46,11 @@ export default class MenuItem<T> {
                 this.hideOtherChildMenu(); // 移除所有子菜单
               },
         },
-        [h('span.label', item.label), item.tip && h('span.tip', item.tip), item.children && h('span.right-arrow')],
+        [
+          h('span.label', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label),
+          item.tip && h('span.tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip),
+          item.children && h('span.right-arrow'),
+        ],
       );
     }
     if (item.children) {

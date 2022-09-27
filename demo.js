@@ -16,7 +16,7 @@ let menu = contextMenu.create({
       },
     },
     {
-      label: '222',
+      label: payload => '222' + payload,
     },
     {
       label: '333',
@@ -60,7 +60,7 @@ let menu2Option = {
   items: [
     {
       label: '移除menu1',
-      tip: '提示1',
+      tip: () => `提示1(rd:${parseInt(Math.random() * 100)})`,
       onclick(e, payload) {
         console.log('菜单1被按下', payload);
         menu.destroy();
@@ -88,7 +88,7 @@ menu2 = contextMenu.create(menu2Option);
 
 // document.body.appendChild(menu.el);
 document.body.oncontextmenu = e => {
-  let payload = 'payload data: callback when click items';
+  let payload = 'payload: ' + parseInt(Math.random() * 1000);
   // menu.show(e, payload);
   menu.show(e, payload);
 };

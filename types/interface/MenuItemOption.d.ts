@@ -1,10 +1,11 @@
 import MenuOption from './MenuOption';
+import { Text } from './common';
 export declare type MenuItemType = 'hr' | '---';
-export declare type TextFormatter<T> = (payload: T) => string;
 export default interface MenuItemOption<Payload> {
-    icon?: string;
-    label?: string | TextFormatter<Payload>;
-    tip?: string | TextFormatter<Payload>;
+    icon?: Text<Payload>;
+    class?: Text<Payload>;
+    label?: Text<Payload>;
+    tip?: Text<Payload>;
     disabled?: boolean;
     type?: MenuItemType;
     customItem?: HTMLElement;

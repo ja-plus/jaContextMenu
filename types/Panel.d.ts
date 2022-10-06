@@ -1,17 +1,17 @@
-import MenuOption from './interface/MenuOption';
 export declare type PanelPosition = MouseEvent | {
     x: number;
     y: number;
 };
 export interface PanelOption {
-    position?: string;
+    width?: number;
+    position?: 'fixed' | null;
 }
 export default class Panel {
     el: HTMLElement;
     width: number;
     height: number;
     panelOption: PanelOption;
-    constructor(option: MenuOption<any>, panelOption?: PanelOption);
+    constructor(panelOption?: PanelOption);
     show(e: PanelPosition): void;
     calcPosition(e: PanelPosition): {
         x: number;

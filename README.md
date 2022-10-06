@@ -21,6 +21,7 @@ const contextMenu = new ContextMenu({
 const option = {
   items: [
     { 
+      icon: './assets/images/ico.png',
       label: 'menu1', 
       tip: 'tip1', 
       onclick(e, payload) {
@@ -76,6 +77,7 @@ document.body.oncontextmenu = (e) => {
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
+| icon?: string |    |  图片icon |
 | label?: string |    |  选项文字 |
 | tip?: string |    | 选项右侧提示文字 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 

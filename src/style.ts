@@ -70,6 +70,11 @@ export const contextMenuStyle = `
     border-right: 4px solid transparent;
     border-bottom: 4px solid transparent;
   }
+  .${config.wrapperClassName} .ja-icon{
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
   .${config.wrapperClassName}_child{
   }
   `;

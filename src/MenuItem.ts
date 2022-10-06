@@ -24,6 +24,9 @@ export default class MenuItem<T> {
     if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
+      // const img = document.createElement('img');
+      // img.src = item.icon;
+      // img.className = 'ja-icon';
       this.el = h(
         'li',
         {
@@ -47,7 +50,10 @@ export default class MenuItem<T> {
               },
         },
         [
-          h('span.label', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label),
+          h('span.label', [
+            item.icon && h('img.ja-icon', { src: item.icon }),
+            h('span', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label)
+          ]),
           item.tip && h('span.tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip),
           item.children && h('span.right-arrow'),
         ],

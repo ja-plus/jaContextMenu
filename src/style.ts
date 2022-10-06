@@ -45,11 +45,18 @@ export const contextMenuStyle = `
     color: #aaa;
     pointer-events: none;
   }
-  .${config.wrapperClassName} li span.label {
+  .${config.wrapperClassName} li .menu-item-icon{
+    position:absolute;
+    left: 7px;
+    top: 4px;
+    height: 16px;
+    vertical-align: middle;
+  }
+  .${config.wrapperClassName} li span.menu-item-label {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .${config.wrapperClassName} li span.tip{
+  .${config.wrapperClassName} li span.menu-item-tip{
     color:#aaa;
     font-size: 12px;
   }
@@ -69,11 +76,6 @@ export const contextMenuStyle = `
     border-left: 4px solid #000;
     border-right: 4px solid transparent;
     border-bottom: 4px solid transparent;
-  }
-  .${config.wrapperClassName} .ja-icon{
-    height: 16px;
-    vertical-align: middle;
-    margin-right: 5px;
   }
   .${config.wrapperClassName}_child{
   }

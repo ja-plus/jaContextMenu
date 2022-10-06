@@ -50,11 +50,11 @@ export default class MenuItem<T> {
               },
         },
         [
-          h('span.label', [
-            item.icon && h('img.ja-icon', { src: item.icon }),
-            h('span', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label)
+          h('span.menu-item-label', [
+            item.icon && h('img.menu-item-icon', { src: item.icon }),
+            h('span', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label),
           ]),
-          item.tip && h('span.tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip),
+          item.tip && h('span.menu-item-tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip),
           item.children && h('span.right-arrow'),
         ],
       );

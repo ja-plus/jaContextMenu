@@ -111,3 +111,8 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 //menu.show({x: 100,y:100}, '2') // payload type error not number
 
 ```
+
+## 关于项目
+### 结构
+* typscript, rollup 打包, parcel 开发环境调试
+* 打包使用 npm run bd && npm run dts (生成ts声明)

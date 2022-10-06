@@ -1,3 +1,5 @@
+import { Text } from '@/interface/common';
+
 interface WindowSize {
   /** <html> element */
   htmlEl: HTMLElement;
@@ -27,8 +29,12 @@ export function getWindowSize(): WindowSize {
 
 getWindowSize();
 window.addEventListener('resize', () => {
-  console.log('get getWindowSize');
+  // console.log('get getWindowSize');
   getWindowSize();
 });
 
 export { _storeWindowSize as windowSize };
+
+export function dealTextFmt<T>(data: Text<T>, payload: T) {
+  return typeof data === 'function' ? data(payload) : data;
+}

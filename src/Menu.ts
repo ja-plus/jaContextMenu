@@ -1,9 +1,9 @@
 import h from './utils/h';
 import config from './config.js';
 import MenuItem from './MenuItem';
-import MenuItemOption from './interface/MenuItemOption';
 import MenuOption from './interface/MenuOption';
 import Panel, { PanelOption, PanelPosition } from './Panel';
+import { dealTextFmt } from './utils/utils';
 
 /**
  * 第一层menu保留el，使用display控制显示隐藏
@@ -12,23 +12,25 @@ import Panel, { PanelOption, PanelPosition } from './Panel';
 export default class Menu<Payload> extends Panel {
   /** 列表元素 */
   ul: HTMLElement;
-  /** 0 1*/
+  /** 表示第几级的菜单*/
   level: number;
   /** config*/
-  items: MenuItemOption<Payload>[];
+  menuOption: MenuOption<Payload>;
+  /** 列表项 */
   children: MenuItem<Payload>[] = [];
   /** 传入的参数 */
-  payload: any;
+  payload: Payload;
 
-  constructor(level: number, option: MenuOption<Payload>, panelOption?: PanelOption) {
-    super(option, panelOption);
+  constructor(level: number, menuOption: MenuOption<Payload>, panelOption: PanelOption = {}) {
+    super(panelOption);
+    this.menuOption = menuOption;
     this.level = level;
-    this.items = option.items;
     this.init();
     this.renderMenuItem();
   }
   init() {
-    this.ul = h(`ul.${config.wrapperClassName}.${config.wrapperClassName}-lv${this.level}`, {
+    this.ul = h(`ul`, {
+      classList: [config.wrapperClassName, `${config.wrapperClassName}-lv${this.level}`],
       dataset: {
         lv: this.level,
       },
@@ -44,8 +46,13 @@ export default class Menu<Payload> extends Panel {
     // 向panel中增加列表元素
     this.el.appendChild(this.ul);
   }
+  /** 更新Menu ul属性 */
+  updateMenuAttr() {
+    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealTextFmt(this.menuOption.class, this.payload)}`;
+  }
+  /** 生成菜单项 */
   renderMenuItem() {
-    if (!Array.isArray(this.items)) {
+    if (!Array.isArray(this.menuOption.items)) {
       return console.error('option.items is not type of array');
     }
     this.children = [];
@@ -54,7 +61,7 @@ export default class Menu<Payload> extends Panel {
     while ((menuItemEl = this.ul.lastChild)) {
       menuItemEl.remove();
     }
-    for (const it of this.items) {
+    for (const it of this.menuOption.items) {
       this.children.push(new MenuItem(this.level, it, this));
     }
     // 挂载li
@@ -70,6 +77,7 @@ export default class Menu<Payload> extends Panel {
     this.payload = payload;
     this.removeAllHover(); // 移除所有hover
     this.removeChildMenus(); // 打开的时候不会展示任何子菜单
+    this.updateMenuAttr();
     this.renderMenuItem();
     super.show(e);
   }
@@ -129,7 +137,7 @@ export default class Menu<Payload> extends Panel {
   destroy() {
     this.el.remove();
     this.el = null;
-    this.items = [];
+    this.menuOption = null;
     this.children = [];
     this.payload = null;
   }

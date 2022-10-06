@@ -1,15 +1,16 @@
 import MenuOption from './MenuOption';
-
+import { Text } from './common';
 export type MenuItemType = 'hr' | '---';
 /** 自定义展示文字 */
-export type TextFormatter<T> = (payload: T) => string;
 export default interface MenuItemOption<Payload> {
   /** 图标 */
-  icon?: string;
+  icon?: Text<Payload>;
+  /** 自定义class */
+  class?: Text<Payload>;
   /** 选项文字 */
-  label?: string | TextFormatter<Payload>;
+  label?: Text<Payload>;
   /** 选项右侧文字提示 */
-  tip?: string | TextFormatter<Payload>;
+  tip?: Text<Payload>;
   /** 是否禁用 */
   disabled?: boolean;
   /** */

@@ -2,7 +2,7 @@ import h from './utils/h';
 import Menu from './Menu';
 import config from './config.js';
 import MenuItemOption from './interface/MenuItemOption';
-import { windowSize } from './utils/utils';
+import { dealTextFmt, windowSize } from './utils/utils';
 /**
  * Menu item
  */
@@ -24,17 +24,18 @@ export default class MenuItem<T> {
     if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
-      // const img = document.createElement('img');
-      // img.src = item.icon;
-      // img.className = 'ja-icon';
+      const liClassList = [];
+      if (item.disabled) liClassList.push('disabled');
+      const className = dealTextFmt(item.class, this.parentMenu.payload);
+      if (className) liClassList.push(className);
+
       this.el = h(
         'li',
         {
-          classList: item.disabled ? ['disabled'] : [],
+          classList: liClassList,
           onclick: e => {
             if (!item.disabled) {
-              const payload = this.parentMenu.payload;
-              item.onclick && item.onclick(e, payload);
+              item.onclick && item.onclick(e, this.parentMenu.payload);
               if (!item.children) this.parentMenu.closeAllMenus();
             }
           },
@@ -50,22 +51,24 @@ export default class MenuItem<T> {
               },
         },
         [
-          item.icon && h('img.menu-item-icon', { src: item.icon }), // 图标
+          item.icon && h('img.menu-item-icon', { src: dealTextFmt(item.icon, this.parentMenu.payload) }), // 图标
           ...[
             item.customItem
               ? item.customItem
               : h('span.menu-item-label', {
-                  textContent: typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label,
+                  textContent: dealTextFmt(item.label, this.parentMenu.payload),
                 }),
           ],
-          item.tip && h('span.menu-item-tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip), // 提示文字
+          item.tip && h('span.menu-item-tip', dealTextFmt(item.tip, this.parentMenu.payload)), // 提示文字
           item.children && h('span.right-arrow'), // 右箭头
         ],
       );
     }
     if (item.children) {
-      if (!item.children.width) item.children.width = this.parentMenu.width; // 不设置宽度则继承父菜单宽度
-      this.childMenu = new Menu(this.level + 1, item.children);
+      const panelOption = {
+        width: item.children.width || this.parentMenu.width, // 不设置宽度则继承父菜单宽度
+      };
+      this.childMenu = new Menu(this.level + 1, item.children, panelOption);
     }
   }
   /**

@@ -1,8 +1,9 @@
 ## v1.3.0
 * fix: `ContextMenu.create` option passed `MenuOption.width` not work.
-* add: `MenutOption.title/tip` can pass formatter function.
-* add: `MenutOption.icon`
-* add: `MenuOption.customItem` 用户自定义渲染
+* add: `MenuItemOption.title/tip` 可传 formatter 方法.
+* add: `MenuItemOption.icon`
+* add: `MenuItemOption.customItem` 用户自定义渲染
+* add: `MenuOption.class`,`MenuItemOption.class` 自定义class
 ## v1.2.2
 * MenuWrapper 支持传入position，不一定要MouseEvent
 * `ContextMenuOption` 支持传入默认width

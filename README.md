@@ -1,6 +1,6 @@
 TODO: 
-- [ ] 支持配置css 类名
 - [ ] 有子菜单的项不能点击
+- [x] 支持配置菜单类名
 - [x] 图标 
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
@@ -24,6 +24,7 @@ const option = {
   items: [
     { 
       icon: './assets/images/ico.png',
+      class: 'customClass',
       label: 'menu1', 
       tip: 'tip1', 
       onclick(e, payload) {
@@ -42,6 +43,8 @@ const option = {
             onclick(e,payload){
               console.log('sub menu click', payload)
             }
+          },{
+            customItem: document.createElement('div')
           }
         ]
       }
@@ -61,27 +64,29 @@ document.body.oncontextmenu = (e) => {
 > new ContextMenu(option: `ContextMenuOption`);
 
 ### ContextMenuOption
-| key | type | default | desc |
-| ---- | ---- | ---- | ---- |
-| width | Number | 200 | 菜单宽度 |
-| fixMenuWhenScroll | Boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
-| hideMenuWhenScroll | Boolean | true | 滚动时是否关闭菜单 |
+| key: type | default | desc |
+|  ---- | ---- | ---- |
+| width: number | 200 | 菜单宽度 |
+| fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
+| hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
-### create<PayloadType>(option: `MenuOption`): `MenuWrapper`
+### create\<PayloadType\>(option: `MenuOption`): `MenuWrapper`
 创建一个菜单，返回一个MenuWrapper对象  
 泛型`PayloadType` 为payload的类型  
 #### MenuOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
 | width?: number| 200 | 菜单宽度，子菜单不配置，则继承父菜单宽度 |
+| class?: string\|(payload)=>string | | 菜单ul class |
 | items: `MenuItemOption` |    | 列表配置项 |
 
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string |    |  图片icon |
-| label?: string |    |  选项文字 |
-| tip?: string |    | 选项右侧提示文字 |
+| icon?: string\|(payload)=>string |    |  图片icon |
+| class?: string\|(payload)=>string |    | 菜单项li class |
+| label?: string\|(payload)=>string |    |  选项文字 |
+| tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 
 | customItem?: `HTMLElement` |  | 自定义菜单项 |
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
@@ -119,3 +124,4 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 ### 结构
 * typscript, rollup 打包, parcel 开发环境调试
 * 打包使用 npm run bd && npm run dts (生成ts声明)
+* 用src/utils/h.ts 创建一个元素

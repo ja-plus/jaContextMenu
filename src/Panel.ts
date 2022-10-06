@@ -3,13 +3,14 @@
  */
 import h from './utils/h';
 import config from './config';
-import MenuOption from './interface/MenuOption';
 import { windowSize } from './utils/utils';
 
 export type PanelPosition = MouseEvent | { x: number; y: number };
 /** panel 的配置 */
 export interface PanelOption {
-  position?: string;
+  /** 宽度 */
+  width?: number;
+  position?: 'fixed' | null;
 }
 /** 面板 */
 export default class Panel {
@@ -20,9 +21,9 @@ export default class Panel {
   /** panel height 计算得出的菜单高度 */
   height = 0;
   panelOption: PanelOption;
-  constructor(option: MenuOption<any>, panelOption?: PanelOption) {
-    this.width = option?.width || config.defaultMenuWidth;
+  constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
+    this.width = panelOption?.width || config.defaultMenuWidth;
     this.el = h(`div.${config.panelClassName}`, {
       style: {
         width: this.width + 'px',

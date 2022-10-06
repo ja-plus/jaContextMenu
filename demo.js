@@ -8,6 +8,7 @@ let contextMenu = new ContextMenu({
 });
 let menu = contextMenu.create({
   width: 150,
+  class: payload => 'my-contextmenu' + payload[payload.length - 1],
   items: [
     {
       label: 'width:150',
@@ -20,6 +21,7 @@ let menu = contextMenu.create({
       label: payload => '2' + payload,
     },
     {
+      class: payload => (payload ? 'custom-' + payload[payload.length - 1] : 'custom-class'),
       customItem: h('div', {
         textContent: 'customRender',
         style: {

@@ -1,10 +1,12 @@
 TODO: 
-- [ ] 图标 
 - [ ] 支持配置css 类名
 - [ ] 有子菜单的项不能点击
+- [x] 图标 
 - [x] 滚动时隐藏Menu
 - [x] 使用position:fixed定位
 - [x] 支持title/tip formatter
+- [x] 支持传入dom，自定义菜单项
+
 # jaContextMenu
 js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。
@@ -81,6 +83,7 @@ document.body.oncontextmenu = (e) => {
 | label?: string |    |  选项文字 |
 | tip?: string |    | 选项右侧提示文字 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 
+| customItem?: `HTMLElement` |  | 自定义菜单项 |
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
 | children?: `MenuOption` |     | 子菜单配置
 ## MenuWrapper 方法

@@ -1,3 +1,6 @@
+/**
+ * 这个文件用来测试typescript 代码提示是否正常
+ */
 import ContextMenu from '../src/index';
 const contextMenu = new ContextMenu();
 const menu = contextMenu.create<number>({

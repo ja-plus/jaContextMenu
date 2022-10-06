@@ -10,7 +10,7 @@ export default class Menu<Payload> extends Panel {
     payload: any;
     constructor(level: number, option: MenuOption<Payload>, panelOption?: PanelOption);
     init(): void;
-    addChildren(items: MenuItemOption<Payload>[]): void;
+    renderMenuItem(): void;
     show(e: PanelPosition, payload?: any): void;
     calcPosition(e: MouseEvent): {
         x: number;

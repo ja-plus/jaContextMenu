@@ -14,10 +14,12 @@ export default interface MenuItemOption<Payload> {
   disabled?: boolean;
   /** */
   type?: MenuItemType;
+  /** 用户自定义展示的内容 */
+  customItem?: HTMLElement;
   /**
    * 点击事件
    * @param {Event} e 鼠标事件
-   * @param {any} payload 点击时传入的数据
+   * @param {Payload} payload 点击时传入的数据
    */
   onclick?(e: Event, payload: Payload): void;
   children?: MenuOption<Payload>;

@@ -50,12 +50,16 @@ export default class MenuItem<T> {
               },
         },
         [
-          h('span.menu-item-label', [
-            item.icon && h('img.menu-item-icon', { src: item.icon }),
-            h('span', typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label),
-          ]),
-          item.tip && h('span.menu-item-tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip),
-          item.children && h('span.right-arrow'),
+          item.icon && h('img.menu-item-icon', { src: item.icon }), // 图标
+          ...[
+            item.customItem
+              ? item.customItem
+              : h('span.menu-item-label', {
+                  textContent: typeof item.label === 'function' ? item.label(this.parentMenu.payload) : item.label,
+                }),
+          ],
+          item.tip && h('span.menu-item-tip', typeof item.tip === 'function' ? item.tip(this.parentMenu.payload) : item.tip), // 提示文字
+          item.children && h('span.right-arrow'), // 右箭头
         ],
       );
     }

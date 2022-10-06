@@ -1,5 +1,5 @@
 // import { Menu } from './src/Menu.js';
-import ContextMenu, { Panel } from './src/index.ts';
+import ContextMenu, { Panel, h } from './src/index.ts';
 // import ContextMenu from './lib/index.esm.js';
 let contextMenu = new ContextMenu({
   width: 200,
@@ -17,10 +17,25 @@ let menu = contextMenu.create({
       },
     },
     {
-      label: payload => '222' + payload,
+      label: payload => '2' + payload,
     },
     {
-      label: '333',
+      customItem: h('div', {
+        textContent: 'customRender',
+        style: {
+          cssText: `
+            border:1px solid #aaa;
+            border-radius:4px;
+            padding:0 2px;
+            background:repeating-linear-gradient(45deg,#aaa 0,#aaa 10%,#eee 10%,#eee 20%);
+            text-shadow: 0 0 2px #000;
+            box-shadow: 0 0 10px #aaa;
+          `,
+        },
+      }),
+    },
+    {
+      label: '3',
       children: {
         width: 100,
         items: [

@@ -1,11 +1,11 @@
 import MenuOption from './MenuOption';
-import { Text } from './common';
+import { BaseAttr } from './common';
 export declare type MenuItemType = 'hr' | '---';
 export default interface MenuItemOption<Payload> {
-    icon?: Text<Payload>;
-    class?: Text<Payload>;
-    label?: Text<Payload>;
-    tip?: Text<Payload>;
+    icon?: BaseAttr<string, Payload>;
+    class?: BaseAttr<string, Payload>;
+    label?: BaseAttr<string, Payload>;
+    tip?: BaseAttr<string, Payload>;
     disabled?: boolean;
     type?: MenuItemType;
     customItem?: HTMLElement;

@@ -1,16 +1,16 @@
 import MenuOption from './MenuOption';
-import { Text } from './common';
+import { BaseAttr } from './common';
 export type MenuItemType = 'hr' | '---';
 /** 自定义展示文字 */
 export default interface MenuItemOption<Payload> {
   /** 图标 */
-  icon?: Text<Payload>;
+  icon?: BaseAttr<string, Payload>;
   /** 自定义class */
-  class?: Text<Payload>;
+  class?: BaseAttr<string, Payload>;
   /** 选项文字 */
-  label?: Text<Payload>;
+  label?: BaseAttr<string, Payload>;
   /** 选项右侧文字提示 */
-  tip?: Text<Payload>;
+  tip?: BaseAttr<string, Payload>;
   /** 是否禁用 */
   disabled?: boolean;
   /** */

@@ -1,4 +1,4 @@
-import { Text } from '@/interface/common';
+import { BaseAttr } from '@/interface/common';
 
 interface WindowSize {
   /** <html> element */
@@ -35,6 +35,6 @@ window.addEventListener('resize', () => {
 
 export { _storeWindowSize as windowSize };
 
-export function dealTextFmt<T>(data: Text<T>, payload: T) {
+export function dealTextFmt<T>(data: BaseAttr<string, T>, payload: T) {
   return typeof data === 'function' ? data(payload) : data;
 }

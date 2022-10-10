@@ -1,7 +1,7 @@
-import { Text } from './common';
+import { BaseAttr } from './common';
 import MenuItemOption from './MenuItemOption';
 export default interface MenuOption<Payload> {
     width?: number;
-    class?: Text<Payload>;
+    class?: BaseAttr<string, Payload>;
     items?: MenuItemOption<Payload>[];
 }

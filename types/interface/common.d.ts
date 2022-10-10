@@ -1,2 +1,2 @@
-export declare type TextFormatter<T> = (payload: T) => string;
-export declare type Text<T> = string | TextFormatter<T>;
+export declare type Formatter<T, P> = (payload: P) => T;
+export declare type BaseAttr<T, P> = T | Formatter<T, P>;

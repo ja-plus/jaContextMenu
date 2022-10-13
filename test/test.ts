@@ -7,7 +7,7 @@ const menu = contextMenu.create<number>({
   width: 100,
   items: [
     {
-      label: 'label',
+      label: payload => 'label',
       onclick(e, payload) {
         console.log(payload);
       },

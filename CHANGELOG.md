@@ -1,3 +1,6 @@
+## v1.3.1
+* update: 点击右键时才渲染菜单项。而不是一开始就渲染。
+* update：`MenuItemOption.disabled` 可传方法
 ## v1.3.0
 * fix: `ContextMenu.create` option passed `MenuOption.width` not work.
 * add: `MenuItemOption.title/tip` 可传 formatter 方法.

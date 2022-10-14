@@ -12,7 +12,7 @@ export default interface MenuItemOption<Payload> {
   /** 选项右侧文字提示 */
   tip?: BaseAttr<string, Payload>;
   /** 是否禁用 */
-  disabled?: boolean;
+  disabled?: BaseAttr<boolean, Payload>;
   /** */
   type?: MenuItemType;
   /** 用户自定义展示的内容 */

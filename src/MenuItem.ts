@@ -2,7 +2,7 @@ import h from './utils/h';
 import Menu from './Menu';
 import config from './config.js';
 import MenuItemOption from './interface/MenuItemOption';
-import { dealTextFmt, windowSize } from './utils/utils';
+import { dealBastAttr, windowSize } from './utils/utils';
 /**
  * Menu item
  */
@@ -25,8 +25,9 @@ export default class MenuItem<T> {
       this.el = h('li.divide');
     } else {
       const liClassList = [];
+      const liDisabled = dealBastAttr(item.disabled, this.parentMenu.payload);
       if (item.disabled) liClassList.push('disabled');
-      const className = dealTextFmt(item.class, this.parentMenu.payload);
+      const className = dealBastAttr(item.class, this.parentMenu.payload);
       if (className) liClassList.push(className);
 
       this.el = h(
@@ -34,7 +35,7 @@ export default class MenuItem<T> {
         {
           classList: liClassList,
           onclick: e => {
-            if (!item.disabled) {
+            if (!liDisabled) {
               item.onclick && item.onclick(e, this.parentMenu.payload);
               if (!item.children) this.parentMenu.closeAllMenus();
             }
@@ -51,15 +52,15 @@ export default class MenuItem<T> {
               },
         },
         [
-          item.icon && h('img.menu-item-icon', { src: dealTextFmt(item.icon, this.parentMenu.payload) }), // 图标
+          item.icon && h('img.menu-item-icon', { src: dealBastAttr(item.icon, this.parentMenu.payload) }), // 图标
           ...[
             item.customItem
               ? item.customItem
               : h('span.menu-item-label', {
-                  textContent: dealTextFmt(item.label, this.parentMenu.payload),
+                  textContent: dealBastAttr(item.label, this.parentMenu.payload),
                 }),
           ],
-          item.tip && h('span.menu-item-tip', dealTextFmt(item.tip, this.parentMenu.payload)), // 提示文字
+          item.tip && h('span.menu-item-tip', dealBastAttr(item.tip, this.parentMenu.payload)), // 提示文字
           item.children && h('span.right-arrow'), // 右箭头
         ],
       );
@@ -82,9 +83,9 @@ export default class MenuItem<T> {
       childMenuEle.style.display = 'block';
     }
     this.el.appendChild(childMenuEle);
-    this.calcPosition(e);
-    this.childMenu.removeAllHover(); // 取消hover
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
+    this.childMenu.show(e, this.childMenu.payload);
+    this.calcPosition(e); // 重新计算菜单出现的位置。
   }
   calcPosition(e: MouseEvent) {
     const childMenuEle = this.childMenu.el;
@@ -100,8 +101,9 @@ export default class MenuItem<T> {
     if (windowSize.clientHeight - liPosition.y + 2 < childMenuHeight) {
       translateY = -childMenuHeight + config.menuItemHeight + 2 + 1; // 1px border
     }
-    this.childMenu.removeChildMenus();
+    // this.childMenu.removeChildMenus();
     childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    // return { x: translateX, y: translateY };
   }
   hideOtherChildMenu() {
     this.parentMenu?.removeChildMenus(); // 移除所有子菜单

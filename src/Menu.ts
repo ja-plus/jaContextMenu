@@ -25,10 +25,10 @@ export default class Menu<Payload> extends Panel {
     super(panelOption);
     this.menuOption = menuOption;
     this.level = level;
-    this.init();
+    this.createUl();
     // this.renderMenuItem();//初始化时不渲染MenuItem
   }
-  init() {
+  createUl() {
     this.ul = h(`ul`, {
       classList: [config.wrapperClassName, `${config.wrapperClassName}-lv${this.level}`],
       dataset: {

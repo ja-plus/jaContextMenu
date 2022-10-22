@@ -75,15 +75,15 @@ export default class ContextMenu {
    * @template Payload payload type
    * @returns
    */
-  create<Payload>(option: MenuOption<Payload>): MenuWrapper<Payload> {
+  create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
     const panelOption: PanelOption = {
-      width: option.width || this.contextMenuOption.width,
+      width: menuOption.width || this.contextMenuOption.width,
     };
     if (this.contextMenuOption.fixMenuWhenScroll) {
       panelOption.position = 'fixed';
     }
     // if not pass width ,use default width
-    const mainMenu = new Menu(0, option, panelOption);
+    const mainMenu = new Menu(0, menuOption, panelOption);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {

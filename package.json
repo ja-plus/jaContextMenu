@@ -20,7 +20,9 @@
     "js",
     "ts",
     "typescript",
-    "ESModule"
+    "ESModule",
+    "右键菜单",
+    "原生"
   ],
   "author": "JA+",
   "license": "MIT",

@@ -23,7 +23,11 @@ export default class Panel {
   panelOption: PanelOption;
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
-    this.width = panelOption?.width || config.defaultMenuWidth;
+    this.width = this.panelOption?.width || config.defaultMenuWidth;
+    this.createEl();
+    this.addEvnetListener();
+  }
+  createEl() {
     this.el = h(`div.${config.panelClassName}`, {
       style: {
         width: this.width + 'px',
@@ -31,6 +35,8 @@ export default class Panel {
         position: this.panelOption?.position, // fix
       },
     });
+  }
+  addEvnetListener() {
     this.el.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();

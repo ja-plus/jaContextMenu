@@ -71,6 +71,10 @@ let menu = contextMenu.create({
         ],
       },
     },
+    {
+      label: '4 disabled',
+      disabled: payload => true,
+    },
   ],
 });
 let menu2;

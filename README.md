@@ -8,7 +8,7 @@ TODO:
 - [x] 支持传入dom，自定义菜单项
 
 # jaContextMenu
-js右键菜单封装  
+原生js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。
 ## Usage 使用方式
 > npm i ja-contextmenu
@@ -27,14 +27,18 @@ const option = {
       class: 'customClass',
       label: 'menu1', 
       tip: 'tip1', 
+      disabled: false,
       onclick(e, payload) {
         console.log('menu1 click', payload);
       },
     },
     { type: '---' }, // divide line
     { 
-      label: 'menu2', 
-      tip: 'tip2',
+      icon: payload => 'icon href2',
+      label: payload => 'menu2', 
+      tip: payload => 'tip2',
+      class: payload => 'class2',
+      disabled: payload => true
       children: {
         width: 120,
         items: [
@@ -87,6 +91,7 @@ document.body.oncontextmenu = (e) => {
 | class?: string\|(payload)=>string |    | 菜单项li class |
 | label?: string\|(payload)=>string |    |  选项文字 |
 | tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
+| disabled?: boolean\|(payload)=>boolean |    | 是否禁用 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 
 | customItem?: `HTMLElement` |  | 自定义菜单项 |
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
@@ -125,3 +130,5 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 * typscript, rollup 打包, parcel 开发环境调试
 * 打包使用 npm run bd && npm run dts (生成ts声明)
 * 用src/utils/h.ts 创建一个元素
+### 计划
+* 尝试使用`Web Components`实现一版

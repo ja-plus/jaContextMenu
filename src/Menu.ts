@@ -3,7 +3,7 @@ import config from './config.js';
 import MenuItem from './MenuItem';
 import MenuOption from './interface/MenuOption';
 import Panel, { PanelOption, PanelPosition } from './Panel';
-import { dealTextFmt } from './utils/utils';
+import { dealBastAttr } from './utils/utils';
 
 /**
  * 第一层menu保留el，使用display控制显示隐藏
@@ -25,10 +25,10 @@ export default class Menu<Payload> extends Panel {
     super(panelOption);
     this.menuOption = menuOption;
     this.level = level;
-    this.init();
-    this.renderMenuItem();
+    this.createUl();
+    // this.renderMenuItem();//初始化时不渲染MenuItem
   }
-  init() {
+  createUl() {
     this.ul = h(`ul`, {
       classList: [config.wrapperClassName, `${config.wrapperClassName}-lv${this.level}`],
       dataset: {
@@ -48,7 +48,7 @@ export default class Menu<Payload> extends Panel {
   }
   /** 更新Menu ul属性 */
   updateMenuAttr() {
-    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealTextFmt(this.menuOption.class, this.payload)}`;
+    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBastAttr(this.menuOption.class, this.payload)}`;
   }
   /** 生成菜单项 */
   renderMenuItem() {
@@ -56,7 +56,7 @@ export default class Menu<Payload> extends Panel {
       return console.error('option.items is not type of array');
     }
     this.children = [];
-    // 移除原有menuItem
+    // remove all menuItem
     let menuItemEl: ChildNode;
     while ((menuItemEl = this.ul.lastChild)) {
       menuItemEl.remove();
@@ -85,7 +85,7 @@ export default class Menu<Payload> extends Panel {
    * 计算出现的位置
    * @override
    */
-  calcPosition(e: MouseEvent) {
+  calcPosition(e: PanelPosition) {
     let { x, y } = super.calcPosition(e);
     // add scrollX scrollY if page has scroll bar
     if (this.level === 0 && this.panelOption.position !== 'fixed') {

@@ -35,6 +35,6 @@ window.addEventListener('resize', () => {
 
 export { _storeWindowSize as windowSize };
 
-export function dealTextFmt<T>(data: BaseAttr<string, T>, payload: T) {
+export function dealBastAttr<T extends BaseAttr<B1, P>, P, B1>(data: T, payload: P) {
   return typeof data === 'function' ? data(payload) : data;
 }

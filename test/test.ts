@@ -14,4 +14,6 @@ const menu = contextMenu.create<number>({
     },
   ],
 });
-// menu.show({ x: 1, y: 1 }, 's');
+const payload = 1;
+const showPosition = { x: 1, y: 1 };
+menu.show(showPosition, payload);

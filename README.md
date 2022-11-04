@@ -12,6 +12,10 @@ TODO:
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。
 ## Usage 使用方式
 > npm i ja-contextmenu
+
+安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm自动更新。(eg: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
+精力有限，不保证小版本更新时，不改动使用方式。
+## Code
 ```javascript
 import ContextMenu from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  

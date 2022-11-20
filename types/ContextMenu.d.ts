@@ -14,7 +14,7 @@ export default class ContextMenu {
     injectCss(): void;
     hideMenuEventListener(): void;
     scrollListener(): void;
-    create<Payload>(option: MenuOption<Payload>): MenuWrapper<Payload>;
+    create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload>;
     showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T): void;
     hideAllMenu(): void;
     destroy(menu: Menu<any>): void;

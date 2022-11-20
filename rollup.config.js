@@ -1,6 +1,6 @@
 // import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
-import { uglify } from 'rollup-plugin-uglify'; // 代码压缩
+import { terser } from 'rollup-plugin-terser'; // 代码压缩
 export default {
   input: 'src/index.ts',
   output: [
@@ -13,7 +13,7 @@ export default {
       file: 'lib/index.esm.min.js',
       format: 'esm',
       sourcemap: true,
-      plugins: [uglify()],
+      plugins: [terser()],
     },
     // {
     //   file: 'lib/index.es5.js',

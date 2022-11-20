@@ -8,11 +8,11 @@ export default class Menu<Payload> extends Panel {
     children: MenuItem<Payload>[];
     payload: Payload;
     constructor(level: number, menuOption: MenuOption<Payload>, panelOption?: PanelOption);
-    init(): void;
+    createUl(): void;
     updateMenuAttr(): void;
     renderMenuItem(): void;
     show(e: PanelPosition, payload?: any): void;
-    calcPosition(e: MouseEvent): {
+    calcPosition(e: PanelPosition): {
         x: number;
         y: number;
     };

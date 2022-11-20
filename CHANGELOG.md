@@ -1,4 +1,4 @@
-## v1.3.1
+## v1.4.0
 * update: 点击右键时才渲染菜单项。而不是一开始就渲染。
 * update：`MenuItemOption.disabled` 可传方法
 ## v1.3.0

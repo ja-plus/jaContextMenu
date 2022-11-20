@@ -12,10 +12,10 @@ TODO:
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。
 ## Usage 使用方式
 > npm i ja-contextmenu
-
+## 注意
 安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm自动更新。(eg: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
-## Code
+## Code 样例
 ```javascript
 import ContextMenu from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
@@ -134,5 +134,7 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 * typscript, rollup 打包, parcel 开发环境调试
 * 打包使用 npm run bd && npm run dts (生成ts声明)
 * 用src/utils/h.ts 创建一个元素
-### 计划
+### 以后
 * 尝试使用`Web Components`实现一版
+
+### 欢迎提交merge request

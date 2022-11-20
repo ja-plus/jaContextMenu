@@ -6,7 +6,7 @@ export default interface MenuItemOption<Payload> {
     class?: BaseAttr<string, Payload>;
     label?: BaseAttr<string, Payload>;
     tip?: BaseAttr<string, Payload>;
-    disabled?: boolean;
+    disabled?: BaseAttr<boolean, Payload>;
     type?: MenuItemType;
     customItem?: HTMLElement;
     onclick?(e: Event, payload: Payload): void;

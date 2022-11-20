@@ -12,6 +12,8 @@ export default class Panel {
     height: number;
     panelOption: PanelOption;
     constructor(panelOption?: PanelOption);
+    createEl(): void;
+    addEvnetListener(): void;
     show(e: PanelPosition): void;
     calcPosition(e: PanelPosition): {
         x: number;

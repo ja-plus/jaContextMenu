@@ -13,7 +13,7 @@ export default class Panel {
     panelOption: PanelOption;
     constructor(panelOption?: PanelOption);
     createEl(): void;
-    addEvnetListener(): void;
+    addEventListener(): void;
     show(e: PanelPosition): void;
     calcPosition(e: PanelPosition): {
         x: number;

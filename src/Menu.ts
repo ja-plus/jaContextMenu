@@ -1,5 +1,5 @@
 import h from './utils/h';
-import config from './config.js';
+import config from './config';
 import MenuItem from './MenuItem';
 import MenuOption from './interface/MenuOption';
 import Panel, { PanelOption, PanelPosition } from './Panel';

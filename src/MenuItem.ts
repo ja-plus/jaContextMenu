@@ -1,6 +1,6 @@
 import h from './utils/h';
 import Menu from './Menu';
-import config from './config.js';
+import config from './config';
 import MenuItemOption from './interface/MenuItemOption';
 import { dealBastAttr, windowSize } from './utils/utils';
 /**
@@ -93,11 +93,11 @@ export default class MenuItem<T> {
     const liPosition = (e.target as HTMLElement).getBoundingClientRect();
     let translateX = this.parentMenu.width - 5;
     let translateY = -2; // paddingTop
-    // right avaliable space
+    // right available space
     if (windowSize.clientWidth - liPosition.x - this.parentMenu.width < this.childMenu.width) {
       translateX = -this.childMenu.width + 5;
     }
-    // bottom avaliable space
+    // bottom available space
     if (windowSize.clientHeight - liPosition.y + 2 < childMenuHeight) {
       translateY = -childMenuHeight + config.menuItemHeight + 2 + 1; // 1px border
     }

@@ -5,12 +5,12 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: 'lib/index.esm.js',
+      file: 'lib/ja-contextmenu.esm.js',
       format: 'esm',
       sourcemap: true,
     },
     {
-      file: 'lib/index.esm.min.js',
+      file: 'lib/ja-contextmenu.esm.min.js',
       format: 'esm',
       sourcemap: true,
       plugins: [terser()],

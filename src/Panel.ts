@@ -25,7 +25,7 @@ export default class Panel {
     this.panelOption = panelOption;
     this.width = this.panelOption?.width || config.defaultMenuWidth;
     this.createEl();
-    this.addEvnetListener();
+    this.addEventListener();
   }
   createEl() {
     this.el = h(`div.${config.panelClassName}`, {
@@ -36,7 +36,7 @@ export default class Panel {
       },
     });
   }
-  addEvnetListener() {
+  addEventListener() {
     this.el.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();

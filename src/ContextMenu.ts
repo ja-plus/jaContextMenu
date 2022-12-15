@@ -1,6 +1,6 @@
 import h from './utils/h';
 // import debounce from './utils/debounce.js';
-import config from './config.js';
+import config from './config';
 // import store from './store.js';
 import Menu from './Menu';
 import ContextMenuOption from './interface/ContextMenuOption';

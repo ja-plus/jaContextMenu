@@ -1,6 +1,6 @@
 // import { Menu } from './src/Menu.js';
-import ContextMenu, { Panel, h } from './src/index.ts';
-// import ContextMenu from './lib/index.esm.js';
+import ContextMenu, { Panel, h } from '../src/index.ts';
+// import ContextMenu, { Panel, h } from '../lib/ja-contextmenu.esm.js';
 let contextMenu = new ContextMenu({
   width: 200,
   fixMenuWhenScroll: false, // 滚动时会跟随滚动

@@ -1,10 +1,10 @@
-declare namespace _default {
-    const cssId: string;
-    const panelClassName: string;
-    const wrapperClassName: string;
-    const defaultMenuWidth: number;
-    const menuItemHeight: number;
-    const menuItemDivideLineMargin: number;
-    const baseZIndex: number;
-}
+declare const _default: {
+    cssId: string;
+    panelClassName: string;
+    wrapperClassName: string;
+    defaultMenuWidth: number;
+    menuItemHeight: number;
+    menuItemDivideLineMargin: number;
+    baseZIndex: number;
+};
 export default _default;

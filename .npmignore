@@ -1,6 +1,4 @@
 .prettierignore
 .prettierrc.js
-demo_old.html
-demo.html
-demo.js
+./test
 tsconfig.json

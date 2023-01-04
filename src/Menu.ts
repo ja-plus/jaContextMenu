@@ -35,7 +35,7 @@ export default class Menu<Payload> extends Panel {
         lv: this.level,
       },
       style: {
-        zIndex: +config.baseZIndex + this.level,
+        zIndex: config.baseZIndex + this.level,
       },
       onclick: e => e.stopPropagation(),
       oncontextmenu: e => {
@@ -123,8 +123,8 @@ export default class Menu<Payload> extends Panel {
    * 关闭所有菜单
    */
   closeAllMenus() {
-    const menus = document.querySelectorAll(`.${config.panelClassName}`);
-    menus.forEach((menu: HTMLElement) => {
+    const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClassName}`);
+    menus.forEach(menu => {
       const level = menu.dataset.lv;
       if (+level > 0) {
         menu.remove();

@@ -1,14 +1,13 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
   "source": "src/index.ts",
   "types": "types/index.d.ts",
   "scripts": {
     "dev": "parcel ./test/demo.html",
-    "bd": "rollup -c",
-    "dts": "tsc -d --declarationDir types --emitDeclarationOnly "
+    "bd": "rollup -c && tsc -d --declarationDir types --emitDeclarationOnly"
   },
   "repository": {
     "type": "git",

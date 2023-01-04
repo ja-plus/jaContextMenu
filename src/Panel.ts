@@ -63,15 +63,14 @@ export default class Panel {
    */
   calcPosition(e: PanelPosition) {
     this.height = parseFloat(getComputedStyle(this.el).height);
-    let x = e.x;
-    let y = e.y;
+    let { x, y } = e;
 
     // right not have enough space
-    if (windowSize.clientWidth - e.x < this.width) {
+    if (windowSize.clientWidth - x < this.width) {
       x = windowSize.clientWidth - this.width;
     }
     // bottom not have enough space
-    if (windowSize.clientHeight - e.y < this.height) {
+    if (windowSize.clientHeight - y < this.height) {
       y = e.y - this.height;
     }
     return { x, y };

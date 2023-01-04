@@ -36,7 +36,7 @@ export default class MenuItem<T> {
           classList: liClassList,
           onclick: e => {
             if (!liDisabled) {
-              item.onclick && item.onclick(e, this.parentMenu.payload);
+              item.onclick?.(e, this.parentMenu.payload);
               if (!item.children) this.parentMenu.closeAllMenus();
             }
           },
@@ -53,13 +53,10 @@ export default class MenuItem<T> {
         },
         [
           item.icon && h('img.menu-item-icon', { src: dealBastAttr(item.icon, this.parentMenu.payload) }), // 图标
-          ...[
-            item.customItem
-              ? item.customItem
-              : h('span.menu-item-label', {
-                  textContent: dealBastAttr(item.label, this.parentMenu.payload),
-                }),
-          ],
+          item.customItem ||
+            h('span.menu-item-label', {
+              textContent: dealBastAttr(item.label, this.parentMenu.payload),
+            }),
           item.tip && h('span.menu-item-tip', dealBastAttr(item.tip, this.parentMenu.payload)), // 提示文字
           item.children && h('span.right-arrow'), // 右箭头
         ],

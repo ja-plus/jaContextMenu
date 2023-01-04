@@ -6,7 +6,7 @@ import Menu from './Menu';
 import ContextMenuOption from './interface/ContextMenuOption';
 import MenuOption from './interface/MenuOption';
 import { contextMenuStyle, panelStyle } from './style';
-import { PanelOption, PanelPosition } from './Panel';
+import { PanelPosition } from './Panel';
 
 export interface MenuWrapper<T> {
   show(position: PanelPosition, payload?: T): void;
@@ -14,7 +14,7 @@ export interface MenuWrapper<T> {
 }
 export default class ContextMenu {
   /** 保存生成的菜单,便于统一管理 */
-  storeMenus: Menu<any>[] = [];
+  private storeMenus: Menu<any>[] = [];
   clickEventFunc: () => void;
 
   contextMenuOption: ContextMenuOption;
@@ -22,7 +22,7 @@ export default class ContextMenu {
     this.injectCss();
     // this.#onPageResize();
     this.hideMenuEventListener();
-    const defaultConfig = {
+    const defaultConfig: ContextMenuOption = {
       width: config.defaultMenuWidth,
       fixMenuWhenScroll: false,
       hideMenuWhenScroll: true,
@@ -33,9 +33,9 @@ export default class ContextMenu {
     }
   }
   /**
-   * 创建style标签，注入css
+   * create style tag (<style>)，inject css
    */
-  injectCss() {
+  private injectCss() {
     const titleTag = document.querySelector('head title');
     let style = document.querySelector(`#${config.cssId}`);
     if (!style) {
@@ -51,7 +51,7 @@ export default class ContextMenu {
     }
   }
   /** click and close menu listener */
-  hideMenuEventListener() {
+  private hideMenuEventListener() {
     // add once event
     if (!this.clickEventFunc) {
       this.clickEventFunc = () => {
@@ -64,26 +64,24 @@ export default class ContextMenu {
     }
   }
   /** if scroll hide all menu */
-  scrollListener() {
+  private scrollListener() {
     window.addEventListener('scroll', () => {
       this.hideAllMenu();
     });
   }
   /**
-   *
+   * create a context menu
    * @param {Array<Object>} items 配置
    * @template Payload payload type
    * @returns
    */
   create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
-    const panelOption: PanelOption = {
-      width: menuOption.width || this.contextMenuOption.width,
-    };
-    if (this.contextMenuOption.fixMenuWhenScroll) {
-      panelOption.position = 'fixed';
-    }
-    // if not pass width ,use default width
-    const mainMenu = new Menu(0, menuOption, panelOption);
+    // if not transfer width ,use default width
+    if (!menuOption.width) menuOption.width = this.contextMenuOption.width;
+    // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;
+    if (this.contextMenuOption.fixMenuWhenScroll) menuOption.position = 'fixed';
+
+    const mainMenu = new Menu(0, menuOption);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
     return {

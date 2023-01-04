@@ -1,5 +1,7 @@
 ## v1.4.1
-* change: lib file name `index` to `ja-contextmenu`
+* change: lib file name `index` to `ja-contextmenu`.
+* remove: inline style `z-index`.
+* add: `private` decorator.
 ## v1.4.0
 * update: 点击右键时才渲染菜单项。而不是一开始就渲染。
 * update：`MenuItemOption.disabled` 可传方法

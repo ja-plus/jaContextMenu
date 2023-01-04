@@ -63,10 +63,9 @@ export default class MenuItem<T> {
       );
     }
     if (item.children) {
-      const panelOption = {
-        width: item.children.width || this.parentMenu.width, // 不设置宽度则继承父菜单宽度
-      };
-      this.childMenu = new Menu(this.level + 1, item.children, panelOption);
+      // 不设置宽度则继承父菜单宽度
+      if (!item.children.width) item.children.width = this.parentMenu.width;
+      this.childMenu = new Menu(this.level + 1, item.children);
     }
   }
   /**

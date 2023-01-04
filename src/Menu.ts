@@ -2,7 +2,7 @@ import h from './utils/h';
 import config from './config';
 import MenuItem from './MenuItem';
 import MenuOption from './interface/MenuOption';
-import Panel, { PanelOption, PanelPosition } from './Panel';
+import Panel, { PanelPosition } from './Panel';
 import { dealBastAttr } from './utils/utils';
 
 /**
@@ -21,8 +21,9 @@ export default class Menu<Payload> extends Panel {
   /** 传入的参数 */
   payload: Payload;
 
-  constructor(level: number, menuOption: MenuOption<Payload>, panelOption: PanelOption = {}) {
-    super(panelOption);
+  constructor(level: number, menuOption: MenuOption<Payload>) {
+    super(menuOption);
+    // if(level > 1) delete menuOption.position,baseZIndex?
     this.menuOption = menuOption;
     this.level = level;
     this.createUl();
@@ -34,9 +35,9 @@ export default class Menu<Payload> extends Panel {
       dataset: {
         lv: this.level,
       },
-      style: {
-        zIndex: config.baseZIndex + this.level,
-      },
+      // style: {
+      //   zIndex: this.menuOption.zIndex + this.level,
+      // },
       onclick: e => e.stopPropagation(),
       oncontextmenu: e => {
         e.stopPropagation();

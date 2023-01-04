@@ -9,7 +9,8 @@ TODO:
 
 # jaContextMenu
 原生js右键菜单封装  
-默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。
+默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。<br>
+default z-index = 5000;
 ## Usage 使用方式
 > npm i ja-contextmenu
 ## 注意
@@ -17,7 +18,7 @@ TODO:
 精力有限，不保证小版本更新时，不改动使用方式。
 ## Code 样例
 ```javascript
-import ContextMenu from 'ja-contextmenu'; // types.d.ts supported
+import ContextMenu, { h } from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
 const contextMenu = new ContextMenu({
   width: 200,
@@ -52,7 +53,22 @@ const option = {
               console.log('sub menu click', payload)
             }
           },{
+            class: 'li-class-name',
             customItem: document.createElement('div')
+          },{
+            // 我封装了createElement的函数h
+            customItem: h('div',[
+              h('span', {
+                // {[element.key]:value}
+                textContent: 'hello', // element.textContent = 'hello'
+                style:{
+                  fontWeight:'bolder'.// element.style.fontWeight = 'holder'
+                  cssText: 'font-size:14px;' // element.style.cssText = 'font-size:14px;'
+                }, 
+                className:'class-name', 
+              }),
+              h('span.class-name#id',' world')
+            ])
           }
         ]
       }
@@ -131,10 +147,8 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 
 ## 关于项目
 ### 结构
-* typscript, rollup 打包, parcel 开发环境调试
-* 打包使用 npm run bd && npm run dts (生成ts声明)
+* rollup 打包, parcel 开发环境调试
+* 打包使用 npm run bd
 * 用src/utils/h.ts 创建一个元素
-### 以后
-* 尝试使用`Web Components`实现一版
 
 ### 欢迎提交merge request

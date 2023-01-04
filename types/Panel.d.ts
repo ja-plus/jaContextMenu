@@ -5,6 +5,7 @@ export declare type PanelPosition = MouseEvent | {
 export interface PanelOption {
     width?: number;
     position?: 'fixed' | null;
+    zIndex?: number;
 }
 export default class Panel {
     el: HTMLElement;
@@ -13,7 +14,8 @@ export default class Panel {
     panelOption: PanelOption;
     constructor(panelOption?: PanelOption);
     createEl(): void;
-    addEventListener(): void;
+    private addEventListener;
+    private eventListenerCb;
     show(e: PanelPosition): void;
     calcPosition(e: PanelPosition): {
         x: number;

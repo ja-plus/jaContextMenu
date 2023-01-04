@@ -11,6 +11,7 @@ export const panelStyle = `
     display: none;
     width: ${config.defaultMenuWidth}px;
     position:absolute;
+    z-index: ${config.defaultZIndex};
   }
 `;
 

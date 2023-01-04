@@ -1,13 +1,13 @@
 import MenuItem from './MenuItem';
 import MenuOption from './interface/MenuOption';
-import Panel, { PanelOption, PanelPosition } from './Panel';
+import Panel, { PanelPosition } from './Panel';
 export default class Menu<Payload> extends Panel {
     ul: HTMLElement;
     level: number;
     menuOption: MenuOption<Payload>;
     children: MenuItem<Payload>[];
     payload: Payload;
-    constructor(level: number, menuOption: MenuOption<Payload>, panelOption?: PanelOption);
+    constructor(level: number, menuOption: MenuOption<Payload>);
     createUl(): void;
     updateMenuAttr(): void;
     renderMenuItem(): void;

@@ -22,7 +22,7 @@ let menu = contextMenu.create({
     },
     {
       class: payload => (payload ? 'custom-' + payload[payload.length - 1] : 'custom-class'),
-      customItem: h('div', {
+      customItem: h('div.customClassName#customItemId', {
         textContent: 'customRender',
         style: {
           cssText: `

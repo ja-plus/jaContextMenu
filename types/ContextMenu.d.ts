@@ -7,13 +7,13 @@ export interface MenuWrapper<T> {
     destroy(): void;
 }
 export default class ContextMenu {
-    storeMenus: Menu<any>[];
+    private storeMenus;
     clickEventFunc: () => void;
     contextMenuOption: ContextMenuOption;
     constructor(option?: ContextMenuOption);
-    injectCss(): void;
-    hideMenuEventListener(): void;
-    scrollListener(): void;
+    private injectCss;
+    private hideMenuEventListener;
+    private scrollListener;
     create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload>;
     showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T): void;
     hideAllMenu(): void;

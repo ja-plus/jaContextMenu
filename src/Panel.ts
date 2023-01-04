@@ -8,9 +8,10 @@ import { windowSize } from './utils/utils';
 export type PanelPosition = MouseEvent | { x: number; y: number };
 /** panel 的配置 */
 export interface PanelOption {
-  /** 宽度 */
+  /** Panel width */
   width?: number;
   position?: 'fixed' | null;
+  zIndex?: number;
 }
 /** 面板 */
 export default class Panel {
@@ -31,20 +32,18 @@ export default class Panel {
     this.el = h(`div.${config.panelClassName}`, {
       style: {
         width: this.width + 'px',
-        zIndex: +config.baseZIndex,
+        zIndex: this.panelOption?.zIndex,
         position: this.panelOption?.position, // fix
       },
     });
   }
-  addEventListener() {
-    this.el.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
-    this.el.addEventListener('contextmenu', e => {
-      e.preventDefault();
-      e.stopPropagation();
-    });
+  private addEventListener() {
+    this.el.addEventListener('click', this.eventListenerCb);
+    this.el.addEventListener('contextmenu', this.eventListenerCb);
+  }
+  private eventListenerCb(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
   }
   /**
    * 展示菜单
@@ -83,7 +82,8 @@ export default class Panel {
   }
   /** 移除dom */
   destroy() {
+    this.el.removeEventListener('click', this.eventListenerCb);
+    this.el.removeEventListener('contextmenu', this.eventListenerCb);
     this.el.remove();
-    this.el = null;
   }
 }

@@ -5,6 +5,6 @@ declare const _default: {
     defaultMenuWidth: number;
     menuItemHeight: number;
     menuItemDivideLineMargin: number;
-    baseZIndex: number;
+    defaultZIndex: number;
 };
 export default _default;

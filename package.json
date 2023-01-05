@@ -1,6 +1,6 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
   "source": "src/index.ts",
@@ -13,6 +13,11 @@
     "type": "git",
     "url": "https://gitee.com/japlus/ja-context-menu"
   },
+  "files": [
+    "lib",
+    "src",
+    "types"
+  ],
   "keywords": [
     "contextmenu",
     "vanilla",

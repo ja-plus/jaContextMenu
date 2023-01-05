@@ -10,7 +10,8 @@ TODO:
 # jaContextMenu
 原生js右键菜单封装  
 默认样式通过js插入style标签完成，注意命名空间。仅提供最基础的样式。<br>
-default z-index = 5000;
+default z-index = 5000;<br>
+[Gitee](https://gitee.com/japlus/ja-context-menu)
 ## Usage 使用方式
 > npm i ja-contextmenu
 ## 注意

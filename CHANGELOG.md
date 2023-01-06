@@ -1,5 +1,5 @@
 ## v1.4.2
-* delete: `.npmignore`, use package.json `files` to order publish file
+* delete: `.npmignore`, use package.json `files` to order publish file.Optimize npm package size.
 * change: package.json `gitee` to `github`
 ## v1.4.1
 * change: lib file name `index` to `ja-contextmenu`.

@@ -23,7 +23,7 @@ export default function h(tag: string, attrs?: Attrs | string | number | HTMLEle
   const id = tag.match(/#[\w\d_-]+/);
   // let classArr = tag.match(/(?<=\.)[\w\d_-]+/g) || []; // className // 低版本浏览器不支持零宽断言
   let classArr: string[] = tag.match(/\.[\w\d_-]+/g) || []; // className
-  classArr = classArr.map(it => it.substring(1));
+  classArr = Array.from(classArr).map(it => it.substring(1));
   tag = tag.match(/^[\w\d]+/)[0];
 
   const elem: any = document.createElement(tag);
@@ -37,8 +37,8 @@ export default function h(tag: string, attrs?: Attrs | string | number | HTMLEle
         for (const key in attrs[attr]) {
           elem[attr][key] = attrs[attr][key];
         }
-      } else if (attr === 'classList' && Array.isArray(attrs[attr])) {
-        classArr = classArr.concat(attrs[attr]);
+      } else if (attr === 'classList' && Array.isArray(attrs.classList)) {
+        classArr = classArr.concat(attrs.classList.filter(Boolean));
       } else {
         elem[attr] = attrs[attr];
       }
@@ -47,7 +47,8 @@ export default function h(tag: string, attrs?: Attrs | string | number | HTMLEle
     elem.textContent = String(attrs);
   }
 
-  if (classArr) elem.classList.add(...classArr);
+  if (classArr.length) elem.classList.add(...classArr);
+
   if (children) {
     children.forEach(child => {
       if (child instanceof HTMLElement) elem.appendChild(child);

@@ -24,11 +24,9 @@ export default class MenuItem<T> {
     if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
-      const liClassList = [];
       const liDisabled = dealBastAttr(item.disabled, this.parentMenu.payload);
+      const liClassList = [dealBastAttr(item.class, this.parentMenu.payload)];
       if (item.disabled) liClassList.push('disabled');
-      const className = dealBastAttr(item.class, this.parentMenu.payload);
-      if (className) liClassList.push(className);
 
       this.el = h(
         'li',

@@ -38,5 +38,5 @@ export { _storeWindowSize as windowSize };
  * 判断属性是否是函数，是则返回调用后的结果，否则返回值
  */
 export function dealBastAttr<T extends BaseAttr<B1, P>, P, B1>(data: T, payload: P) {
-  return typeof data === 'function' ? data(payload) : data;
+  return typeof data === 'function' ? data(payload) : data || '';
 }

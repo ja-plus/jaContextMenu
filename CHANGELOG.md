@@ -1,3 +1,5 @@
+## v1.4.3
+fix: remove `undefined` class name in ja-contextmenu class
 ## v1.4.2
 * delete: `.npmignore`, use package.json `files` to order publish file.Optimize npm package size.
 * change: package.json `gitee` to `github`

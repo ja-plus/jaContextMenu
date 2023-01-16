@@ -1,4 +1,4 @@
-import { BaseAttr } from '@/interface/common';
+import { BaseAttr } from '@/types/common';
 
 interface WindowSize {
   /** <html> element */

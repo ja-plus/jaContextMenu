@@ -1,7 +1,7 @@
 import h from './utils/h';
 import config from './config';
 import MenuItem from './MenuItem';
-import MenuOption from './interface/MenuOption';
+import MenuOption from './types/MenuOption';
 import Panel, { PanelPosition } from './Panel';
 import { dealBastAttr } from './utils/utils';
 

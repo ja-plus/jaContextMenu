@@ -3,8 +3,8 @@ import h from './utils/h';
 import config from './config';
 // import store from './store.js';
 import Menu from './Menu';
-import ContextMenuOption from './interface/ContextMenuOption';
-import MenuOption from './interface/MenuOption';
+import ContextMenuOption from './types/ContextMenuOption';
+import MenuOption from './types/MenuOption';
 import { contextMenuStyle, panelStyle } from './style';
 import { PanelPosition } from './Panel';
 

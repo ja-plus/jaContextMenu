@@ -3,8 +3,8 @@
   "version": "1.4.4",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
-  "source": "src/index.ts",
   "types": "src/index.ts",
+  "type": "module",
   "scripts": {
     "dev": "parcel ./test/demo.html",
     "bd": "rollup -c"

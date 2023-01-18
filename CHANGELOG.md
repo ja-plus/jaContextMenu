@@ -1,5 +1,6 @@
 ## v1.4.4
 remove: d.ts declaration file.
+remove: package.json `source`
 ## v1.4.3
 fix: remove `undefined` class name in ja-contextmenu class
 ## v1.4.2

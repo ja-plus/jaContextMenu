@@ -3,7 +3,7 @@
   "version": "1.4.4",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
-  "types": "src/index.ts",
+  "types": "lib/index.d.ts",
   "type": "module",
   "scripts": {
     "dev": "parcel ./test/demo.html",

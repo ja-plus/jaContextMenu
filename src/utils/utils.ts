@@ -16,15 +16,16 @@ let _storeWindowSize: WindowSize;
 /** 获取界面大小 */
 export function getWindowSize(): WindowSize {
   const html = document.querySelector('html');
-  const ss = {
+  const {innerWidth,innerHeight} = window;
+  const {clientWidth,clientHeight} = html;
+  _storeWindowSize = {
     htmlEl: html,
-    scrollWidth: window.innerWidth - html.clientWidth,
-    scrollHeight: window.innerHeight - html.clientHeight,
-    clientWidth: html.clientWidth,
-    clientHeight: html.clientHeight,
+    scrollWidth: innerWidth - clientWidth,
+    scrollHeight: innerHeight - clientHeight,
+    clientWidth: clientWidth,
+    clientHeight: clientHeight,
   };
-  _storeWindowSize = ss; // store
-  return ss;
+  return _storeWindowSize;
 }
 
 getWindowSize();

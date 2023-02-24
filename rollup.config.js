@@ -38,7 +38,10 @@ export default {
     // },
   ],
   plugins: [
-    typescript(),
+    typescript({
+      declaration: true,
+      declarationDir: './types'
+    }),
     // getBabelOutputPlugin({
     //   presets: ['@babel/preset-env'],
     // }),

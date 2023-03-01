@@ -2,7 +2,6 @@
 import ContextMenu, { Panel, h } from '../src/index.ts';
 // import ContextMenu, { Panel, h } from '../lib/ja-contextmenu.esm.js';
 let contextMenu = new ContextMenu({
-  width: 200,
   fixMenuWhenScroll: false, // 滚动时会跟随滚动
   hideMenuWhenScroll: false, // 滚动页面时关闭菜单
 });
@@ -82,9 +81,9 @@ let menu2Option = {
   items: [
     {
       label: '移除menu1',
-      tip: () => `提示1(rd:${parseInt(Math.random() * 100)})`,
+      tip: () => `rd:${parseInt(Math.random() * 100)}`,
       onclick(e, payload) {
-        console.log('菜单1被按下', payload);
+        console.log('菜单1被按下', payload);s
         menu.destroy();
         menu = null;
       },
@@ -104,6 +103,10 @@ let menu2Option = {
         ],
       },
     },
+    {
+      label:'返回',
+      tip:'Alt+向左键'
+    }
   ],
 };
 menu2 = contextMenu.create(menu2Option);

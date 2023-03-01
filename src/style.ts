@@ -53,11 +53,11 @@ export const contextMenuStyle = `
     height: 16px;
     vertical-align: middle;
   }
-  .${config.wrapperClassName} li span.menu-item-label {
+  .${config.wrapperClassName} li menu-item-label {
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .${config.wrapperClassName} li span.menu-item-tip{
+  .${config.wrapperClassName} li menu-item-tip{
     color:#aaa;
     font-size: 12px;
   }

@@ -1,11 +1,12 @@
-
 .ja-panel {
     border: none;
     background-color: transparent;
 }
+
 .ja-contextmenu * {
     box-sizing: border-box;
 }
+
 .ja-contextmenu {
     box-shadow: 0 10px 15px 0px #bbb;
     border-radius: 5px;
@@ -16,6 +17,7 @@
     background-color: #fff;
     padding: 0;
 }
+
 .ja-contextmenu li {
     margin: 4px;
     border-radius: 4px;
@@ -23,21 +25,29 @@
     line-height: 28px;
     padding: 0 32px;
 }
+
+.ja-contextmenu li .menu-item-icon {
+    left: 8px;
+    top: 6px;
+}
+
 .ja-contextmenu li .menu-item-label {
     font-size: 12px;
 }
+
 .ja-contextmenu li .menu-item-tip {
     color: #000;
     font-size: 12px;
 }
+
 .ja-contextmenu li .right-arrow {
     top: 10px;
     right: 15px;
     width: 7px;
     height: 7px;
-    transform:rotate(45deg);
+    transform: rotate(45deg);
     border-top: 1px solid;
-    border-right:1px solid;
+    border-right: 1px solid;
     border-bottom: none;
-    border-left:none;
+    border-left: none;
 }

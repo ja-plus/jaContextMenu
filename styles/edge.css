@@ -1,6 +1,12 @@
 .ja-panel {
     border: none;
-    background-color: transparent;
+    border-radius: 5px;
+    border-top: 1px solid #e2e2e2;
+    border-left: 1px solid #c0c0c0;
+    border-right: 1px solid #c0c0c0;
+    border-bottom: 1px solid #a4a4a4;
+    box-shadow: 0 10px 15px 0px #bbb;
+    background-color: #fff;
 }
 
 .ja-contextmenu * {
@@ -8,13 +14,6 @@
 }
 
 .ja-contextmenu {
-    box-shadow: 0 10px 15px 0px #bbb;
-    border-radius: 5px;
-    border-top: 1px solid #e2e2e2;
-    border-left: 1px solid #c0c0c0;
-    border-right: 1px solid #c0c0c0;
-    border-bottom: 1px solid #a4a4a4;
-    background-color: #fff;
     padding: 0;
 }
 

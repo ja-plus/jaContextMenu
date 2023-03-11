@@ -1,6 +1,5 @@
 ## v1.4.5
 add: edge contextmenu style.
-change: default width to 250.
 ## v1.4.4
 remove: package.json `source`.
 optimize: browser rerender cause by `utils -> getWindowSize()`.

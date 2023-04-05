@@ -9,53 +9,57 @@ TODO:
 
 # jaContextMenu
 原生js右键菜单封装<br>
-默认样式通过js插入style标签完成，注意命名空间。<br>
+默认样式通过js插入style标签完成，注意class命名空间。<br>
 仅提供最基础的样式。<br>
+支持typescript<br>
 default z-index = 5000;<br>
 [Gitee](https://gitee.com/japlus/ja-context-menu)
 ## Usage 使用方式
 > npm i ja-contextmenu
 ## 注意
-安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm自动更新。(eg: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
+安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm有预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
 ## Code 样例
 ```javascript
 import ContextMenu, { h } from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
 const contextMenu = new ContextMenu({
-  width: 200,
-  fixMenuWhenScroll: false,
-  hideMenuWhenScroll: true
+  width: 200, // 默认200
+  fixMenuWhenScroll: false, // 滚动时菜单是否固定，默认false
+  hideMenuWhenScroll: true // 滚动时是否关闭菜单，默认true
 });
 const option = {
   items: [
     { 
-      icon: './assets/images/ico.png',
-      class: 'customClass',
-      label: 'menu1', 
-      tip: 'tip1', 
-      disabled: false,
+      label: 'menu1', // 选项名称
+      icon: './assets/images/ico.png', // 选项前的图标icon url
+      class: 'customClass', // 选项自定义class，默认 ''
+      tip: 'tip1', // 选项右侧提示文字
+      disabled: false, // 是否禁用选项，默认false
       onclick(e, payload) {
+        // payload 为调用menu.show方法传入的参数
         console.log('menu1 click', payload);
       },
     },
-    { type: '---' }, // divide line
+    { type: '---' }, // 分割线
     { 
-      icon: payload => 'icon href2',
+      // 支持选项内容根据payload变动
       label: payload => 'menu2', 
-      tip: payload => 'tip2',
+      icon: payload => 'icon href2',
       class: payload => 'class2',
+      tip: payload => 'tip2',
       disabled: payload => true
       children: {
-        width: 120,
+        width: 120,// 不传则继承父菜单宽度
         items: [
           {
             label: 'sub menu1',
-            onclick(e,payload){
-              console.log('sub menu click', payload)
+            onclick: (e, payload) => {
+              console.log('sub menu1 click', payload)
             }
           },{
             class: 'li-class-name',
+            // 自定义选项内容
             customItem: document.createElement('div')
           },{
             // 我封装了createElement的函数h
@@ -109,9 +113,9 @@ document.body.oncontextmenu = (e) => {
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string\|(payload)=>string |    |  图片icon |
+| icon?: string\|(payload)=>string |    | 选项前的图标icon url |
 | class?: string\|(payload)=>string |    | 菜单项li class |
-| label?: string\|(payload)=>string |    |  选项文字 |
+| label?: string\|(payload)=>string |    | 选项文字 |
 | tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
 | disabled?: boolean\|(payload)=>boolean |    | 是否禁用 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 

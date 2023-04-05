@@ -16,6 +16,7 @@
   "files": [
     "lib",
     "src",
+    "styles",
     "types"
   ],
   "keywords": [

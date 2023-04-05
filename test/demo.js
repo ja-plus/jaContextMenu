@@ -103,10 +103,9 @@ let menu2Option = {
         ],
       },
     },
-    {
-      label:'返回',
-      tip:'Alt+向左键'
-    }
+    { type:'---' },
+    { label:'返回', tip:'Alt+向左键' },
+    { label:'前进', tip:'Alt+向右键' },
   ],
 };
 menu2 = contextMenu.create(menu2Option);

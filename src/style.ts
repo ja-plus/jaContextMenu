@@ -5,7 +5,8 @@ export const panelStyle = `
     box-sizing: border-box;
   }
   .${config.panelClassName}{
-    border: 1px solid #ddd;
+    --border-color: #dadce0;
+    border: 1px solid var(--border-color);
     left: 0;top:0;
     background-color: #fff;
     display: none;
@@ -28,9 +29,9 @@ export const contextMenuStyle = `
     position: absolute;
   }
   .${config.wrapperClassName} .divide{
-    margin: ${config.menuItemDivideLineMargin}px 0;
+    margin: ${config.menuItemDivideLineMargin}px 1px;
     height: 1px;
-    background-color: #ddd;
+    background-color: var(--border-color);
   }
   .${config.wrapperClassName} li {
     position: relative;
@@ -43,7 +44,7 @@ export const contextMenuStyle = `
     flex-wrap: nowrap;
   }
   .${config.wrapperClassName} li.disabled{
-    color: #aaa;
+    color: #5f6368;
     pointer-events: none;
   }
   .${config.wrapperClassName} li .menu-item-icon{
@@ -53,17 +54,21 @@ export const contextMenuStyle = `
     height: 16px;
     vertical-align: middle;
   }
-  .${config.wrapperClassName} li menu-item-label {
+  .${config.wrapperClassName} li .menu-item-label {
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 12px;
   }
-  .${config.wrapperClassName} li menu-item-tip{
-    color:#aaa;
+  .${config.wrapperClassName} li .menu-item-tip {
+    color: #5f6368;
     font-size: 12px;
   }
   .${config.wrapperClassName} li:hover:not(.divide):not(.disabled),
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover{
-    background-color: #eee;
+  .${config.wrapperClassName} li.${config.wrapperClassName}_hover {
+    background-color: #e8e8e9;
+  }
+  .${config.wrapperClassName} li.${config.wrapperClassName}_hover .menu-item-tip {
+    color: #000;
   }
   .${config.wrapperClassName} li:hover:not(.divide):not(.disabled) .tip,
   .${config.wrapperClassName} li.${config.wrapperClassName}_hover .tip{

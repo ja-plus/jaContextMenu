@@ -1,13 +1,18 @@
 ## v1.4.5
-add: edge contextmenu style.
+* add: edge contextmenu style.
+* change: default style.
+    * font-size -> 12px,
+    * border-color -> #dadce0
+    * li:hover background-color -> #e8e8e9, .menu-item-tip: color -> #000
+    * divide line: color -> ,margin-left/right -> 1px
 ## v1.4.4
-remove: package.json `source`.
-optimize: browser rerender cause by `utils -> getWindowSize()`.
+* remove: package.json `source`.
+* optimize: browser rerender cause by `utils -> getWindowSize()`.
 move: `d.ts` file into `lib`folder.
 ## v1.4.3
-fix: remove `undefined` class name in ja-contextmenu class
+* fix: remove `undefined` class name in ja-contextmenu class
 ## v1.4.2
-* delete: `.npmignore`, use package.json `files` to order publish file.Optimize npm package size.
+* delete: `.npmignore`, use package.json `files` to order publish file. Optimize npm package size.
 * change: package.json `gitee` to `github`
 ## v1.4.1
 * change: lib file name `index` to `ja-contextmenu`.

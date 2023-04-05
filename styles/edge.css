@@ -1,3 +1,4 @@
+/**仿ms-edge 右键菜单style*/
 .ja-panel {
     border: none;
     border-radius: 5px;
@@ -30,13 +31,8 @@
     top: 6px;
 }
 
-.ja-contextmenu li .menu-item-label {
-    font-size: 12px;
-}
-
 .ja-contextmenu li .menu-item-tip {
     color: #000;
-    font-size: 12px;
 }
 
 .ja-contextmenu li .right-arrow {

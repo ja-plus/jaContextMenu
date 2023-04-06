@@ -1,6 +1,6 @@
 // import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
-import { terser } from 'rollup-plugin-terser'; // 代码压缩
+import terser from '@rollup/plugin-terser'; // 代码压缩
 export default {
   input: 'src/index.ts',
   output: [
@@ -38,10 +38,7 @@ export default {
     // },
   ],
   plugins: [
-    typescript({
-      declaration: true,
-      declarationDir: './types'
-    }),
+    typescript(),
     // getBabelOutputPlugin({
     //   presets: ['@babel/preset-env'],
     // }),

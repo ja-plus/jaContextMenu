@@ -1,6 +1,6 @@
 import MenuOption from './MenuOption';
 import { BaseAttr } from './common';
-export declare type MenuItemType = 'hr' | '---';
+export type MenuItemType = 'hr' | '---';
 export default interface MenuItemOption<Payload> {
     icon?: BaseAttr<string, Payload>;
     class?: BaseAttr<string, Payload>;

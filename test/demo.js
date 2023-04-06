@@ -83,9 +83,13 @@ let menu2Option = {
       label: '移除menu1',
       tip: () => `rd:${parseInt(Math.random() * 100)}`,
       onclick(e, payload) {
-        console.log('菜单1被按下', payload);s
-        menu.destroy();
-        menu = null;
+        console.log('移除menu1', payload);
+        if (menu) {
+          menu.destroy();
+          menu = null;
+        } else {
+          console.warn('menu1已被移除');
+        }
       },
     },
     {
@@ -103,9 +107,9 @@ let menu2Option = {
         ],
       },
     },
-    { type:'---' },
-    { label:'返回', tip:'Alt+向左键' },
-    { label:'前进', tip:'Alt+向右键' },
+    { type: '---' },
+    { label: '返回', tip: 'Alt+向左键', onclick: () => console.log('返回') },
+    { label: '前进', tip: 'Alt+向右键', onclick: () => console.log('前进') },
   ],
 };
 menu2 = contextMenu.create(menu2Option);

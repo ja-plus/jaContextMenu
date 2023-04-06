@@ -1,12 +1,12 @@
 module.exports = {
   // 一行最多字符
   printWidth: 150,
-  // 使用4空格缩进
+  // 使用2空格缩进
   tabWidth: 2,
   // 禁用tab缩进
   useTabs: false,
-  // 删除尾行分号
-  // semi: true,
+  // 尾行分号
+  // semi: false,
   // 使用单引号
   singleQuote: true,
   // 对象的key仅在必要时使用引号

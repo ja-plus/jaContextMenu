@@ -60,7 +60,7 @@ export default class ContextMenu {
           this.hideAllMenu();
         }
       };
-      window.addEventListener('click', this.clickEventFunc, { capture: true });
+      window.addEventListener('click', this.clickEventFunc);
     }
   }
   /** if scroll hide all menu */

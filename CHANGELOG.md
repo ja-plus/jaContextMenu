@@ -6,6 +6,7 @@
     * li:hover background-color -> #e8e8e9, .menu-item-tip: color -> #000
     * divide line: color -> ,margin-left/right -> 1px
 * change: ts `declarationDir` lib/index.d.ts -> lib/types/index.d.ts
+* fix: menuItemOption.disabled bug
 ## v1.4.4
 * remove: package.json `source`.
 * optimize: browser rerender cause by `utils -> getWindowSize()`.

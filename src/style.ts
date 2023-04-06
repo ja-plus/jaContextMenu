@@ -5,7 +5,7 @@ export const panelStyle = `
     box-sizing: border-box;
   }
   .${config.panelClassName}{
-    --border-color: #dadce0;
+    --border-color: #dee0e3;
     border: 1px solid var(--border-color);
     left: 0;top:0;
     background-color: #fff;

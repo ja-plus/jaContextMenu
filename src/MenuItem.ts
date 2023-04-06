@@ -26,7 +26,7 @@ export default class MenuItem<T> {
     } else {
       const liDisabled = dealBastAttr(item.disabled, this.parentMenu.payload);
       const liClassList = [dealBastAttr(item.class, this.parentMenu.payload)];
-      if (item.disabled) liClassList.push('disabled');
+      if (liDisabled) liClassList.push('disabled');
 
       this.el = h(
         'li',
@@ -79,12 +79,12 @@ export default class MenuItem<T> {
     this.el.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
     this.childMenu.show(e, this.childMenu.payload);
-    this.calcPosition(e); // 重新计算菜单出现的位置。
+    this.calcPosition(); // 重新计算菜单出现的位置。
   }
-  calcPosition(e: MouseEvent) {
+  calcPosition() {
     const childMenuEle = this.childMenu.el;
-    const childMenuHeight = parseFloat(getComputedStyle(childMenuEle).height);
-    const liPosition = (e.target as HTMLElement).getBoundingClientRect();
+    const childMenuHeight = childMenuEle.getBoundingClientRect().height;
+    const liPosition = this.el.getBoundingClientRect();
     let translateX = this.parentMenu.width - 5;
     let translateY = -2; // paddingTop
     // right available space

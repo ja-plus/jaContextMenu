@@ -40,21 +40,22 @@ let menu = contextMenu.create({
       children: {
         width: 100,
         items: [
-          { label: 'w:100' },
+          { label: 'w:100', disabled: true },
+          { type: '---' },
           {
             label: '2-1',
             onclick: (e, payload) => {
               console.log('2-1 click,', payload);
             },
           },
-          { type: '---' },
           { label: '2-2' },
           {
             label: '2-3->',
             children: {
               width: 200,
               items: [
-                { label: 'width:200' },
+                { label: 'width:200', disabled: true },
+                { type: '---' },
                 {
                   label: '3-1',
                   onclick: (e, payload) => {
@@ -80,16 +81,13 @@ let menu2;
 let menu2Option = {
   items: [
     {
-      label: '移除menu1',
+      label: () => (menu ? '移除menu1' : 'menu1已被移除'),
       tip: () => `rd:${parseInt(Math.random() * 100)}`,
+      disabled: () => !menu,
       onclick(e, payload) {
         console.log('移除menu1', payload);
-        if (menu) {
-          menu.destroy();
-          menu = null;
-        } else {
-          console.warn('menu1已被移除');
-        }
+        menu.destroy();
+        menu = null;
       },
     },
     {

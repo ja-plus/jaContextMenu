@@ -9,6 +9,6 @@ export default class MenuItem<T> {
     constructor(level: number, item: MenuItemOption<T>, parentMenu: Menu<T>);
     init(): void;
     showChildMenu(e: MouseEvent): void;
-    calcPosition(e: MouseEvent): void;
+    calcPosition(): void;
     hideOtherChildMenu(): void;
 }

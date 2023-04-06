@@ -8,16 +8,17 @@ TODO:
 - [x] 支持传入dom，自定义菜单项
 
 # jaContextMenu
-原生js右键菜单封装<br>
-默认样式通过js插入style标签完成，注意class命名空间。<br>
-仅提供最基础的样式。<br>
-支持typescript<br>
-default z-index = 5000;<br>
-[Gitee](https://gitee.com/japlus/ja-context-menu)
+## 简介
+* 原生js右键菜单封装。也可用于onclick事件打开菜单。
+* 默认样式通过js插入style标签完成，注意class命名空间。
+* 仅提供最基础的样式。
+* 支持typescript。
+* default z-index = 5000;
+* [Gitee](https://gitee.com/japlus/ja-context-menu)
 ## Usage 使用方式
 > npm i ja-contextmenu
 ## 注意
-安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm有预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
+安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm的预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
 ## Code 样例
 ```javascript
@@ -28,7 +29,7 @@ const contextMenu = new ContextMenu({
   fixMenuWhenScroll: false, // 滚动时菜单是否固定，默认false
   hideMenuWhenScroll: true // 滚动时是否关闭菜单，默认true
 });
-const option = {
+const menuOption = {
   items: [
     { 
       label: 'menu1', // 选项名称
@@ -81,13 +82,18 @@ const option = {
     },
   ],
 }
-let menu = contextMenu.create(option);
+let menu = contextMenu.create(menuOption);
 
 document.body.oncontextmenu = (e) => {
   let payload = 'payload data: callback when click items';
-  menu.show(e,payload)
+  menu.show(e, payload);
 };
-// menu.destroy(); // 销毁实例
+// 或者
+someButton.onclick = (e) => {
+  menu.show(e);
+}
+// 销毁实例
+// menu.destroy(); 
 // menu = null;
  ```
 ## contextMenu constructure 构造函数

@@ -1,6 +1,8 @@
 // import { Menu } from './src/Menu.js';
 import ContextMenu, { Panel, h } from '../src/index.ts';
 // import ContextMenu, { Panel, h } from '../lib/ja-contextmenu.esm.js';
+import PlusIcon from './icon/plus.svg';
+import MinusIcon from './icon/minus.svg';
 let contextMenu = new ContextMenu({
   fixMenuWhenScroll: false, // 滚动时会跟随滚动
   hideMenuWhenScroll: false, // 滚动页面时关闭菜单
@@ -17,6 +19,7 @@ let menu = contextMenu.create({
       },
     },
     {
+      icon: PlusIcon,
       label: payload => '2' + payload,
     },
     {
@@ -36,6 +39,7 @@ let menu = contextMenu.create({
       }),
     },
     {
+      icon: MinusIcon,
       label: '3',
       children: {
         width: 100,

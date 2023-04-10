@@ -1,3 +1,5 @@
+## v1.4.6
+* change: class li font-size -> 12px
 ## v1.4.5
 * add: edge contextmenu style.
 * change: default style.

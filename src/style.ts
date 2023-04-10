@@ -61,13 +61,6 @@ export const contextMenuStyle = `
   .${config.wrapperClassName} li.${config.wrapperClassName}_hover {
     background-color: #e8e8e9;
   }
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover .menu-item-tip {
-    color: #000;
-  }
-  .${config.wrapperClassName} li:hover:not(.divide):not(.disabled) .tip,
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover .tip{
-    color: #000;
-  }
   .${config.wrapperClassName} li .right-arrow {
     position: absolute;
     right: 8px; top: 9px;

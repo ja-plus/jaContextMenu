@@ -1,0 +1,92 @@
+/**this file not been used*/
+@panelClassName: ja-panel;
+@wrapperClassName: ja-contextmenu;
+@defaultMenuWidth: 200px;
+@defaultZIndex: 5000;
+@menuItemDivideLineMargin: 5px;
+@menuItemHeight: 24px;
+
+.@{panelClassName},
+.@{panelClassName} * {
+    box-sizing: border-box;
+}
+
+.@{panelClassName} {
+    --border-color: #dee0e3;
+    border: 1px solid var(--border-color);
+    left: 0;
+    top: 0;
+    background-color: #fff;
+    display: none;
+    width: @defaultMenuWidth;
+    position: absolute;
+    z-index: @defaultZIndex;
+}
+
+.@{wrapperClassName} {
+    user-select: none;
+    padding: 2px 0 2px 0px;
+    margin: 0;
+
+    /*子菜单*/
+    .@{panelClassName} {
+        position: absolute;
+    }
+
+    .divide {
+        margin: @menuItemDivideLineMargin 1px;
+        height: 1px;
+        background-color: var(--border-color);
+    }
+
+    li {
+        position: relative;
+        padding: 0 30px 0 30px;
+        list-style: none;
+        line-height: @menuItemHeight;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+
+        &.disabled {
+            color: #5f6368;
+            pointer-events: none;
+        }
+
+        // &:hover:not(.divide):not(.disabled),
+        // &.@{wrapperClassName}_hover {
+        //     background-color: #e8e8e9;
+
+        //     .menu-item-tip {
+        //         color: #000;
+        //     }
+        // }
+
+        .menu-item-icon {
+            position: absolute;
+            left: 7px;
+            top: 4px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .menu-item-label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .menu-item-tip {
+            color: #5f6368;
+        }
+
+        .right-arrow {
+            position: absolute;
+            right: 8px;
+            top: 9px;
+            border-top: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+            border-left: 4px solid #000;
+        }
+    }
+}

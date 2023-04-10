@@ -1,12 +1,14 @@
 ## v1.4.6
 * change: class li font-size -> 12px
+* change: default style.
+    * li:hover .menu-item-tip: color -> `remove`
 ## v1.4.5
 * add: edge contextmenu style.
 * change: default style.
     * font-size -> 12px,
     * border-color -> #dadce0
     * li:hover background-color -> #e8e8e9, .menu-item-tip: color -> #000
-    * divide line: color -> ,margin-left/right -> 1px
+    * divide line: color -> #dee0e3, margin-left/right -> 1px
 * change: ts `declarationDir` lib/index.d.ts -> lib/types/index.d.ts
 * fix: menuItemOption.disabled bug
 ## v1.4.4

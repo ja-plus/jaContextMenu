@@ -14,7 +14,7 @@
 ## v1.4.4
 * remove: package.json `source`.
 * optimize: browser rerender cause by `utils -> getWindowSize()`.
-move: `d.ts` file into `lib`folder.
+* move: `d.ts` file into `lib` folder.
 ## v1.4.3
 * fix: remove `undefined` class name in ja-contextmenu class
 ## v1.4.2

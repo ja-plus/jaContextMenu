@@ -1,12 +1,10 @@
-import h from './utils/h';
-// import debounce from './utils/debounce.js';
-import config from './config';
-// import store from './store.js';
 import Menu from './Menu';
+import { PanelPosition } from './Panel';
+import config from './config';
+import { contextMenuStyle, panelStyle } from './style';
 import ContextMenuOption from './types/ContextMenuOption';
 import MenuOption from './types/MenuOption';
-import { contextMenuStyle, panelStyle } from './style';
-import { PanelPosition } from './Panel';
+import h from './utils/h';
 
 export interface MenuWrapper<T> {
   show(position: PanelPosition, payload?: T): void;
@@ -15,7 +13,7 @@ export interface MenuWrapper<T> {
 export default class ContextMenu {
   /** 保存生成的菜单,便于统一管理 */
   private storeMenus: Menu<any>[] = [];
-  clickEventFunc: () => void;
+  clickEventFunc: (e: MouseEvent) => void;
 
   contextMenuOption: ContextMenuOption;
   constructor(option: ContextMenuOption = {}) {
@@ -54,13 +52,13 @@ export default class ContextMenu {
   private hideMenuEventListener() {
     // add once event
     if (!this.clickEventFunc) {
-      this.clickEventFunc = () => {
-        if (this.storeMenus.some(it => it.el.style.display === 'block')) {
-          // 存在打开的菜单才关闭
+      this.clickEventFunc = e => {
+        if (this.storeMenus.some(menu => menu.el.style.display === 'block')) {
           this.hideAllMenu();
         }
       };
-      window.addEventListener('click', this.clickEventFunc);
+      /* capture:true: prevent click the element that stopPropagation in click event. */
+      window.addEventListener('click', this.clickEventFunc /* { capture: true } */);
     }
   }
   /** if scroll hide all menu */
@@ -71,7 +69,7 @@ export default class ContextMenu {
   }
   /**
    * create a context menu
-   * @param {Array<Object>} items 配置
+   * @param {MenuOption<Payload>} items
    * @template Payload payload type
    * @returns
    */
@@ -105,12 +103,10 @@ export default class ContextMenu {
   //   window.addEventListener('resize', resizeFunc);
   // }
   /**
-   * 封装展示菜单
-   * 因为要把其他菜单隐藏
+   * show a menu and hide other menus.
    * @param {Menu} menu
    */
   showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T) {
-    // 隐藏其他菜单
     this.storeMenus.forEach(item => {
       item.hide();
     });
@@ -123,13 +119,6 @@ export default class ContextMenu {
   }
   destroy(menu: Menu<any>) {
     menu.destroy();
-    for (let i = 0; i < this.storeMenus.length; i++) {
-      const m = this.storeMenus[i];
-      if (m === menu) {
-        this.storeMenus[i] = null;
-        break;
-      }
-    }
-    this.storeMenus = this.storeMenus.filter(Boolean);
+    this.storeMenus = this.storeMenus.filter(menuItem => menu !== menuItem);
   }
 }

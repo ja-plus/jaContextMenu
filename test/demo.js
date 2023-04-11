@@ -81,7 +81,6 @@ let menu = contextMenu.create({
     },
   ],
 });
-let menu2;
 let menu2Option = {
   items: [
     {
@@ -114,7 +113,7 @@ let menu2Option = {
     { label: '前进', tip: 'Alt+向右键', onclick: () => console.log('前进') },
   ],
 };
-menu2 = contextMenu.create(menu2Option);
+let menu2 = contextMenu.create(menu2Option);
 
 // document.body.appendChild(menu.el);
 document.body.oncontextmenu = e => {
@@ -122,19 +121,43 @@ document.body.oncontextmenu = e => {
   // menu.show(e, payload);
   menu.show(e, payload);
 };
-let block = document.querySelector('#block1');
+const block = document.querySelector('#block1');
+const block2 = document.querySelector('#block2');
+const block3 = document.querySelector('#block3');
 block.addEventListener('contextmenu', e => {
   menu2.show(e, 'payload');
 });
 
 // create panel demo
-let block2 = document.querySelector('#block2');
 let panel = new Panel();
-panel.el.innerHTML = '<div style="padding:5px 10px;"> 自定义Panel</div>';
+panel.el.append(
+  h(
+    'div',
+    {
+      textContent: 'Custom panel inner',
+      style: {
+        padding: '5px 10px',
+      },
+    },
+    [
+      h('table', { border: '1px', style: { width: '100%' } }, [
+        h('thead', [h('tr', [h('th', 'id'), h('th', 'name')])]),
+        h('tbody', [h('tr', [h('td', '1'), h('td', 'Jack')]), h('tr', [h('td', '2'), h('td', 'Tom')])]),
+      ]),
+    ],
+  ),
+);
 document.body.appendChild(panel.el);
 window.addEventListener('click', e => {
   panel.hide();
 });
 block2.addEventListener('contextmenu', e => {
   panel.show(e);
+});
+
+// const menu3 = contextMenu.create({ items: [{ label: 'test' }] });
+block3.addEventListener('click', e => {
+  e.stopPropagation();
+  console.log('stop propagation');
+  // menu3.show(e);
 });

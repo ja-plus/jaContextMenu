@@ -16,21 +16,20 @@ let _storeWindowSize: WindowSize;
 /** 获取界面大小 */
 export function getWindowSize(): WindowSize {
   const html = document.querySelector('html');
-  const {innerWidth,innerHeight} = window;
-  const {clientWidth,clientHeight} = html;
+  const { innerWidth, innerHeight } = window;
+  const { clientWidth, clientHeight } = html;
   _storeWindowSize = {
     htmlEl: html,
     scrollWidth: innerWidth - clientWidth,
     scrollHeight: innerHeight - clientHeight,
-    clientWidth: clientWidth,
-    clientHeight: clientHeight,
+    clientWidth,
+    clientHeight,
   };
   return _storeWindowSize;
 }
 
 getWindowSize();
 window.addEventListener('resize', () => {
-  // console.log('get getWindowSize');
   getWindowSize();
 });
 

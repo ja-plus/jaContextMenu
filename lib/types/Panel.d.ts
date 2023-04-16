@@ -1,4 +1,4 @@
-export type PanelPosition = MouseEvent | {
+export type PanelPosition = {
     x: number;
     y: number;
 };

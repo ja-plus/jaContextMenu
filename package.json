@@ -1,6 +1,6 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
   "types": "lib/types/index.d.ts",

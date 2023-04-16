@@ -1,5 +1,5 @@
 TODO: 
-- [] 点击外部关闭，会被ev.stopPropagation 阻止。
+- [x] click 外部关闭事件，capture:true。
 - [x] 有子菜单的项不能点击
 - [x] 支持配置菜单类名
 - [x] 图标 
@@ -93,6 +93,8 @@ document.body.oncontextmenu = (e) => {
 someButton.onclick = (e) => {
   menu.show(e);
 }
+// 主动隐藏
+// menu.hide();
 // 销毁实例
 // menu.destroy(); 
 // menu = null;
@@ -133,9 +135,10 @@ someButton.onclick = (e) => {
 ```ts
 const menu:MenuWrapper = context.create(...)
 ```
-### 1.show(e: `MouseEvent` | { x: number, y:number }, payload?: any)
-展示菜单  
-payload参数在点击菜单的onclick回调中返回
+### 1.show(pos: { x: number, y:number }, payload?: any)
+展示菜单。
+* pos: 支持 `PointerEvent`, `MouseEvent`
+* payload: 在点击菜单的onclick回调中返回。
 ### 2.hide() 隐藏
 ### 3.destroy() 销毁
 

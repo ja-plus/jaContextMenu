@@ -1,3 +1,6 @@
+## v1.4.7
+* update: window.addEventListener (click outside close menu), use `capture:true` 
+* fix: Close menu when click in a element has stopPropagation event; 
 ## v1.4.6
 * change: class li font-size -> 12px
 * change: default style.

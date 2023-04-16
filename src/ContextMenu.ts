@@ -12,9 +12,8 @@ export interface MenuWrapper<T> {
   destroy(): void;
 }
 export default class ContextMenu {
-  /** 保存生成的菜单,便于统一管理 */
+  /** store created Menu ins*/
   private storeMenus: Menu<any>[] = [];
-  clickEventFunc: (e: MouseEvent) => void;
 
   contextMenuOption: ContextMenuOption;
   constructor(option: ContextMenuOption = {}) {
@@ -50,16 +49,28 @@ export default class ContextMenu {
   }
   /** click and close menu listener */
   private hideMenuEventListener() {
-    // add once event
-    if (!this.clickEventFunc) {
-      this.clickEventFunc = e => {
-        if (this.storeMenus.some(menu => menu.el.style.display === 'block')) {
-          this.hideAllMenu();
+    /* capture:true: prevent click the element that stopPropagation in click event. */
+    window.addEventListener('click', this.clickEventFunc.bind(this), { capture: true });
+  }
+  /** */
+  private clickEventFunc(e: PointerEvent) {
+    this.storeMenus.forEach(menu => {
+      if (menu.el.style.display === 'block') {
+        /**is click inside the contextmenu */
+        let isInside = false;
+        let el = { parentElement: e.target as HTMLElement };
+        // eslint-disable-next-line no-cond-assign
+        while ((el = el.parentElement)) {
+          if (el === menu.el) {
+            isInside = true;
+            break;
+          }
         }
-      };
-      /* capture:true: prevent click the element that stopPropagation in click event. */
-      window.addEventListener('click', this.clickEventFunc /* { capture: true } */);
-    }
+        if (!isInside) {
+          menu.hide();
+        }
+      }
+    });
   }
   /** if scroll hide all menu */
   private scrollListener() {
@@ -85,7 +96,7 @@ export default class ContextMenu {
 
     return {
       show: (position, payload) => this.showMenu(position, mainMenu, payload),
-      hide: () => mainMenu.hide(), // 用箭头函数，防止hide函数的this指向问题
+      hide: () => mainMenu.hide(), // use arrow func, constraint `this` pointer
       destroy: () => this.destroy(mainMenu),
     };
   }

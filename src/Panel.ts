@@ -5,7 +5,7 @@ import h from './utils/h';
 import config from './config';
 import { windowSize } from './utils/utils';
 
-export type PanelPosition = MouseEvent | { x: number; y: number };
+export type PanelPosition = { x: number; y: number };
 /** panel 的配置 */
 export interface PanelOption {
   /** Panel width */

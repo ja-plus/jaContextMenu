@@ -1,4 +1,5 @@
 TODO: 
+- [] 点击外部关闭，会被ev.stopPropagation 阻止。
 - [x] 有子菜单的项不能点击
 - [x] 支持配置菜单类名
 - [x] 图标 
@@ -26,8 +27,8 @@ import ContextMenu, { h } from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
 const contextMenu = new ContextMenu({
   width: 200, // 默认200
-  fixMenuWhenScroll: false, // 滚动时菜单是否固定，默认false
-  hideMenuWhenScroll: true // 滚动时是否关闭菜单，默认true
+  fixMenuWhenScroll: false, // 滚动时菜单是否固定(position:fixed)default:false
+  hideMenuWhenScroll: true // 滚动时是否关闭菜单，default:true
 });
 const menuOption = {
   items: [
@@ -103,7 +104,7 @@ someButton.onclick = (e) => {
 | key: type | default | desc |
 |  ---- | ---- | ---- |
 | width: number | 200 | 菜单宽度 |
-| fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(需要设置hideMenuWhenScroll=false) |
+| fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
 ### create\<PayloadType\>(option: `MenuOption`): `MenuWrapper`

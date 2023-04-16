@@ -111,6 +111,7 @@ let menu2Option = {
     { type: '---' },
     { label: '返回', tip: 'Alt+向左键', onclick: () => console.log('返回') },
     { label: '前进', tip: 'Alt+向右键', onclick: () => console.log('前进') },
+    { label: '按q关闭菜单', tip: '', disabled: true },
   ],
 };
 let menu2 = contextMenu.create(menu2Option);
@@ -121,6 +122,13 @@ document.body.oncontextmenu = e => {
   // menu.show(e, payload);
   menu.show(e, payload);
 };
+window.addEventListener('keypress', e => {
+  // console.log('keypress', e);
+  if (e.key === 'q') {
+    console.log('按下q，主动调用hide()关闭菜单');
+    menu2.hide();
+  }
+});
 const block = document.querySelector('#block1');
 const block2 = document.querySelector('#block2');
 const block3 = document.querySelector('#block3');
@@ -154,7 +162,6 @@ window.addEventListener('click', e => {
 block2.addEventListener('contextmenu', e => {
   panel.show(e);
 });
-
 // const menu3 = contextMenu.create({ items: [{ label: 'test' }] });
 block3.addEventListener('click', e => {
   e.stopPropagation();

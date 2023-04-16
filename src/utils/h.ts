@@ -14,7 +14,7 @@ interface Attrs {
  * h(tag[, attrs[,children]])
  * h(tag[, children])
  * @param {String} tag 标签名称，支持tag#id.class emmet写法，暂支持id ,class
- * @param {Attrs | String | Number | HTMLElement[]} attrs 传Object为属性，传String为textContent，传数组为children
+ * @param {Attrs | String | Number | HTMLElement[]} attrs 传Object为属性，传String为textContent，传数组为children。children 自动忽略假值
  * @param {HTMLElement[]} children
  */
 export default function h(tag: string, attrs?: Attrs | string | number | HTMLElement[], children?: HTMLElement[]): HTMLElement {
@@ -51,8 +51,10 @@ export default function h(tag: string, attrs?: Attrs | string | number | HTMLEle
 
   if (children) {
     children.forEach(child => {
+      if (!child) return;
+
       if (child instanceof HTMLElement) elem.appendChild(child);
-      else if (child !== null && child !== undefined) console.error(child, 'not instance of HTMLElement');
+      else console.error(child, 'not instance of HTMLElement');
     });
   }
 

@@ -2,6 +2,8 @@
 * change: class li font-size -> 12px
 * change: default style.
     * li:hover .menu-item-tip: color -> `remove`
+* add: `MenuWrapper` add `hide` function
+* fix: `h` bug.
 ## v1.4.5
 * add: edge contextmenu style.
 * change: default style.

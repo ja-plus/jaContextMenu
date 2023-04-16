@@ -1,14 +1,15 @@
 import Menu from './Menu';
+import { PanelPosition } from './Panel';
 import ContextMenuOption from './types/ContextMenuOption';
 import MenuOption from './types/MenuOption';
-import { PanelPosition } from './Panel';
 export interface MenuWrapper<T> {
     show(position: PanelPosition, payload?: T): void;
+    hide(): void;
     destroy(): void;
 }
 export default class ContextMenu {
     private storeMenus;
-    clickEventFunc: () => void;
+    clickEventFunc: (e: MouseEvent) => void;
     contextMenuOption: ContextMenuOption;
     constructor(option?: ContextMenuOption);
     private injectCss;

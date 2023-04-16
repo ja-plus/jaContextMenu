@@ -128,12 +128,15 @@ someButton.onclick = (e) => {
 | customItem?: `HTMLElement` |  | 自定义菜单项 |
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
 | children?: `MenuOption` |     | 子菜单配置
-## MenuWrapper 方法
+## MenuWrapper
+```ts
+const menu:MenuWrapper = context.create(...)
+```
 ### 1.show(e: `MouseEvent` | { x: number, y:number }, payload?: any)
 展示菜单  
 payload参数在点击菜单的onclick回调中返回
-### 2.destroy()
-销毁菜单
+### 2.hide() 隐藏
+### 3.destroy() 销毁
 
 ## Typescript Demo
 ```ts
@@ -159,8 +162,8 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 
 ## 关于项目
 ### 结构
-* rollup 打包, parcel 开发环境调试
-* 打包使用 npm run bd
-* 用src/utils/h.ts 创建一个元素
+* build:rollup, dev: parel
+* prod打包: npm run bd
+* src/utils/h.ts 用来创建一个DOM元素
 
 ### 欢迎提交merge request

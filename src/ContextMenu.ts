@@ -8,6 +8,7 @@ import h from './utils/h';
 
 export interface MenuWrapper<T> {
   show(position: PanelPosition, payload?: T): void;
+  hide(): void;
   destroy(): void;
 }
 export default class ContextMenu {
@@ -18,7 +19,6 @@ export default class ContextMenu {
   contextMenuOption: ContextMenuOption;
   constructor(option: ContextMenuOption = {}) {
     this.injectCss();
-    // this.#onPageResize();
     this.hideMenuEventListener();
     const defaultConfig: ContextMenuOption = {
       width: config.defaultMenuWidth,
@@ -82,40 +82,23 @@ export default class ContextMenu {
     const mainMenu = new Menu(0, menuOption);
     this.storeMenus.push(mainMenu);
     document.body.appendChild(mainMenu.el);
+
     return {
-      show: (position, payload) => {
-        this.showMenu(position, mainMenu, payload);
-      },
-      destroy: () => {
-        this.destroy(mainMenu);
-      },
+      show: (position, payload) => this.showMenu(position, mainMenu, payload),
+      hide: () => mainMenu.hide(), // 用箭头函数，防止hide函数的this指向问题
+      destroy: () => this.destroy(mainMenu),
     };
   }
-  /** 监听窗口 */
-  // #onPageResize() {
-  //   let resizeFunc = debounce(() => {
-  //     // save window inner size
-  //     store.windowSize = {
-  //       width: window.innerWidth,
-  //       height: window.innerHeight,
-  //     };
-  //   });
-  //   window.addEventListener('resize', resizeFunc);
-  // }
   /**
    * show a menu and hide other menus.
    * @param {Menu} menu
    */
   showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T) {
-    this.storeMenus.forEach(item => {
-      item.hide();
-    });
+    this.hideAllMenu();
     menu.show(position, payload);
   }
   hideAllMenu() {
-    this.storeMenus.forEach(menu => {
-      menu.el.style.display = 'none';
-    });
+    this.storeMenus.forEach(menu => menu.hide());
   }
   destroy(menu: Menu<any>) {
     menu.destroy();

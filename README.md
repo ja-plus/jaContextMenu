@@ -1,4 +1,5 @@
 TODO: 
+- [x] 可控制菜单项是否展示。MenuItemOption.show: boolean。 (v1.5.0)
 - [x] click 外部关闭事件，capture:true。
 - [x] 有子菜单的项不能点击
 - [x] 支持配置菜单类名
@@ -35,9 +36,10 @@ const menuOption = {
     { 
       label: 'menu1', // 选项名称
       icon: './assets/images/ico.png', // 选项前的图标icon url
-      class: 'customClass', // 选项自定义class，默认 ''
-      tip: 'tip1', // 选项右侧提示文字
-      disabled: false, // 是否禁用选项，默认false
+      class: 'customClass', // 选项自定义class, default: ''
+      tip: 'tip1', // 选项右侧提示文字, default: ''
+      show: true, // 是否展示, default: true
+      disabled: false, // 是否禁用选项, defualt: false
       onclick(e, payload) {
         // payload 为调用menu.show方法传入的参数
         console.log('menu1 click', payload);
@@ -50,6 +52,7 @@ const menuOption = {
       icon: payload => 'icon href2',
       class: payload => 'class2',
       tip: payload => 'tip2',
+      show: payload => true,
       disabled: payload => true
       children: {
         width: 120,// 不传则继承父菜单宽度
@@ -126,8 +129,9 @@ someButton.onclick = (e) => {
 | class?: string\|(payload)=>string |    | 菜单项li class |
 | label?: string\|(payload)=>string |    | 选项文字 |
 | tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
-| disabled?: boolean\|(payload)=>boolean |    | 是否禁用 |
-| type?: `MenuItemType` |     | 取值 '---' \| 'hr'为分割线 | 
+| show?: boolean\|(payload)=>boolean |  true  | 是否展示 |
+| disabled?: boolean\|(payload)=>boolean |  false  | 是否禁用 |
+| type?: `MenuItemType` |     | 取值 '---' \| 'hr' => &lt;hr&gt; 分割线 | 
 | customItem?: `HTMLElement` |  | 自定义菜单项 |
 | onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
 | children?: `MenuOption` |     | 子菜单配置

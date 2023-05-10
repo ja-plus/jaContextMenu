@@ -1,3 +1,5 @@
+## v1.5.0
+* add: `MenuItemOption.show` to hide some selection
 ## v1.4.7
 * update: window.addEventListener (click outside close menu), use `capture:true` 
 * fix: Close menu when click in a element has stopPropagation event; 

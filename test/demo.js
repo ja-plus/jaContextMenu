@@ -19,6 +19,10 @@ let menu = contextMenu.create({
       },
     },
     {
+      label: 'show',
+      show: () => Math.random() < 0.5,
+    },
+    {
       icon: PlusIcon,
       label: payload => '2' + payload,
     },

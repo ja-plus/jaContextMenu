@@ -27,10 +27,14 @@ export default class MenuItem<T> {
       const liDisabled = dealBastAttr(item.disabled, this.parentMenu.payload);
       const liClassList = [dealBastAttr(item.class, this.parentMenu.payload)];
       if (liDisabled) liClassList.push('disabled');
+      const show = item.show === undefined ? true : dealBastAttr(item.show, this.parentMenu.payload);
 
       this.el = h(
         'li',
         {
+          style: {
+            display: show ? '' : 'none',
+          },
           classList: liClassList,
           onclick: e => {
             if (!liDisabled) {

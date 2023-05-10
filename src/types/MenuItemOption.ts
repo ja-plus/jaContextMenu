@@ -1,26 +1,27 @@
 import MenuOption from './MenuOption';
 import { BaseAttr } from './common';
 export type MenuItemType = 'hr' | '---';
-/** 自定义展示文字 */
 export default interface MenuItemOption<Payload> {
-  /** 图标 */
+  /** item icon url or base64 */
   icon?: BaseAttr<string, Payload>;
-  /** 自定义class */
+  /** item class name */
   class?: BaseAttr<string, Payload>;
-  /** 选项文字 */
+  /** item text */
   label?: BaseAttr<string, Payload>;
   /** 选项右侧文字提示 */
   tip?: BaseAttr<string, Payload>;
-  /** 是否禁用 */
+  /** if disabled item */
   disabled?: BaseAttr<boolean, Payload>;
-  /** */
+  /**if show item */
+  show?: BaseAttr<boolean, Payload>;
+  /** value = '---' indicate splitLine */
   type?: MenuItemType;
   /** 用户自定义展示的内容 */
   customItem?: HTMLElement;
   /**
-   * 点击事件
-   * @param {Event} e 鼠标事件
-   * @param {Payload} payload 点击时传入的数据
+   * Item click event
+   * @param {MouseEvent} e
+   * @param {Payload} payload data
    */
   onclick?(e: Event, payload: Payload): void;
   children?: MenuOption<Payload>;

@@ -1,3 +1,7 @@
+## v1.5.1
+* fix: `ContextMenu.create` type hint.
+* change: disabled li color to `#777`.
+* change: get panel height `getComputedStyle` to `getBoundingClientRect`.
 ## v1.5.0
 * add: `MenuItemOption.show` to hide some selection
 ## v1.4.7

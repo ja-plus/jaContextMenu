@@ -2,8 +2,8 @@ import Menu from './Menu';
 import { PanelPosition } from './Panel';
 import config from './config';
 import { contextMenuStyle, panelStyle } from './style';
-import ContextMenuOption from './types/ContextMenuOption';
-import MenuOption from './types/MenuOption';
+import { ContextMenuOption } from './types/ContextMenuOption';
+import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
 
 export interface MenuWrapper<T> {

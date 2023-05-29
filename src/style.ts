@@ -41,7 +41,7 @@ export const contextMenuStyle = `
     justify-content: space-between;
   }
   .${config.wrapperClassName} li.disabled{
-    color: #5f6368;
+    color: #777;
     pointer-events: none;
   }
   .${config.wrapperClassName} li .menu-item-icon{

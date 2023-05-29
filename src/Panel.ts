@@ -1,30 +1,30 @@
 /**
- * 简单的绝对定位panel块
+ * absolute position panel
  */
 import h from './utils/h';
 import config from './config';
 import { windowSize } from './utils/utils';
 
 export type PanelPosition = { x: number; y: number };
-/** panel 的配置 */
-export interface PanelOption {
+export type PanelOption = {
   /** Panel width */
   width?: number;
   position?: 'fixed' | null;
   zIndex?: number;
-}
-/** 面板 */
+};
 export default class Panel {
-  /** element*/
   el: HTMLElement;
-  /** panel width 传百分比就不好计算 */
+  /** panel width */
   width: number;
-  /** panel height 计算得出的菜单高度 */
+  /** panel height (getBoundingClientRect) */
   height = 0;
   panelOption: PanelOption;
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
     this.width = this.panelOption?.width || config.defaultMenuWidth;
+    if (typeof this.panelOption?.width === 'string') {
+      throw new TypeError('Invalid width type.');
+    }
     this.createEl();
     this.addEventListener();
   }
@@ -46,7 +46,7 @@ export default class Panel {
     e.stopPropagation();
   }
   /**
-   * 展示菜单
+   * show menu
    */
   show(e: PanelPosition) {
     if (e instanceof MouseEvent) {
@@ -58,10 +58,10 @@ export default class Panel {
     this.el.style.transform = `translate(${x}px,${y}px)`;
   }
   /**
-   * 计算菜单的位置 x,y
+   * calc menu position x,y
    */
   calcPosition(e: PanelPosition) {
-    this.height = parseFloat(getComputedStyle(this.el).height);
+    this.height = this.el.getBoundingClientRect().height;
     let { x, y } = e;
 
     // right not have enough space
@@ -75,12 +75,12 @@ export default class Panel {
     return { x, y };
   }
   /**
-   * 隐藏菜单
+   * hide menu
    */
   hide() {
     this.el.style.display = 'none';
   }
-  /** 移除dom */
+  /** dom remove*/
   destroy() {
     this.el.removeEventListener('click', this.eventListenerCb);
     this.el.removeEventListener('contextmenu', this.eventListenerCb);

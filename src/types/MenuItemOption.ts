@@ -1,14 +1,14 @@
-import MenuOption from './MenuOption';
+import { MenuOption } from './MenuOption';
 import { BaseAttr } from './common';
 export type MenuItemType = 'hr' | '---';
-export default interface MenuItemOption<Payload> {
+export interface MenuItemOption<Payload> {
   /** item icon url or base64 */
   icon?: BaseAttr<string, Payload>;
   /** item class name */
   class?: BaseAttr<string, Payload>;
   /** item text */
   label?: BaseAttr<string, Payload>;
-  /** 选项右侧文字提示 */
+  /** tip text */
   tip?: BaseAttr<string, Payload>;
   /** if disabled item */
   disabled?: BaseAttr<boolean, Payload>;
@@ -16,7 +16,7 @@ export default interface MenuItemOption<Payload> {
   show?: BaseAttr<boolean, Payload>;
   /** value = '---' indicate splitLine */
   type?: MenuItemType;
-  /** 用户自定义展示的内容 */
+  /** custom <li> */
   customItem?: HTMLElement;
   /**
    * Item click event

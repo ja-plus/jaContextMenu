@@ -1,7 +1,7 @@
-import h from './utils/h';
 import Menu from './Menu';
 import config from './config';
-import MenuItemOption from './types/MenuItemOption';
+import { MenuItemOption } from './types/MenuItemOption';
+import h from './utils/h';
 import { dealBastAttr, windowSize } from './utils/utils';
 /**
  * Menu item

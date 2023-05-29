@@ -13,7 +13,6 @@ let menu = contextMenu.create({
   items: [
     {
       label: 'width:150',
-      icon: 'http://test4.h5ds.com/assets/win11/shell32 295.png',
       onclick: (e, payload) => {
         console.log('aaa click', payload);
       },

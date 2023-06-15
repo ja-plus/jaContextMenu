@@ -18,6 +18,10 @@ export const panelStyle = `
 
 export const contextMenuStyle = `
   .${config.wrapperClassName}{
+    --item-background--hover: #e8e8e9;
+    --disabled-color: #777;
+    --tip-color: #5f6368;
+    --li-height: ${config.menuItemHeight}px;
     user-select: none;
     padding: 2px 0 2px 0px;
     margin: 0;
@@ -26,40 +30,44 @@ export const contextMenuStyle = `
   .${config.wrapperClassName} .${config.panelClassName}{ 
     position: absolute;
   }
-  .${config.wrapperClassName} .divide{
-    margin: ${config.menuItemDivideLineMargin}px 1px;
-    height: 1px;
-    background-color: var(--border-color);
-  }
+  
   .${config.wrapperClassName} li {
     position: relative;
     padding: 0 30px 0 30px;
     list-style: none;
-    line-height: ${config.menuItemHeight}px;
+    height: var(--li-height);
+    line-height: var(--li-height);
     font-size: 12px;
     display: flex;
     justify-content: space-between;
   }
+  .${config.wrapperClassName} li.divide{
+    margin: ${config.menuItemDivideLineMargin}px 1px;
+    height: 1px;
+    background-color: var(--border-color);
+  }
   .${config.wrapperClassName} li.disabled{
-    color: #777;
+    color: var(--disabled-color);
     pointer-events: none;
   }
   .${config.wrapperClassName} li .menu-item-icon{
-    position: absolute;
-    left: 7px; top: 4px;
     width: 16px;
     height: 16px;
+    position: absolute;
+    left: 7px; 
+    top: calc(calc(var(--li-height) - 16px) / 2);
   }
   .${config.wrapperClassName} li .menu-item-label {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .${config.wrapperClassName} li .menu-item-tip {
-    color: #5f6368;
+    color: var(--tip-color);
   }
   .${config.wrapperClassName} li:hover:not(.divide):not(.disabled),
   .${config.wrapperClassName} li.${config.wrapperClassName}_hover {
-    background-color: #e8e8e9;
+    background: var(--item-background--hover);
   }
   .${config.wrapperClassName} li .right-arrow {
     position: absolute;
@@ -67,6 +75,6 @@ export const contextMenuStyle = `
     border-top: 4px solid transparent;
     border-right: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    border-left: 4px solid #000;
+    border-left: 4px solid;
   }
   `;

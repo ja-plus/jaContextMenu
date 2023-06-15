@@ -12,6 +12,8 @@ let menu = contextMenu.create({
   class: payload => 'my-contextmenu' + payload[payload.length - 1],
   items: [
     {
+      icon: () =>
+        h('div', { style: { cssText: `width:16px;height: 16px;background-color:${Math.random() < 0.5 ? 'green' : 'red'};border-radius:50%` } }),
       label: 'width:150',
       onclick: (e, payload) => {
         console.log('aaa click', payload);
@@ -81,6 +83,11 @@ let menu = contextMenu.create({
     {
       label: '4 disabled',
       disabled: payload => true,
+    },
+    {
+      icon: () => h('input', { type: 'checkbox' }),
+      label: 'onclick:() => true',
+      onclick: () => true,
     },
   ],
 });

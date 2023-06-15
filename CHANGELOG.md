@@ -1,3 +1,8 @@
+## v1.6.0
+* update: abstract css var.
+* remove: `arrow-right` color. Make it inherit.
+* update: `li` label add `white-space:nowrap`.
+* add: `MenuItemOption.onclick` return true will not close menu.
 ## v1.5.1
 * fix: `ContextMenu.create` type hint.
 * change: disabled li color to `#777`.

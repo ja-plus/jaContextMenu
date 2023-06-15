@@ -1,15 +1,4 @@
-TODO: 
-- [x] 可控制菜单项是否展示。MenuItemOption.show: boolean。 (v1.5.0)
-- [x] click 外部关闭事件，capture:true。
-- [x] 有子菜单的项不能点击
-- [x] 支持配置菜单类名
-- [x] 图标 
-- [x] 滚动时隐藏Menu
-- [x] 使用position:fixed定位
-- [x] 支持title/tip formatter
-- [x] 支持传入dom，自定义菜单项
-
-# jaContextMenu
+# ja-contextmenu
 ## 简介
 * 原生js右键菜单封装。也可用于onclick事件打开菜单。
 * 默认样式通过js插入style标签完成，注意class命名空间。
@@ -17,32 +6,56 @@ TODO:
 * 支持typescript。
 * default z-index = 5000;
 * [Gitee](https://gitee.com/japlus/ja-context-menu)
-## Usage 使用方式
+## Usage
 > npm i ja-contextmenu
+```js
+import ContextMenu from 'ja-contextmenu';
+const contextMenu = new ContextMenu();
+let menu = contextMenu.create({
+  item:[
+    { label:'go', onclick(e, payload){...} }
+  ]
+})
+window.addEventListener('contextmenu',e => {menu.show(e, payload)})
+
+```
 ## 注意
 安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm的预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
-## Code 样例
+## Feature Log
+- [x] MenuItemOption.onclick 返回true 则点击不关闭menu (v1.6.0)
+- [x] MenuItemOption.icon 支持 HTMLElement (v1.6.0)
+- [x] MenuItemOption.show: boolean。控制MenuItem展示。 (v1.5.0)
+- [x] click 外部关闭事件，capture:true。
+- [x] 有子菜单的项不能点击
+- [x] 支持配置class
+- [x] icon support 
+- [x] 滚动时隐藏
+- [x] 使用position:fixed
+- [x] title/tip formatter
+- [x] 支持传入dom，自定义菜单项
+## Example
 ```javascript
 import ContextMenu, { h } from 'ja-contextmenu'; // types.d.ts supported
 // import ContextMenu from 'ja-contextmenu/src/index.ts'  
 const contextMenu = new ContextMenu({
-  width: 200, // 默认200
-  fixMenuWhenScroll: false, // 滚动时菜单是否固定(position:fixed)default:false
+  width: 200, // default: 200
+  fixMenuWhenScroll: false, // 滚动时菜单是否固定(position:fixed) default:false
   hideMenuWhenScroll: true // 滚动时是否关闭菜单，default:true
 });
 const menuOption = {
   items: [
     { 
       label: 'menu1', // 选项名称
-      icon: './assets/images/ico.png', // 选项前的图标icon url
+      icon: './assets/images/ico.png', // icon url | HTMLElement
       class: 'customClass', // 选项自定义class, default: ''
       tip: 'tip1', // 选项右侧提示文字, default: ''
       show: true, // 是否展示, default: true
-      disabled: false, // 是否禁用选项, defualt: false
+      disabled: false, // 是否禁用选项, default: false
       onclick(e, payload) {
         // payload 为调用menu.show方法传入的参数
         console.log('menu1 click', payload);
+        // return true; // not close menu
       },
     },
     { type: '---' }, // 分割线
@@ -92,19 +105,17 @@ document.body.oncontextmenu = (e) => {
   let payload = 'payload data: callback when click items';
   menu.show(e, payload);
 };
-// 或者
+// or
 someButton.onclick = (e) => {
   menu.show(e);
 }
-// 主动隐藏
-// menu.hide();
-// 销毁实例
-// menu.destroy(); 
+
+// menu.hide(); // 隐藏
+// menu.destroy(); // 销毁
 // menu = null;
  ```
-## contextMenu constructure 构造函数
+## ContextMenu constructor 构造函数
 > new ContextMenu(option: `ContextMenuOption`);
-
 ### ContextMenuOption
 | key: type | default | desc |
 |  ---- | ---- | ---- |
@@ -113,8 +124,7 @@ someButton.onclick = (e) => {
 | hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
 ### create\<PayloadType\>(option: `MenuOption`): `MenuWrapper`
-创建一个菜单，返回一个MenuWrapper对象  
-泛型`PayloadType` 为payload的类型  
+创建一个菜单，返回一个MenuWrapper对象   
 #### MenuOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -125,7 +135,7 @@ someButton.onclick = (e) => {
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string\|(payload)=>string |    | 选项前的图标icon url |
+| icon?: string|HTMLElement\|(payload)=>string|HTMLElement |    | 选项前的图标icon url |
 | class?: string\|(payload)=>string |    | 菜单项li class |
 | label?: string\|(payload)=>string |    | 选项文字 |
 | tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
@@ -133,11 +143,11 @@ someButton.onclick = (e) => {
 | disabled?: boolean\|(payload)=>boolean |  false  | 是否禁用 |
 | type?: `MenuItemType` |     | 取值 '---' \| 'hr' => &lt;hr&gt; 分割线 | 
 | customItem?: `HTMLElement` |  | 自定义菜单项 |
-| onclick?: function(event, payload)|   | 点击事件回调,参数payload为调用showMenu时传入的参数 |
+| onclick?: function(event, payload):boolean|   | 点击事件回调,参数payload为调用showMenu时传入的参数.return true 则点击后不关闭菜单. |
 | children?: `MenuOption` |     | 子菜单配置
 ## MenuWrapper
 ```ts
-const menu:MenuWrapper = context.create(...)
+const menu:MenuWrapper = context.create<Payload>(...)
 ```
 ### 1.show(pos: { x: number, y:number }, payload?: any)
 展示菜单。
@@ -171,7 +181,7 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 ## 关于项目
 ### 结构
 * build:rollup, dev: parel
-* prod打包: npm run bd
-* src/utils/h.ts 用来创建一个DOM元素
+* build prod: npm run bd
+* src/utils/h.ts => document.createElement()
 
 ### 欢迎提交merge request

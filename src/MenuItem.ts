@@ -29,6 +29,11 @@ export default class MenuItem<T> {
       if (liDisabled) liClassList.push('disabled');
       const show = item.show === undefined ? true : dealBastAttr(item.show, this.parentMenu.payload);
 
+      let iconEl = null;
+      if (item.icon) {
+        const icon = dealBastAttr(item.icon, this.parentMenu.payload);
+        iconEl = icon instanceof HTMLElement ? h('div.menu-item-icon', [icon]) : h('img.menu-item-icon', { src: icon }); // 图标
+      }
       this.el = h(
         'li',
         {
@@ -38,8 +43,8 @@ export default class MenuItem<T> {
           classList: liClassList,
           onclick: e => {
             if (!liDisabled) {
-              item.onclick?.(e, this.parentMenu.payload);
-              if (!item.children) this.parentMenu.closeAllMenus();
+              const stay = item.onclick?.(e, this.parentMenu.payload);
+              if (!item.children && !stay) this.parentMenu.closeAllMenus();
             }
           },
           // onmouseenter: it.children?.length
@@ -54,7 +59,7 @@ export default class MenuItem<T> {
               },
         },
         [
-          item.icon && h('img.menu-item-icon', { src: dealBastAttr(item.icon, this.parentMenu.payload) }), // 图标
+          iconEl,
           item.customItem ||
             h('span.menu-item-label', {
               textContent: dealBastAttr(item.label, this.parentMenu.payload),

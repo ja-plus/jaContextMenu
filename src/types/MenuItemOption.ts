@@ -12,11 +12,15 @@ export interface MenuItemOption<Payload> {
   tip?: BaseAttr<string, Payload>;
   /** if disabled item */
   disabled?: BaseAttr<boolean, Payload>;
-  /**if show item */
+  /** if show item */
   show?: BaseAttr<boolean, Payload>;
   /** value = '---' indicate splitLine */
   type?: MenuItemType;
-  /** custom <li> */
+  /**
+   * custom <li>
+   * @example
+   * customItem: document.createElement('div')
+   */
   customItem?: HTMLElement;
   /**
    * Item click event

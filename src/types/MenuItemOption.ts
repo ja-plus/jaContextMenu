@@ -3,7 +3,7 @@ import { BaseAttr } from './common';
 export type MenuItemType = 'hr' | '---';
 export interface MenuItemOption<Payload> {
   /** item icon url or base64 */
-  icon?: BaseAttr<string, Payload>;
+  icon?: BaseAttr<string | HTMLElement, Payload>;
   /** item class name */
   class?: BaseAttr<string, Payload>;
   /** item text */

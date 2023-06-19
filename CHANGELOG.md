@@ -1,3 +1,5 @@
+## v1.6.1
+* fix: `MenuItemOption.icon` type
 ## v1.6.0
 * update: abstract css var.
 * remove: `arrow-right` color. Make it inherit.

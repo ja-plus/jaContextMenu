@@ -1,3 +1,5 @@
+## v1.6.2
+* fix: ts declaration build
 ## v1.6.1
 * fix: `MenuItemOption.icon` type
 ## v1.6.0

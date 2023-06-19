@@ -1,6 +1,6 @@
 import MenuItem from './MenuItem';
 import Panel, { PanelPosition } from './Panel';
-import MenuOption from './types/MenuOption';
+import { MenuOption } from './types/MenuOption';
 export default class Menu<Payload> extends Panel {
     ul: HTMLElement;
     level: number;

@@ -2,11 +2,11 @@ export type PanelPosition = {
     x: number;
     y: number;
 };
-export interface PanelOption {
+export type PanelOption = {
     width?: number;
     position?: 'fixed' | null;
     zIndex?: number;
-}
+};
 export default class Panel {
     el: HTMLElement;
     width: number;

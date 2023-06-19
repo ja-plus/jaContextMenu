@@ -1,5 +1,5 @@
 import Menu from './Menu';
-import MenuItemOption from './types/MenuItemOption';
+import { MenuItemOption } from './types/MenuItemOption';
 export default class MenuItem<T> {
     parentMenu: Menu<T>;
     level: number;

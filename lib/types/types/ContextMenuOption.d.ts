@@ -1,5 +1,5 @@
-export default interface ContextMenuOption {
+export type ContextMenuOption = {
     width?: number;
     hideMenuWhenScroll?: boolean;
     fixMenuWhenScroll?: boolean;
-}
+};

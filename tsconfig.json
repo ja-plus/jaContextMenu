@@ -23,7 +23,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
-    "test/**/*.ts",
-    "test/*.js"
+    // "test/test.ts" // 不要解开注释，否则生成的声明文件d.ts路径会变动
   ]
 }

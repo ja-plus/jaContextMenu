@@ -1,7 +1,7 @@
 import Menu from './Menu';
 import { PanelPosition } from './Panel';
-import ContextMenuOption from './types/ContextMenuOption';
-import MenuOption from './types/MenuOption';
+import { ContextMenuOption } from './types/ContextMenuOption';
+import { MenuOption } from './types/MenuOption';
 export interface MenuWrapper<T> {
     show(position: PanelPosition, payload?: T): void;
     hide(): void;

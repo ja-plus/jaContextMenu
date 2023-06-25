@@ -34,7 +34,11 @@ export default function h(tag: string, attrs?: Attrs | string | number | HTMLEle
   } else if (typeof attrs === 'object' && attrs !== null) {
     for (const attr in attrs) {
       if (attr === 'style' || attr === 'dataset') {
+        // if (attr === 'style' && 'cssText' in attrs.style) {
+        //   elem.style.cssText = attrs.style.cssText;
+        // }
         for (const key in attrs[attr]) {
+          // if (attr === 'style' && key === 'cssText') continue;
           elem[attr][key] = attrs[attr][key];
         }
       } else if (attr === 'classList' && Array.isArray(attrs.classList)) {

@@ -1,3 +1,5 @@
+## v1.6.3
+* change: github repository
 ## v1.6.2
 * fix: ts declaration build
 ## v1.6.1

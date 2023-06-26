@@ -1,6 +1,6 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "VanillaJS contextmenu ESModule 原生js右键菜单",
   "main": "lib/ja-contextmenu.esm.js",
   "types": "lib/types/index.d.ts",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/601286825nj/jaContextMenu"
+    "url": "https://github.com/ja-plus/jaContextMenu"
   },
   "files": [
     "lib",

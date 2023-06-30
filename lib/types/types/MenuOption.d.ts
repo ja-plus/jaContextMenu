@@ -1,4 +1,4 @@
-import { PanelOption } from '@/Panel';
+import { PanelOption } from '../Panel';
 import { BaseAttr } from './common';
 import { MenuItemOption } from './MenuItemOption';
 export type MenuOption<Payload> = PanelOption & {

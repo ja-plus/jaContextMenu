@@ -147,7 +147,7 @@ someButton.onclick = (e) => {
 | children?: `MenuOption` |     | 子菜单配置
 ## MenuWrapper
 ```ts
-const menu:MenuWrapper = context.create<Payload>(...)
+const menu:MenuWrapper = contextMenu.create<Payload>(...)
 ```
 ### 1.show(pos: { x: number, y:number }, payload?: any)
 展示菜单。

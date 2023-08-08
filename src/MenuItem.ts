@@ -87,9 +87,10 @@ export default class MenuItem<T> {
     }
     this.el.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
-    this.childMenu.show(e, this.childMenu.payload);
+    this.childMenu.prepareMenuShow(this.childMenu.payload);
     this.calcPosition(); // 重新计算菜单出现的位置。
   }
+
   calcPosition() {
     const childMenuEle = this.childMenu.el;
     const childMenuHeight = childMenuEle.getBoundingClientRect().height;

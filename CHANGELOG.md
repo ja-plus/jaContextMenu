@@ -1,3 +1,6 @@
+## v1.6.4
+* delete `src/utils/h.js`
+* fix: When expand sub menu, the code run twice calculate panel position func. It may cause browser show scroll bar when the user zoom is not 100%.
 ## v1.6.3
 * change: github repository
 * fix: type hint

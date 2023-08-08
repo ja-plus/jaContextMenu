@@ -65,13 +65,22 @@ export default class Menu<Payload> extends Panel {
    * @override
    */
   show(e: PanelPosition, payload?: any) {
+    this.prepareMenuShow(payload);
+    super.show(e); // calculate transform:translate
+  }
+
+  /**
+   * do something before menu show
+   * @param payload data
+   */
+  prepareMenuShow(payload: any) {
     this.payload = payload;
     this.removeAllHover();
     this.removeChildMenus(); // Not show child menu when open menu
     this.updateMenuAttr();
     this.renderMenuItem();
-    super.show(e);
   }
+
   /**
    * menu position
    * @override

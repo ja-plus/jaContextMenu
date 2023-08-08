@@ -12,6 +12,7 @@ export default class Menu<Payload> extends Panel {
     updateMenuAttr(): void;
     renderMenuItem(): void;
     show(e: PanelPosition, payload?: any): void;
+    prepareMenuShow(payload: any): void;
     calcPosition(e: PanelPosition): {
         x: number;
         y: number;

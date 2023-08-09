@@ -3,7 +3,7 @@ import Panel, { PanelPosition } from './Panel';
 import config from './config';
 import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
-import { dealBastAttr } from './utils/utils';
+import { dealBaseAttr } from './utils/utils';
 
 /**
  * 第一层menu保留el，使用display控制显示隐藏
@@ -42,7 +42,7 @@ export default class Menu<Payload> extends Panel {
     this.el.appendChild(this.ul);
   }
   updateMenuAttr() {
-    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBastAttr(this.menuOption.class, this.payload)}`;
+    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBaseAttr(this.menuOption.class, this.payload)}`;
   }
   renderMenuItem() {
     if (!Array.isArray(this.menuOption.items)) {

@@ -2,7 +2,7 @@ import Menu from './Menu';
 import config from './config';
 import { MenuItemOption } from './types/MenuItemOption';
 import h from './utils/h';
-import { dealBastAttr, windowSize } from './utils/utils';
+import { dealBaseAttr, windowSize } from './utils/utils';
 /**
  * Menu item
  */
@@ -24,14 +24,14 @@ export default class MenuItem<T> {
     if (item.type === 'hr' || item.type === '---') {
       this.el = h('li.divide');
     } else {
-      const liDisabled = dealBastAttr(item.disabled, this.parentMenu.payload);
-      const liClassList = [dealBastAttr(item.class, this.parentMenu.payload)];
+      const liDisabled = dealBaseAttr(item.disabled, this.parentMenu.payload);
+      const liClassList = [dealBaseAttr(item.class, this.parentMenu.payload)];
       if (liDisabled) liClassList.push('disabled');
-      const show = item.show === undefined ? true : dealBastAttr(item.show, this.parentMenu.payload);
+      const show = item.show === undefined ? true : dealBaseAttr(item.show, this.parentMenu.payload);
 
       let iconEl = null;
       if (item.icon) {
-        const icon = dealBastAttr(item.icon, this.parentMenu.payload);
+        const icon = dealBaseAttr(item.icon, this.parentMenu.payload);
         iconEl = icon instanceof HTMLElement ? h('div.menu-item-icon', [icon]) : h('img.menu-item-icon', { src: icon }); // 图标
       }
       this.el = h(
@@ -62,9 +62,9 @@ export default class MenuItem<T> {
           iconEl,
           item.customItem ||
             h('span.menu-item-label', {
-              textContent: dealBastAttr(item.label, this.parentMenu.payload),
+              textContent: dealBaseAttr(item.label, this.parentMenu.payload),
             }),
-          item.tip && h('span.menu-item-tip', dealBastAttr(item.tip, this.parentMenu.payload)), // 提示文字
+          item.tip && h('span.menu-item-tip', dealBaseAttr(item.tip, this.parentMenu.payload)), // 提示文字
           item.children && h('span.right-arrow'), // 右箭头
         ],
       );

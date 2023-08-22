@@ -10,6 +10,11 @@ export default {
       sourcemap: true,
     },
     {
+      file: 'lib/ja-contextmenu.js',
+      format: 'cjs',
+      sourcemap: true,
+    },
+    {
       file: 'lib/ja-contextmenu.esm.min.js',
       format: 'esm',
       sourcemap: true,

@@ -1,3 +1,6 @@
+## v1.7.0
+* package.json `main` "lib/ja-contextmenu.esm.js" -> "lib/ja-contextmenu.js",
+* package.json `module` "lib/ja-contextmenu.esm.js"
 ## v1.6.4
 * delete `src/utils/h.js`
 * fix: When expand sub menu, the code run twice calculate panel position func. It may cause browser show scroll bar when the user zoom is not 100%.

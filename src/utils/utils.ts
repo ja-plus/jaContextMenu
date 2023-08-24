@@ -15,7 +15,7 @@ interface WindowSize {
 let _storeWindowSize: WindowSize;
 /** 获取界面大小 */
 export function getWindowSize(): WindowSize {
-  const html = document.querySelector('html');
+  const html = document.querySelector('html') as HTMLElement;
   const { innerWidth, innerHeight } = window;
   const { clientWidth, clientHeight } = html;
   _storeWindowSize = {

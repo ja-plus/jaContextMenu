@@ -9,9 +9,10 @@ import { dealBaseAttr, windowSize } from './utils/utils';
 export default class MenuItem<T> {
   parentMenu: Menu<T>;
   level: number;
-  el: HTMLElement;
+  el!: HTMLElement;
   itemOption: MenuItemOption<T>;
-  childMenu: Menu<T>;
+  childMenu!: Menu<T>;
+
   constructor(level: number, item: MenuItemOption<T>, parentMenu: Menu<T>) {
     // console.log(parentMenu);
     this.parentMenu = parentMenu;
@@ -29,7 +30,7 @@ export default class MenuItem<T> {
       if (liDisabled) liClassList.push('disabled');
       const show = item.show === undefined ? true : dealBaseAttr(item.show, this.parentMenu.payload);
 
-      let iconEl = null;
+      let iconEl;
       if (item.icon) {
         const icon = dealBaseAttr(item.icon, this.parentMenu.payload);
         iconEl = icon instanceof HTMLElement ? h('div.menu-item-icon', [icon]) : h('img.menu-item-icon', { src: icon }); // 图标

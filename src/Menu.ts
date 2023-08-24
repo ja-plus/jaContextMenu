@@ -10,14 +10,14 @@ import { dealBaseAttr } from './utils/utils';
  * 第二层后的menu使用remove来控制显示隐藏
  */
 export default class Menu<Payload> extends Panel {
-  ul: HTMLElement;
+  ul!: HTMLElement;
   /** 表示第几级的菜单*/
   level: number;
   /** config*/
-  menuOption: MenuOption<Payload>;
+  menuOption: MenuOption<Payload> | null;
   children: MenuItem<Payload>[] = [];
   /** 传入的参数 */
-  payload: Payload;
+  payload?: Payload;
 
   constructor(level: number, menuOption: MenuOption<Payload>) {
     super(menuOption);
@@ -39,27 +39,28 @@ export default class Menu<Payload> extends Panel {
         e.preventDefault();
       },
     });
-    this.el.appendChild(this.ul);
+    this.el?.appendChild(this.ul);
   }
   updateMenuAttr() {
-    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBaseAttr(this.menuOption.class, this.payload)}`;
+    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
   renderMenuItem() {
-    if (!Array.isArray(this.menuOption.items)) {
+    if (!Array.isArray(this.menuOption?.items)) {
       return console.error('option.items is not type of array');
     }
     this.children = [];
     // remove all menuItem
-    let menuItemEl: ChildNode;
+    let menuItemEl: ChildNode | null;
     while ((menuItemEl = this.ul.lastChild)) {
       menuItemEl.remove();
     }
+    if (!this.menuOption?.items) return;
+
     for (const it of this.menuOption.items) {
-      this.children.push(new MenuItem(this.level, it, this));
+      const menuItem = new MenuItem(this.level, it, this);
+      this.children.push(menuItem);
+      this.ul.appendChild(menuItem.el);
     }
-    this.children.forEach(item => {
-      this.ul.appendChild(item.el);
-    });
   }
   /**
    * @override
@@ -88,7 +89,7 @@ export default class Menu<Payload> extends Panel {
   calcPosition(e: PanelPosition) {
     let { x, y } = super.calcPosition(e);
     // add scrollX scrollY if page has scroll bar
-    if (this.level === 0 && this.panelOption.position !== 'fixed') {
+    if (this.level === 0 && this.panelOption?.position !== 'fixed') {
       x += window.scrollX;
       y += window.scrollY;
     }
@@ -105,7 +106,7 @@ export default class Menu<Payload> extends Panel {
    */
   removeChildMenus() {
     this.children.forEach(item => {
-      item.childMenu?.el.remove();
+      item.childMenu?.el?.remove();
     });
   }
 
@@ -118,7 +119,7 @@ export default class Menu<Payload> extends Panel {
     const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClassName}`);
     menus.forEach(menu => {
       const level = menu.dataset.lv;
-      if (+level > 0) {
+      if (level && +level > 0) {
         menu.remove();
       } else {
         menu.style.display = 'none';
@@ -126,10 +127,9 @@ export default class Menu<Payload> extends Panel {
     });
   }
   destroy() {
-    this.el.remove();
-    this.el = null;
+    super.destroy();
     this.menuOption = null;
     this.children = [];
-    this.payload = null;
+    this.payload = undefined;
   }
 }

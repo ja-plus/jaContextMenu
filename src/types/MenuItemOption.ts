@@ -28,6 +28,6 @@ export interface MenuItemOption<Payload> {
    * @param {Payload} payload data
    * @return {boolean} set true will not close menu
    */
-  onclick?(e: Event, payload: Payload): boolean | void;
+  onclick?(e: Event, payload?: Payload): boolean | void;
   children?: MenuOption<Payload>;
 }

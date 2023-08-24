@@ -1,15 +1,16 @@
 interface Attrs {
     [key: string]: any;
     style?: {
-        [key: string]: string | number;
+        [key: string]: any;
     };
     dataset?: {
-        [key: string]: string | number;
+        [key: string]: any;
     };
     classList?: string[];
     onclick?(e: MouseEvent): void;
     oncontextmenu?(e: MouseEvent): void;
     onmouseenter?(e: MouseEvent): void;
 }
-export default function h(tag: string, attrs?: Attrs | string | number | HTMLElement[], children?: HTMLElement[]): HTMLElement;
+type ChildElements = (HTMLElement | undefined | null | string)[];
+export default function h(tag: string, attrs?: Attrs | string | number | ChildElements, children?: ChildElements): HTMLElement;
 export {};

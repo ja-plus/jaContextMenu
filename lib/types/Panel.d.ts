@@ -11,7 +11,7 @@ export default class Panel {
     el: HTMLElement;
     width: number;
     height: number;
-    panelOption: PanelOption;
+    panelOption?: PanelOption;
     constructor(panelOption?: PanelOption);
     createEl(): void;
     private addEventListener;

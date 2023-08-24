@@ -10,6 +10,6 @@ export interface MenuItemOption<Payload> {
     show?: BaseAttr<boolean, Payload>;
     type?: MenuItemType;
     customItem?: HTMLElement;
-    onclick?(e: Event, payload: Payload): boolean | void;
+    onclick?(e: Event, payload?: Payload): boolean | void;
     children?: MenuOption<Payload>;
 }

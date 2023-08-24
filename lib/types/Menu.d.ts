@@ -4,9 +4,9 @@ import { MenuOption } from './types/MenuOption';
 export default class Menu<Payload> extends Panel {
     ul: HTMLElement;
     level: number;
-    menuOption: MenuOption<Payload>;
+    menuOption: MenuOption<Payload> | null;
     children: MenuItem<Payload>[];
-    payload: Payload;
+    payload?: Payload;
     constructor(level: number, menuOption: MenuOption<Payload>);
     createUl(): void;
     updateMenuAttr(): void;

@@ -13,12 +13,12 @@ export type PanelOption = {
   zIndex?: number;
 };
 export default class Panel {
-  el: HTMLElement;
+  el!: HTMLElement;
   /** panel width */
   width: number;
   /** panel height (getBoundingClientRect) */
   height = 0;
-  panelOption: PanelOption;
+  panelOption?: PanelOption;
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
     this.width = this.panelOption?.width || config.defaultMenuWidth;
@@ -38,8 +38,8 @@ export default class Panel {
     });
   }
   private addEventListener() {
-    this.el.addEventListener('click', this.eventListenerCb);
-    this.el.addEventListener('contextmenu', this.eventListenerCb);
+    this.el?.addEventListener('click', this.eventListenerCb);
+    this.el?.addEventListener('contextmenu', this.eventListenerCb);
   }
   private eventListenerCb(e: Event) {
     e.preventDefault();

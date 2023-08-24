@@ -53,12 +53,13 @@ export default class ContextMenu {
     window.addEventListener('click', this.clickEventFunc.bind(this), { capture: true });
   }
   /** */
-  private clickEventFunc(e: PointerEvent) {
+  private clickEventFunc(this: ContextMenu, e: MouseEvent | PointerEvent) {
     this.storeMenus.forEach(menu => {
+      if (!menu.el) return;
       if (menu.el.style.display === 'block') {
         /**is click inside the contextmenu */
         let isInside = false;
-        let el = { parentElement: e.target as HTMLElement };
+        let el: HTMLElement | null = { parentElement: e.target } as HTMLElement;
         // eslint-disable-next-line no-cond-assign
         while ((el = el.parentElement)) {
           if (el === menu.el) {
@@ -92,7 +93,9 @@ export default class ContextMenu {
 
     const mainMenu = new Menu(0, menuOption);
     this.storeMenus.push(mainMenu);
-    document.body.appendChild(mainMenu.el);
+    if (mainMenu.el) {
+      document.body.appendChild(mainMenu.el);
+    }
 
     return {
       show: (position, payload) => this.showMenu(position, mainMenu, payload),

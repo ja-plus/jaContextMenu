@@ -180,7 +180,7 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 
 ## 关于项目
 ### 结构
-* build:rollup, dev: parel
+* demo:npm run dev
 * build prod: npm run bd
 * src/utils/h.ts => document.createElement()
 

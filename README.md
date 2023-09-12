@@ -3,7 +3,7 @@
 * 原生js右键菜单封装。也可用于onclick事件打开菜单。
 * 默认样式通过js插入style标签完成，注意class命名空间。
 * 仅提供最基础的样式。
-* 支持typescript。
+* support typescript。
 * default z-index = 5000;
 * [Gitee](https://gitee.com/japlus/ja-context-menu)
 ## Usage
@@ -119,7 +119,7 @@ someButton.onclick = (e) => {
 ### ContextMenuOption
 | key: type | default | desc |
 |  ---- | ---- | ---- |
-| width: number | 200 | 菜单宽度 |
+| width: number | 200 | Menu width |
 | fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
 ## ContextMenu instance function 实例方法
@@ -129,13 +129,13 @@ someButton.onclick = (e) => {
 | param: type | default | desc |
 | ---- | ---- | ---- |
 | width?: number| 200 | 菜单宽度，子菜单不配置，则继承父菜单宽度 |
-| class?: string\|(payload)=>string | | 菜单ul class |
+| class?: string\|(payload)=>string | | Menu ul class |
 | items: `MenuItemOption` |    | 列表配置项 |
 
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string|HTMLElement\|(payload)=>string|HTMLElement |    | 选项前的图标icon url |
+| icon?: string\|HTMLElement\|(payload)=>string\|HTMLElement |    | 图标icon url |
 | class?: string\|(payload)=>string |    | 菜单项li class |
 | label?: string\|(payload)=>string |    | 选项文字 |
 | tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
@@ -149,12 +149,12 @@ someButton.onclick = (e) => {
 ```ts
 const menu:MenuWrapper = contextMenu.create<Payload>(...)
 ```
-### 1.show(pos: { x: number, y:number }, payload?: any)
+### 1.show(pos: { x: number, y: number }, payload?: any)
 展示菜单。
-* pos: 支持 `PointerEvent`, `MouseEvent`
+* pos: `PointerEvent`, `MouseEvent`, T extends { x: number, y: number }
 * payload: 在点击菜单的onclick回调中返回。
-### 2.hide() 隐藏
-### 3.destroy() 销毁
+### 2.hide()
+### 3.destroy()
 
 ## Typescript Demo
 ```ts
@@ -178,10 +178,7 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 
 ```
 
-## 关于项目
-### 结构
-* demo:npm run dev
+## About Project
+* demo: npm run dev
 * build prod: npm run bd
 * src/utils/h.ts => document.createElement()
-
-### 欢迎提交merge request

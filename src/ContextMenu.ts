@@ -81,7 +81,7 @@ export default class ContextMenu {
   }
   /**
    * create a context menu
-   * @param {MenuOption<Payload>} items
+   * @param  menuOption menu option
    * @template Payload payload type
    * @returns
    */

@@ -1,6 +1,6 @@
 # ja-contextmenu
 Demo: npm run dev (this project)
-![img](https://gitee.com/japlus/ja-context-menu/raw/master/md-imgs/main.png)
+![img](https://github.com/ja-plus/jaContextMenu/blob/master/md-imgs/main.png?raw=true)
 
 ## Brief introduction
 * Native js right-click menu encapsulation. It can also be used for the onclick event to open the menu.
@@ -184,6 +184,7 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 ```
 
 ## About Project
-* **demo**: npm run dev
+* **demo**: npm run dev<br>
+  Demo code in `/test` folder
 * build prod: npm run bd
 * src/utils/h.ts => document.createElement()

@@ -1,4 +1,5 @@
 # ja-contextmenu
+Demo: npm run dev 本项目即可
 ![img](https://gitee.com/japlus/ja-context-menu/raw/master/md-imgs/main.png)
 ## 简介
 * 原生js右键菜单封装。也可用于onclick事件打开菜单。
@@ -7,7 +8,7 @@
 * 支持 TypeScript。
 * 默认 z-index = 5000;
 * [Gitee](https://gitee.com/japlus/ja-context-menu)
-## Usage
+## 用法
 > npm i ja-contextmenu
 ```js
 import ContextMenu from 'ja-contextmenu';
@@ -23,7 +24,7 @@ window.addEventListener('contextmenu',e => {menu.show(e, payload)})
 ## 注意
 安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm的预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
-## Feature Log
+## 功能更新记录
 - [x] MenuItemOption.onclick 返回true 则点击不关闭menu (v1.6.0)
 - [x] MenuItemOption.icon 支持 HTMLElement (v1.6.0)
 - [x] MenuItemOption.show: boolean。控制MenuItem展示。 (v1.5.0)
@@ -180,6 +181,6 @@ menu.show({x: 100,y:100}, 1) // payload type :number
 ```
 
 ## 关于项目
-* 例子: npm run dev
+* **例子**: npm run dev。代码在`/test`目录下。
 * 打包: npm run bd
 * src/utils/h.ts => document.createElement()

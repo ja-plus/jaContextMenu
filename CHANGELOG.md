@@ -1,5 +1,6 @@
 ## v1.7.1
 * strict ts
+* update en README.md
 ## v1.7.0
 * package.json `main` "lib/ja-contextmenu.esm.js" -> "lib/ja-contextmenu.js",
 * package.json `module` "lib/ja-contextmenu.esm.js"

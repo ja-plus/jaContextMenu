@@ -1,5 +1,5 @@
 # ja-contextmenu
-![img](/md-imgs/main.png)
+![img](https://gitee.com/japlus/ja-context-menu/raw/master/md-imgs/main.png)
 ## 简介
 * 原生js右键菜单封装。也可用于onclick事件打开菜单。
 * 默认样式通过js插入style标签完成，注意class命名空间。

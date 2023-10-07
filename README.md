@@ -9,7 +9,7 @@ Demo: npm run dev (this project)
 * TypeScript ✔
 * default z-index = 5000;
 * [Gitee](https://gitee.com/japlus/ja-context-menu)
-* [中文](https://gitee.com/japlus/ja-context-menu/blob/master/README.zh.md)
+* [中文🇨🇳](https://gitee.com/japlus/ja-context-menu/blob/master/README.zh.md)
 ## Usage
 > npm i ja-contextmenu
 ```js

@@ -7,7 +7,7 @@ import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
 
 export interface MenuWrapper<T> {
-  show(position: PanelPosition, payload?: T): void;
+  show(position: PanelPosition, payload: T): void;
   hide(): void;
   destroy(): void;
 }
@@ -79,6 +79,7 @@ export default class ContextMenu {
       this.hideAllMenu();
     });
   }
+
   /**
    * create a context menu
    * @param  menuOption menu option
@@ -96,11 +97,29 @@ export default class ContextMenu {
     if (mainMenu.el) {
       document.body.appendChild(mainMenu.el);
     }
-
     return {
       show: (position, payload) => this.showMenu(position, mainMenu, payload),
       hide: () => mainMenu.hide(), // use arrow func, constraint `this` pointer
       destroy: () => this.destroy(mainMenu),
+    };
+  }
+  /**
+   * create a context menu async
+   *
+   * call this.create when first time, and return the created menu when next time.
+   * @example
+   * ```
+   * const menu = contextMenu.createAsync([]);
+   * menu().show(e, payload);
+   * ```
+   * @param menuOption
+   * @template Payload
+   * @returns a function wrapper this.create function
+   */
+  createAsync<Payload>(menuOption: MenuOption<Payload>): () => MenuWrapper<Payload> {
+    let menu: MenuWrapper<Payload>;
+    return () => {
+      return menu || (menu = this.create(menuOption));
     };
   }
   /**

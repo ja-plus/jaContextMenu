@@ -124,7 +124,7 @@ let menu2Option = {
     { label: '按q关闭菜单', tip: '', disabled: true },
   ],
 };
-let menu2 = contextMenu.create(menu2Option);
+let menu2 = contextMenu.createAsync(menu2Option);
 
 // document.body.appendChild(menu.el);
 document.body.oncontextmenu = e => {
@@ -136,14 +136,15 @@ window.addEventListener('keypress', e => {
   // console.log('keypress', e);
   if (e.key === 'q') {
     console.log('按下q，主动调用hide()关闭菜单');
-    menu2.hide();
+    menu.hide();
+    menu2().hide();
   }
 });
 const block = document.querySelector('#block1');
 const block2 = document.querySelector('#block2');
-const block3 = document.querySelector('#block3');
+// const block3 = document.querySelector('#block3');
 block.addEventListener('contextmenu', e => {
-  menu2.show(e, 'payload');
+  menu2().show(e, 'payload');
 });
 
 // create panel demo
@@ -173,8 +174,8 @@ block2.addEventListener('contextmenu', e => {
   panel.show(e);
 });
 // const menu3 = contextMenu.create({ items: [{ label: 'test' }] });
-block3.addEventListener('click', e => {
-  e.stopPropagation();
-  console.log('stop propagation');
-  // menu3.show(e);
-});
+// block3.addEventListener('click', e => {
+//   e.stopPropagation();
+//   console.log('stop propagation');
+//   // menu3.show(e);
+// });

@@ -166,7 +166,7 @@ Show menu
 import ContextMenu from 'ja-contextmenu';
 const contextMenu = new ContextMenu();
 // Generic - PayloadType
-const menu = contextMenu.create<number>({
+const menu = contextMenu.create<number | undefined>({
   width: 100,
   items: [
     {
@@ -179,6 +179,7 @@ const menu = contextMenu.create<number>({
 });
 
 menu.show({x: 100,y:100}, 1) // payload type :number
+menu.show({x: 100,y:100}) // payload type :undefined
 //menu.show({x: 100,y:100}, '2') // payload type error not number
 
 ```

@@ -13,18 +13,24 @@ Demo: npm run dev 本项目即可
 ```js
 import ContextMenu from 'ja-contextmenu';
 const contextMenu = new ContextMenu();
-let menu = contextMenu.create({
+const menuOption = {
   item:[
     { label:'go', onclick(e, payload){...} }
   ]
-})
-window.addEventListener('contextmenu',e => {menu.show(e, payload)})
+};
+const menu = contextMenu.create(menuOption);
+window.addEventListener('contextmenu', e => { menu.show(e, payload) });
+
+// async create menu
+const menu2 = contextMenu.createAsync(menuOption);
+window.addEventListener('click', e => { menu2().show(e, payload) });
 
 ```
 ## 注意
 安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm的预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
 ## 功能更新记录
+- [x] ContextMenu.createAsync 异步创建Menu (v1.7.2)
 - [x] MenuItemOption.onclick 返回true 则点击不关闭menu (v1.6.0)
 - [x] MenuItemOption.icon 支持 HTMLElement (v1.6.0)
 - [x] MenuItemOption.show: boolean。控制MenuItem展示。 (v1.5.0)

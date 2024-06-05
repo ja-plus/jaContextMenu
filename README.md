@@ -15,12 +15,17 @@ Demo: npm run dev (this project)
 ```js
 import ContextMenu from 'ja-contextmenu';
 const contextMenu = new ContextMenu();
-let menu = contextMenu.create({
+const menuOption = {
   item:[
     { label:'go', onclick(e, payload){...} }
   ]
-})
-window.addEventListener('contextmenu',e => {menu.show(e, payload)})
+};
+const menu = contextMenu.create(menuOption);
+window.addEventListener('contextmenu', e => { menu.show(e, payload) });
+
+// async create menu
+const menu2 = contextMenu.createAsync(menuOption);
+window.addEventListener('click', e => { menu2().show(e, payload) });
 
 ```
 ## Attention
@@ -29,6 +34,7 @@ Please delete the "^"before the version number of ja-contextmenu in package.json
 <br>
 Limited energy, there is no guarantee that the use mode will not be changed when the small version is updated.
 ## Feature Log
+- [x] ContextMenu.createAsync async create menu (v1.7.2)
 - [x] MenuItemOption.onclick return true. click item not close menu. (v1.6.0)
 - [x] MenuItemOption.icon support HTMLElement. (v1.6.0)
 - [x] MenuItemOption.show: boolean。Control MenuItem show. (v1.5.0)

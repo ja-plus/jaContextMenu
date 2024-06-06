@@ -3,7 +3,7 @@ import { PanelPosition } from './Panel';
 import { ContextMenuOption } from './types/ContextMenuOption';
 import { MenuOption } from './types/MenuOption';
 export interface MenuWrapper<T> {
-    show(position: PanelPosition, payload: T): void;
+    show(position: PanelPosition, payload?: T): void;
     hide(): void;
     destroy(): void;
 }

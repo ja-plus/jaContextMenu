@@ -7,7 +7,7 @@ import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
 
 export interface MenuWrapper<T> {
-  show(position: PanelPosition, payload: T): void;
+  show(position: PanelPosition, payload?: T): void;
   hide(): void;
   destroy(): void;
 }

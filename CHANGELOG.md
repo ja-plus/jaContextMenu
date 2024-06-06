@@ -1,6 +1,7 @@
+## v1.7.3
+* fix: `MenuWrapper.show` fix payload type optional
 ## v1.7.2
 * feature: `ContextMenu.createAsync` wrap ContentMenu.create.
-
 ## v1.7.1
 * strict ts
 * update en README.md

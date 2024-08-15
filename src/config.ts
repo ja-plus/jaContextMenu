@@ -1,5 +1,6 @@
 export default {
-  cssId: 'ja-contextmenu-css',
+  panelCssId: 'ja-panel-css',
+  contextMenuCssId: 'ja-contextmenu-css',
   panelClassName: 'ja-panel',
   wrapperClassName: 'ja-contextmenu',
   defaultMenuWidth: 200,

@@ -1,5 +1,5 @@
 // import { Menu } from './src/Menu.js';
-import ContextMenu, { Panel, h } from '../src/index.ts';
+import { default as ContextMenu, Panel, h } from '../src/index.ts';
 // import ContextMenu, { Panel, h } from '../lib/ja-contextmenu.esm.js';
 import PlusIcon from './icon/plus.svg';
 import MinusIcon from './icon/minus.svg';

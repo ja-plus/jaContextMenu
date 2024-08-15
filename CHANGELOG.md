@@ -1,3 +1,5 @@
+## v1.7.4
+* fix: when use `Panel` only, the style not inject. 
 ## v1.7.3
 * fix: `MenuWrapper.show` fix payload type optional
 ## v1.7.2

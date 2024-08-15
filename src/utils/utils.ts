@@ -1,4 +1,6 @@
+import config from '@/config';
 import { BaseAttr } from '@/types/common';
+import h from './h';
 
 interface WindowSize {
   /** <html> element */
@@ -39,4 +41,23 @@ export { _storeWindowSize as windowSize };
  */
 export function dealBaseAttr<T extends BaseAttr<B1, P>, P, B1>(data: T, payload: P) {
   return typeof data === 'function' ? data(payload) : data || '';
+}
+
+/**
+ * create style tag (<style>)，inject css
+ */
+export function injectCss(cssId: string, styleString: string) {
+  let style = document.getElementById(cssId);
+  if (!style) {
+    // if not be injected
+    style = h(`style#${config.contextMenuCssId}`, {
+      innerHTML: styleString,
+    });
+    const titleTag = document.querySelector('head title');
+    if (titleTag) {
+      document.head.insertBefore(style, titleTag.nextElementSibling);
+    } else {
+      document.head.appendChild(style);
+    }
+  }
 }

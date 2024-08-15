@@ -1,10 +1,10 @@
 import Menu from './Menu';
 import { PanelPosition } from './Panel';
 import config from './config';
-import { contextMenuStyle, panelStyle } from './style';
+import { contextMenuStyle } from './style';
 import { ContextMenuOption } from './types/ContextMenuOption';
 import { MenuOption } from './types/MenuOption';
-import h from './utils/h';
+import { injectCss } from './utils/utils';
 
 export interface MenuWrapper<T> {
   show(position: PanelPosition, payload?: T): void;
@@ -17,7 +17,6 @@ export default class ContextMenu {
 
   contextMenuOption: ContextMenuOption;
   constructor(option: ContextMenuOption = {}) {
-    this.injectCss();
     this.hideMenuEventListener();
     const defaultConfig: ContextMenuOption = {
       width: config.defaultMenuWidth,
@@ -29,24 +28,7 @@ export default class ContextMenu {
       this.scrollListener();
     }
   }
-  /**
-   * create style tag (<style>)，inject css
-   */
-  private injectCss() {
-    const titleTag = document.querySelector('head title');
-    let style = document.querySelector(`#${config.cssId}`);
-    if (!style) {
-      // if not be injected
-      style = h(`style#${config.cssId}`, {
-        innerHTML: panelStyle + contextMenuStyle,
-      });
-      if (titleTag) {
-        document.head.insertBefore(style, titleTag.nextElementSibling);
-      } else {
-        document.head.appendChild(style);
-      }
-    }
-  }
+
   /** click and close menu listener */
   private hideMenuEventListener() {
     /* capture:true: prevent click the element that stopPropagation in click event. */
@@ -87,6 +69,7 @@ export default class ContextMenu {
    * @returns
    */
   create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
+    injectCss(config.contextMenuCssId, contextMenuStyle);
     // if not transfer width ,use default width
     if (!menuOption.width) menuOption.width = this.contextMenuOption.width;
     // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;

@@ -3,7 +3,8 @@
  */
 import h from './utils/h';
 import config from './config';
-import { windowSize } from './utils/utils';
+import { injectCss, windowSize } from './utils/utils';
+import { panelStyle } from './style';
 
 export type PanelPosition = { x: number; y: number };
 export type PanelOption = {
@@ -19,15 +20,18 @@ export default class Panel {
   /** panel height (getBoundingClientRect) */
   height = 0;
   panelOption?: PanelOption;
+
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
     this.width = this.panelOption?.width || config.defaultMenuWidth;
     if (typeof this.panelOption?.width === 'string') {
       throw new TypeError('Invalid width type.');
     }
+    injectCss(config.panelCssId, panelStyle);
     this.createEl();
     this.addEventListener();
   }
+
   createEl() {
     this.el = h(`div.${config.panelClassName}`, {
       style: {
@@ -37,10 +41,12 @@ export default class Panel {
       },
     });
   }
+
   private addEventListener() {
     this.el?.addEventListener('click', this.eventListenerCb);
     this.el?.addEventListener('contextmenu', this.eventListenerCb);
   }
+
   private eventListenerCb(e: Event) {
     e.preventDefault();
     e.stopPropagation();

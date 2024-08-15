@@ -11,7 +11,6 @@ export default class ContextMenu {
     private storeMenus;
     contextMenuOption: ContextMenuOption;
     constructor(option?: ContextMenuOption);
-    private injectCss;
     private hideMenuEventListener;
     private clickEventFunc;
     private scrollListener;

@@ -1,5 +1,6 @@
 declare const _default: {
-    cssId: string;
+    panelCssId: string;
+    contextMenuCssId: string;
     panelClassName: string;
     wrapperClassName: string;
     defaultMenuWidth: number;

@@ -50,7 +50,7 @@ export function injectCss(cssId: string, styleString: string) {
   let style = document.getElementById(cssId);
   if (!style) {
     // if not be injected
-    style = h(`style#${config.contextMenuCssId}`, {
+    style = h(`style#${cssId}`, {
       innerHTML: styleString,
     });
     const titleTag = document.querySelector('head title');

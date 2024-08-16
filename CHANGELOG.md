@@ -1,3 +1,5 @@
+## v1.7.5
+* fix: style error
 ## v1.7.4
 * fix: when use `Panel` only, the style not inject. 
 ## v1.7.3

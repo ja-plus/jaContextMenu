@@ -122,7 +122,7 @@ export default class Menu<Payload> extends Panel {
       if (level && +level > 0) {
         menu.remove();
       } else {
-        menu.style.display = 'none';
+        menu.classList.add('hide');
       }
     });
   }

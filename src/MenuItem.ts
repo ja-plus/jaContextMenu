@@ -28,7 +28,7 @@ export default class MenuItem<T> {
       const liDisabled = dealBaseAttr(item.disabled, this.parentMenu.payload);
       const liClassList = [dealBaseAttr(item.class, this.parentMenu.payload)];
       if (liDisabled) liClassList.push('disabled');
-      const show = item.show === undefined ? true : dealBaseAttr(item.show, this.parentMenu.payload);
+      const show = item.show === void 0 ? true : dealBaseAttr(item.show, this.parentMenu.payload);
 
       let iconEl;
       if (item.icon) {
@@ -84,7 +84,7 @@ export default class MenuItem<T> {
     // if childMenuEle is hidden
     if (!(e.target as HTMLElement).contains(childMenuEle)) {
       (e.target as HTMLElement).classList.add(config.wrapperClassName + '_hover');
-      childMenuEle.style.display = 'block';
+      childMenuEle.classList.remove('hide');
     }
     this.el.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单

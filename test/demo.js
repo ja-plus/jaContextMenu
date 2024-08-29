@@ -112,7 +112,7 @@ let menu2Option = {
             label: '移除本菜单',
             onclick(e, payload) {
               console.log('子菜单被按下', payload);
-              menu2.destroy();
+              menu2().destroy();
             },
           },
         ],

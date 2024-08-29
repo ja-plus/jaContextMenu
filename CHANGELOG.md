@@ -1,3 +1,5 @@
+## v1.7.6
+* change: use class `hide` to hide panel
 ## v1.7.5
 * fix: style error
 ## v1.7.4

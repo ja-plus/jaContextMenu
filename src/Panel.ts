@@ -39,6 +39,7 @@ export default class Panel {
         zIndex: this.panelOption?.zIndex,
         position: this.panelOption?.position, // fix
       },
+      classList: ['hide'],
     });
   }
 
@@ -59,7 +60,7 @@ export default class Panel {
       e.preventDefault();
       e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
     }
-    this.el.style.display = 'block';
+    this.el.classList.remove('hide');
     const { x, y } = this.calcPosition(e);
     this.el.style.transform = `translate(${x}px,${y}px)`;
   }
@@ -84,7 +85,7 @@ export default class Panel {
    * hide menu
    */
   hide() {
-    this.el.style.display = 'none';
+    this.el.classList.add('hide');
   }
   /** dom remove*/
   destroy() {

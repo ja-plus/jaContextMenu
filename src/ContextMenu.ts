@@ -38,7 +38,7 @@ export default class ContextMenu {
   private clickEventFunc(this: ContextMenu, e: MouseEvent | PointerEvent) {
     this.storeMenus.forEach(menu => {
       if (!menu.el) return;
-      if (menu.el.style.display === 'block') {
+      if (!menu.el.classList.contains('hide')) {
         /**is click inside the contextmenu */
         let isInside = false;
         let el: HTMLElement | null = { parentElement: e.target } as HTMLElement;

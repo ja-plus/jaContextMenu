@@ -9,7 +9,6 @@ export const panelStyle = `
     border: 1px solid var(--border-color);
     left: 0; top: 0;
     background-color: #fff;
-    width: ${config.defaultMenuWidth}px;
     position: absolute;
     z-index: ${config.defaultZIndex};
   }

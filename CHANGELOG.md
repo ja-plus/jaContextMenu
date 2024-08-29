@@ -1,5 +1,7 @@
-## v1.7.6
+## v1.8.0
 * change: use class `hide` to hide panel
+* change: remove `Panel` class default width 200px
+* change: remove `Panel` inline style default width 200px 
 ## v1.7.5
 * fix: style error
 ## v1.7.4

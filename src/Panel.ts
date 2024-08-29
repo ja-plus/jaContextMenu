@@ -16,14 +16,14 @@ export type PanelOption = {
 export default class Panel {
   el!: HTMLElement;
   /** panel width */
-  width: number;
+  width?: number;
   /** panel height (getBoundingClientRect) */
   height = 0;
   panelOption?: PanelOption;
 
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
-    this.width = this.panelOption?.width || config.defaultMenuWidth;
+    this.width = this.panelOption?.width;
     if (typeof this.panelOption?.width === 'string') {
       throw new TypeError('Invalid width type.');
     }
@@ -35,7 +35,7 @@ export default class Panel {
   createEl() {
     this.el = h(`div.${config.panelClassName}`, {
       style: {
-        width: this.width + 'px',
+        width: this.width ? this.width + 'px' : void 0,
         zIndex: this.panelOption?.zIndex,
         position: this.panelOption?.position, // fix
       },
@@ -68,16 +68,18 @@ export default class Panel {
    * calc menu position x,y
    */
   calcPosition(e: PanelPosition) {
-    this.height = this.el.getBoundingClientRect().height;
+    const { height, width } = this.el.getBoundingClientRect();
+    this.height = height;
+    this.width = width;
     let { x, y } = e;
 
     // right not have enough space
-    if (windowSize.clientWidth - x < this.width) {
-      x = windowSize.clientWidth - this.width;
+    if (windowSize.clientWidth - x < width) {
+      x = windowSize.clientWidth - width;
     }
     // bottom not have enough space
-    if (windowSize.clientHeight - y < this.height) {
-      y = e.y - this.height;
+    if (windowSize.clientHeight - y < height) {
+      y = e.y - height;
     }
     return { x, y };
   }

@@ -27,8 +27,8 @@
     "typescript",
     "browser",
     "ESModule",
-    "右键菜单",
-    "原生"
+    "ES6",
+    "ES2015"
   ],
   "author": "JA+",
   "license": "MIT",

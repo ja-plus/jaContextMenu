@@ -9,7 +9,7 @@ export type PanelOption = {
 };
 export default class Panel {
     el: HTMLElement;
-    width: number;
+    width?: number;
     height: number;
     panelOption?: PanelOption;
     constructor(panelOption?: PanelOption);

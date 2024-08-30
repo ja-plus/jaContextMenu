@@ -56,7 +56,7 @@ export default class MenuItem<T> {
                 this.showChildMenu(e);
               }
             : () => {
-                this.hideOtherChildMenu(); // 移除所有子菜单
+                this.hideOtherChildMenu(); // remove all child menu
               },
         },
         [
@@ -65,8 +65,8 @@ export default class MenuItem<T> {
             h('span.menu-item-label', {
               textContent: dealBaseAttr(item.label, this.parentMenu.payload),
             }),
-          item.tip && h('span.menu-item-tip', dealBaseAttr(item.tip, this.parentMenu.payload)), // 提示文字
-          item.children && h('span.right-arrow'), // 右箭头
+          item.tip && h('span.menu-item-tip', dealBaseAttr(item.tip, this.parentMenu.payload)),
+          item.children && h('span.right-arrow'),
         ],
       );
     }
@@ -89,18 +89,20 @@ export default class MenuItem<T> {
     this.el.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
     this.childMenu.prepareMenuShow(this.childMenu.payload);
-    this.calcPosition(); // 重新计算菜单出现的位置。
+    this.calcPosition(); // recalculate position
   }
 
   calcPosition() {
     const childMenuEle = this.childMenu.el;
     const childMenuHeight = childMenuEle.getBoundingClientRect().height;
     const liPosition = this.el.getBoundingClientRect();
-    let translateX = this.parentMenu.width - 5;
+    const parentWidth = this.parentMenu.width || config.defaultMenuWidth;
+    const childWidth = this.childMenu.width || config.defaultMenuWidth;
+    let translateX = parentWidth - 5;
     let translateY = -2; // paddingTop
     // right available space
-    if (windowSize.clientWidth - liPosition.x - this.parentMenu.width < this.childMenu.width) {
-      translateX = -this.childMenu.width + 5;
+    if (windowSize.clientWidth - liPosition.x - parentWidth < parentWidth) {
+      translateX = -childWidth + 5;
     }
     // bottom available space
     if (windowSize.clientHeight - liPosition.y + 2 < childMenuHeight) {
@@ -111,7 +113,7 @@ export default class MenuItem<T> {
     // return { x: translateX, y: translateY };
   }
   hideOtherChildMenu() {
-    this.parentMenu?.removeChildMenus(); // 移除所有子菜单
-    this.parentMenu?.removeItemHover(); // 取消hover状态
+    this.parentMenu?.removeChildMenus();
+    this.parentMenu?.removeItemHover();
   }
 }

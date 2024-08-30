@@ -27,7 +27,7 @@ export const contextMenuStyle = `
     padding: 2px 0 2px 0px;
     margin: 0;
   }
-  /*子菜单*/
+  /*child menu*/
   .${config.wrapperClassName} .${config.panelClassName}{ 
     position: absolute;
   }

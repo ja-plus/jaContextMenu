@@ -1,10 +1,8 @@
 export type ContextMenuOption = {
   /** default menu width */
   width?: number;
-  /** 基础z-index 
-  baseZIndex?: number;*/
-  /** 滚动时是否关闭菜单*/
+  /**  if hide menu when scroll */
   hideMenuWhenScroll?: boolean;
-  /** 滚动时菜单是否固定(hideMenuWhenScroll=false) */
+  /** if fix menu when scroll (hideMenuWhenScroll=false) */
   fixMenuWhenScroll?: boolean;
 };

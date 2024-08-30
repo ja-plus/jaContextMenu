@@ -1,6 +1,5 @@
-// import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import typescript from '@rollup/plugin-typescript';
-import terser from '@rollup/plugin-terser'; // 代码压缩
+import terser from '@rollup/plugin-terser';
 export default {
   input: 'src/index.ts',
   output: [
@@ -48,7 +47,7 @@ export default {
     //   presets: ['@babel/preset-env'],
     // }),
     // babel({
-    //   exclude: 'node_modules/**', // 只编译我们的源代码
+    //   exclude: 'node_modules/**',
     //   babelHelpers: 'runtime',
     // }),
   ],

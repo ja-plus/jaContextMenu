@@ -69,19 +69,19 @@
 * remove: inline style `z-index`.
 * add: `private` decorator.
 ## v1.4.0
-* update: 点击右键时才渲染菜单项。而不是一开始就渲染。
-* update：`MenuItemOption.disabled` 可传方法
+* update: Render dom when click event did trigger, not render dom in page load
+* update：`MenuItemOption.disabled` support function
 ## v1.3.0
 * fix: `ContextMenu.create` option passed `MenuOption.width` not work.
-* add: `MenuItemOption.title/tip` 可传 formatter 方法.
+* add: `MenuItemOption.title/tip` support formatter function.
 * add: `MenuItemOption.icon`
-* add: `MenuItemOption.customItem` 用户自定义渲染
-* add: `MenuOption.class`,`MenuItemOption.class` 自定义class
+* add: `MenuItemOption.customItem` use custom render
+* add: `MenuOption.class`,`MenuItemOption.class` custom className
 ## v1.2.2
-* MenuWrapper 支持传入position，不一定要MouseEvent
-* `ContextMenuOption` 支持传入默认width
+* MenuWrapper support position，not strictly use MouseEvent
+* `ContextMenuOption` support default width
 * fix: inject `style` tag after `title` tag
-* payload 泛型支持
+* payload ts generic support
 ## v1.2.1
 * MenuWrapper add destroy function to release DOM
 * fix: panel position error when scrollPage
@@ -93,4 +93,4 @@
 * change type `divide` to `hr`
 ## v1.0.1
 ### Bugfix
-* 修复show Menu的边界情况位置
+* fix show Menu boundary situation

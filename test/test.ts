@@ -1,5 +1,5 @@
 /**
- * 这个文件用来测试typescript 代码提示是否正常
+ * This file is used to test whether the typescript code prompt is normal
  */
 import ContextMenu from '../src/index';
 const contextMenu = new ContextMenu();

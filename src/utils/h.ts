@@ -1,4 +1,4 @@
-// HTMLElement属性重写
+// HTMLElement attribute rewrite
 interface Attrs {
   [key: string]: any;
   style?: { [key: string]: any };
@@ -14,9 +14,9 @@ type ChildElements = (HTMLElement | undefined | null | string)[];
  * h(tag[, text[,children]])
  * h(tag[, attrs[,children]])
  * h(tag[, children])
- * @param {String} tag 标签名称，支持tag#id.class emmet写法，暂支持id ,class
- * @param {Attrs | String | Number | ChildElements} attrs 传Object为属性，传String为textContent，传数组为children。children 自动忽略假值
- * @param {HTMLElement[]} children
+ * @param tag tag name ,support `tag#id.class` emmet grammar，only support id ,class
+ * @param attrs Object - attribute，string - textContent，Array - children。children auto ignore falsy value
+ * @param children
  */
 export default function h(tag: string, attrs?: Attrs | string | number | ChildElements, children?: ChildElements): HTMLElement {
   // TODO: validate param type
@@ -24,9 +24,9 @@ export default function h(tag: string, attrs?: Attrs | string | number | ChildEl
   if (!tagMatch) throw new Error('invalid tag');
   const tagStr = tagMatch[0];
 
-  // 解析emmet 语法 (暂支持id class, 防止解析字符串影响更多性能)
+  // parse emmet grammar (support id class)
   const id = tag.match(/#[\w\d_-]+/);
-  // let classArr = tag.match(/(?<=\.)[\w\d_-]+/g) || []; // className // 低版本浏览器不支持零宽断言
+  // let classArr = tag.match(/(?<=\.)[\w\d_-]+/g) || []; // className // low level browser not support
   let classArr: string[] = tag.match(/\.[\w\d_-]+/g) || []; // className
   classArr = Array.from(classArr).map(it => it.substring(1));
 

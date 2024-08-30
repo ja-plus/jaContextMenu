@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "strict":true,
-    "forceConsistentCasingInFileNames": true, //  强制区分文件名大小写
+    "forceConsistentCasingInFileNames": true, 
     "target": "ES2015",
     "module": "ES2015",
     "noImplicitAny": true,
@@ -11,7 +11,6 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
-    // "checkJs": true, // 在 .js文件中报告错误。与 --allowJs配合使用。
     "declaration": true,
     "declarationDir": "types",
     "paths": {
@@ -23,6 +22,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
-    // "test/test.ts" // 不要解开注释，否则生成的声明文件d.ts路径会变动
+    // "test/test.ts" // Do not uncomment, otherwise the path of the generated declaration file d.ts will change
   ]
 }

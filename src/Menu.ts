@@ -110,6 +110,9 @@ export default class Menu<Payload> extends Panel {
     });
   }
 
+  /**
+   * remove item hover status
+   */
   removeItemHover() {
     this.children.forEach(childItem => {
       childItem.el.classList.remove(`${config.wrapperClassName}_hover`);

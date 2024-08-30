@@ -4,8 +4,8 @@ import { default as ContextMenu, Panel, h } from '../src/index.ts';
 import PlusIcon from './icon/plus.svg';
 import MinusIcon from './icon/minus.svg';
 let contextMenu = new ContextMenu({
-  fixMenuWhenScroll: false, // 滚动时会跟随滚动
-  hideMenuWhenScroll: false, // 滚动页面时关闭菜单
+  fixMenuWhenScroll: false,
+  hideMenuWhenScroll: false,
 });
 let menu = contextMenu.create({
   width: 150,
@@ -82,7 +82,7 @@ let menu = contextMenu.create({
     },
     {
       label: '4 disabled',
-      disabled: payload => true,
+      disabled: () => true,
     },
     {
       icon: () => h('input', { type: 'checkbox' }),
@@ -94,24 +94,24 @@ let menu = contextMenu.create({
 let menu2Option = {
   items: [
     {
-      label: () => (menu ? '移除menu1' : 'menu1已被移除'),
+      label: () => (menu ? 'Remove Menu 1' : 'Menu 1 removed'),
       tip: () => `rd:${parseInt(Math.random() * 100)}`,
       disabled: () => !menu,
       onclick(e, payload) {
-        console.log('移除menu1', payload);
+        console.log('Remove menu1', payload);
         menu.destroy();
         menu = null;
       },
     },
     {
-      label: '菜单2',
-      tip: '提示2',
+      label: 'Menu 2',
+      tip: 'Tip 2',
       children: {
         items: [
           {
-            label: '移除本菜单',
+            label: 'Remove this menu',
             onclick(e, payload) {
-              console.log('子菜单被按下', payload);
+              console.log('sub menu clicked', payload);
               menu2().destroy();
             },
           },
@@ -119,23 +119,20 @@ let menu2Option = {
       },
     },
     { type: '---' },
-    { label: '返回', tip: 'Alt+向左键', onclick: () => console.log('返回') },
-    { label: '前进', tip: 'Alt+向右键', onclick: () => console.log('前进') },
-    { label: '按q关闭菜单', tip: '', disabled: true },
+    { label: 'Return', tip: 'Alt+A', onclick: () => console.log('Return') },
+    { label: 'Forward', tip: 'Alt+B', onclick: () => console.log('Forward') },
+    { label: 'Press Q to close menu', tip: '', disabled: true },
   ],
 };
 let menu2 = contextMenu.createAsync(menu2Option);
 
-// document.body.appendChild(menu.el);
 document.body.oncontextmenu = e => {
   let payload = 'payload: ' + parseInt(Math.random() * 1000);
   // menu.show(e, payload);
   menu.show(e, payload);
 };
 window.addEventListener('keypress', e => {
-  // console.log('keypress', e);
   if (e.key === 'q') {
-    console.log('按下q，主动调用hide()关闭菜单');
     menu.hide();
     menu2().hide();
   }

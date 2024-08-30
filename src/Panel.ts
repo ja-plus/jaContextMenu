@@ -58,7 +58,7 @@ export default class Panel {
   show(e: PanelPosition) {
     if (e instanceof MouseEvent) {
       e.preventDefault();
-      e.stopPropagation(); // 防止触发祖先元素定义的contextmenu事件
+      e.stopPropagation(); // prevent trigger ancestor's contextmenu event
     }
     this.el.classList.remove('hide');
     const { x, y } = this.calcPosition(e);

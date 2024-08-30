@@ -69,7 +69,7 @@ export default class ContextMenu {
    * @returns
    */
   create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
-    injectCss(config.contextMenuCssId, contextMenuStyle);
+    injectCss(config.contextMenuCssId, contextMenuStyle());
     // if not transfer width ,use default width
     if (!menuOption.width) menuOption.width = this.contextMenuOption.width;
     // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;

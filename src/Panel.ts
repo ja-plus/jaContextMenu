@@ -27,7 +27,7 @@ export default class Panel {
     if (typeof this.panelOption?.width === 'string') {
       throw new TypeError('Invalid width type.');
     }
-    injectCss(config.panelCssId, panelStyle);
+    injectCss(config.panelCssId, panelStyle());
     this.createEl();
     this.addEventListener();
   }

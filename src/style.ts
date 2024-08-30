@@ -1,6 +1,6 @@
 import config from './config';
 
-export const panelStyle = `
+export const panelStyle = () => `
   .${config.panelClassName}, .${config.panelClassName} * {
     box-sizing: border-box;
   }
@@ -17,7 +17,7 @@ export const panelStyle = `
   }
 `;
 
-export const contextMenuStyle = `
+export const contextMenuStyle = () => `
   .${config.wrapperClassName}{
     --item-background--hover: #e8e8e9;
     --disabled-color: #777;

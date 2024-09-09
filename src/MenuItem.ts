@@ -83,7 +83,7 @@ export default class MenuItem<T> {
     const childMenuEle = this.childMenu.el;
     // if childMenuEle is hidden
     if (!(e.target as HTMLElement).contains(childMenuEle)) {
-      (e.target as HTMLElement).classList.add(config.wrapperClassName + '_hover');
+      (e.target as HTMLElement).classList.add(config.wrapperClass + '_hover');
       childMenuEle.classList.remove('hide');
     }
     this.el.appendChild(childMenuEle);
@@ -96,17 +96,17 @@ export default class MenuItem<T> {
     const childMenuEle = this.childMenu.el;
     const childMenuHeight = childMenuEle.getBoundingClientRect().height;
     const liPosition = this.el.getBoundingClientRect();
-    const parentWidth = this.parentMenu.width || config.defaultMenuWidth;
-    const childWidth = this.childMenu.width || config.defaultMenuWidth;
+    const parentWidth = this.parentMenu.width || config.defW;
+    const childWidth = this.childMenu.width || config.defW;
     let translateX = parentWidth - 5;
     let translateY = -2; // paddingTop
     // right available space
-    if (windowSize.clientWidth - liPosition.x - parentWidth < parentWidth) {
+    if (windowSize.cW - liPosition.x - parentWidth < parentWidth) {
       translateX = -childWidth + 5;
     }
     // bottom available space
-    if (windowSize.clientHeight - liPosition.y + 2 < childMenuHeight) {
-      translateY = -childMenuHeight + config.menuItemHeight + 2 + 1; // 1px border
+    if (windowSize.cH - liPosition.y + 2 < childMenuHeight) {
+      translateY = -childMenuHeight + config.itemH + 2 + 1; // 1px border
     }
     // this.childMenu.removeChildMenus();
     childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;

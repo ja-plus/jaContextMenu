@@ -29,7 +29,7 @@ export default class Menu<Payload> extends Panel {
   }
   createUl() {
     this.ul = h(`ul`, {
-      classList: [config.wrapperClassName, `${config.wrapperClassName}-lv${this.level}`],
+      classList: [config.wrapperClass, `${config.wrapperClass}-lv${this.level}`],
       dataset: {
         lv: this.level,
       },
@@ -42,7 +42,7 @@ export default class Menu<Payload> extends Panel {
     this.el?.appendChild(this.ul);
   }
   updateMenuAttr() {
-    this.ul.className = `${config.wrapperClassName} ${config.wrapperClassName}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
+    this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
   renderMenuItem() {
     if (!Array.isArray(this.menuOption?.items)) {
@@ -98,7 +98,7 @@ export default class Menu<Payload> extends Panel {
 
   removeAllHover() {
     this.children.forEach(item => {
-      item.el.classList.remove(`${config.wrapperClassName}_hover`);
+      item.el.classList.remove(`${config.wrapperClass}_hover`);
     });
   }
   /**
@@ -115,11 +115,11 @@ export default class Menu<Payload> extends Panel {
    */
   removeItemHover() {
     this.children.forEach(childItem => {
-      childItem.el.classList.remove(`${config.wrapperClassName}_hover`);
+      childItem.el.classList.remove(`${config.wrapperClass}_hover`);
     });
   }
   closeAllMenus() {
-    const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClassName}`);
+    const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClass}`);
     menus.forEach(menu => {
       const level = menu.dataset.lv;
       if (level && +level > 0) {

@@ -5,13 +5,13 @@ interface WindowSize {
   /** <html> element */
   htmlEl: HTMLElement;
   /** window.innerWidth - html.clientWidth */
-  scrollWidth: number;
+  sW: number;
   /** window.innerHeight - html.clientHeight */
-  scrollHeight: number;
+  sH: number;
   /** html.clientWidth, minus scrollbars size*/
-  clientWidth: number;
+  cW: number;
   /** html.clientHeight， minus scrollbars size */
-  clientHeight: number;
+  cH: number;
 }
 let _storeWindowSize: WindowSize;
 
@@ -21,10 +21,10 @@ export function getWindowSize(): WindowSize {
   const { clientWidth, clientHeight } = html;
   _storeWindowSize = {
     htmlEl: html,
-    scrollWidth: innerWidth - clientWidth,
-    scrollHeight: innerHeight - clientHeight,
-    clientWidth,
-    clientHeight,
+    sW: innerWidth - clientWidth,
+    sH: innerHeight - clientHeight,
+    cW: clientWidth,
+    cH: clientHeight,
   };
   return _storeWindowSize;
 }

@@ -19,7 +19,7 @@ export default class ContextMenu {
   constructor(option: ContextMenuOption = {}) {
     this.hideMenuEventListener();
     const defaultConfig: ContextMenuOption = {
-      width: config.defaultMenuWidth,
+      width: config.defW,
       fixMenuWhenScroll: false,
       hideMenuWhenScroll: true,
     };
@@ -69,7 +69,7 @@ export default class ContextMenu {
    * @returns
    */
   create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
-    injectCss(config.contextMenuCssId, contextMenuStyle());
+    injectCss(config.menuCssId, contextMenuStyle());
     // if not transfer width ,use default width
     if (!menuOption.width) menuOption.width = this.contextMenuOption.width;
     // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;

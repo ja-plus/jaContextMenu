@@ -33,7 +33,7 @@ export default class Panel {
   }
 
   createEl() {
-    this.el = h(`div.${config.panelClassName}`, {
+    this.el = h(`div.${config.panelClass}`, {
       style: {
         width: this.width ? this.width + 'px' : void 0,
         zIndex: this.panelOption?.zIndex,
@@ -74,12 +74,12 @@ export default class Panel {
     let { x, y } = e;
 
     // right not have enough space
-    if (windowSize.clientWidth - x < width) {
-      x = windowSize.clientWidth - width;
+    if (windowSize.cW - x < width && x >= width) {
+      x = windowSize.cW - width; // move left
     }
     // bottom not have enough space
-    if (windowSize.clientHeight - y < height) {
-      y = e.y - height;
+    if (windowSize.cH - y < height && y >= height) {
+      y = y - height; // move to top
     }
     return { x, y };
   }

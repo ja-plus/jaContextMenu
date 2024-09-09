@@ -1,10 +1,14 @@
 export default {
   panelCssId: 'ja-panel-css',
-  contextMenuCssId: 'ja-contextmenu-css',
-  panelClassName: 'ja-panel',
-  wrapperClassName: 'ja-contextmenu',
-  defaultMenuWidth: 200,
-  menuItemHeight: 24,
-  menuItemDivideLineMargin: 5, // type == 'divide'
-  defaultZIndex: 5000,
+  menuCssId: 'ja-contextmenu-css',
+  panelClass: 'ja-panel',
+  wrapperClass: 'ja-contextmenu',
+  /** default menu width */
+  defW: 200,
+  /** menu item height */
+  itemH: 24,
+  /** menu item divide line margin */
+  divideMargin: 5, // type == 'divide'
+  /** default z index */
+  defZ: 5000,
 };

@@ -1,38 +1,38 @@
 import config from './config';
 
 export const panelStyle = () => `
-  .${config.panelClassName}, .${config.panelClassName} * {
+  .${config.panelClass}, .${config.panelClass} * {
     box-sizing: border-box;
   }
-  .${config.panelClassName}{
+  .${config.panelClass}{
     --border-color: #dee0e3;
     border: 1px solid var(--border-color);
     left: 0; top: 0;
     background-color: #fff;
     position: absolute;
-    z-index: ${config.defaultZIndex};
+    z-index: ${config.defZ};
   }
-  .${config.panelClassName}.hide{
+  .${config.panelClass}.hide{
     display: none;
   }
 `;
 
 export const contextMenuStyle = () => `
-  .${config.wrapperClassName}{
+  .${config.wrapperClass}{
     --item-background--hover: #e8e8e9;
     --disabled-color: #777;
     --tip-color: #5f6368;
-    --li-height: ${config.menuItemHeight}px;
+    --li-height: ${config.itemH}px;
     user-select: none;
     padding: 2px 0 2px 0px;
     margin: 0;
   }
   /*child menu*/
-  .${config.wrapperClassName} .${config.panelClassName}{ 
+  .${config.wrapperClass} .${config.panelClass}{ 
     position: absolute;
   }
   
-  .${config.wrapperClassName} li {
+  .${config.wrapperClass} li {
     position: relative;
     padding: 0 30px 0 30px;
     list-style: none;
@@ -42,35 +42,35 @@ export const contextMenuStyle = () => `
     display: flex;
     justify-content: space-between;
   }
-  .${config.wrapperClassName} li.divide{
-    margin: ${config.menuItemDivideLineMargin}px 1px;
+  .${config.wrapperClass} li.divide{
+    margin: ${config.divideMargin}px 1px;
     height: 1px;
     background-color: var(--border-color);
   }
-  .${config.wrapperClassName} li.disabled{
+  .${config.wrapperClass} li.disabled{
     color: var(--disabled-color);
     pointer-events: none;
   }
-  .${config.wrapperClassName} li .menu-item-icon{
+  .${config.wrapperClass} li .menu-item-icon{
     width: 16px;
     height: 16px;
     position: absolute;
     left: 7px; 
     top: calc(calc(var(--li-height) - 16px) / 2);
   }
-  .${config.wrapperClassName} li .menu-item-label {
+  .${config.wrapperClass} li .menu-item-label {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .${config.wrapperClassName} li .menu-item-tip {
+  .${config.wrapperClass} li .menu-item-tip {
     color: var(--tip-color);
   }
-  .${config.wrapperClassName} li:hover:not(.divide):not(.disabled),
-  .${config.wrapperClassName} li.${config.wrapperClassName}_hover {
+  .${config.wrapperClass} li:hover:not(.divide):not(.disabled),
+  .${config.wrapperClass} li.${config.wrapperClass}_hover {
     background: var(--item-background--hover);
   }
-  .${config.wrapperClassName} li .right-arrow {
+  .${config.wrapperClass} li .right-arrow {
     position: absolute;
     right: 8px; top: 9px;
     border-top: 4px solid transparent;

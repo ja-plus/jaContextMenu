@@ -1,3 +1,5 @@
+## v1.8.2
+* revert: horizontal position calculate
 ## v1.8.1
 * fix: if bottom has no space, the panel show top. fix if top has no space, panel still show bottom.
 ## v1.8.0

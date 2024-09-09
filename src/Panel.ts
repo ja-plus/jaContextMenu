@@ -74,7 +74,7 @@ export default class Panel {
     let { x, y } = e;
 
     // right not have enough space
-    if (windowSize.cW - x < width && x >= width) {
+    if (windowSize.cW - x < width) {
       x = windowSize.cW - width; // move left
     }
     // bottom not have enough space

@@ -1,3 +1,5 @@
+## v1.8.1
+* fix: if bottom has no space, the panel show top. fix if top has no space, panel still show bottom.
 ## v1.8.0
 * change: use class `hide` to hide panel
 * change: remove `Panel` class default width 200px

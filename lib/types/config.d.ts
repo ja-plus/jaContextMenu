@@ -1,11 +1,11 @@
 declare const _default: {
     panelCssId: string;
-    contextMenuCssId: string;
-    panelClassName: string;
-    wrapperClassName: string;
-    defaultMenuWidth: number;
-    menuItemHeight: number;
-    menuItemDivideLineMargin: number;
-    defaultZIndex: number;
+    menuCssId: string;
+    panelClass: string;
+    wrapperClass: string;
+    defW: number;
+    itemH: number;
+    divideMargin: number;
+    defZ: number;
 };
 export default _default;

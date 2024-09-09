@@ -1,10 +1,10 @@
 import { BaseAttr } from '@/types/common';
 interface WindowSize {
     htmlEl: HTMLElement;
-    scrollWidth: number;
-    scrollHeight: number;
-    clientWidth: number;
-    clientHeight: number;
+    sW: number;
+    sH: number;
+    cW: number;
+    cH: number;
 }
 declare let _storeWindowSize: WindowSize;
 export declare function getWindowSize(): WindowSize;

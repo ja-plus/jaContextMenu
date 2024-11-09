@@ -13,6 +13,13 @@ export type PanelOption = {
   position?: 'fixed' | null;
   zIndex?: number;
 };
+
+export enum PanelPositionEnum {
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
 export default class Panel {
   el!: HTMLElement;
   /** panel width */
@@ -61,8 +68,11 @@ export default class Panel {
       e.stopPropagation(); // prevent trigger ancestor's contextmenu event
     }
     this.el.classList.remove('hide');
-    const { x, y } = this.calcPosition(e);
+    const { x, y, position } = this.calcPosition(e);
     this.el.style.transform = `translate(${x}px,${y}px)`;
+    return {
+      position,
+    };
   }
   /**
    * calc menu position x,y
@@ -72,16 +82,18 @@ export default class Panel {
     this.height = height;
     this.width = width;
     let { x, y } = e;
-
+    const position: [PanelPositionEnum, PanelPositionEnum] = [PanelPositionEnum.RIGHT, PanelPositionEnum.BOTTOM];
     // right not have enough space
     if (windowSize.cW - x < width) {
       x = windowSize.cW - width; // move left
+      position[0] = PanelPositionEnum.LEFT;
     }
     // bottom not have enough space
     if (windowSize.cH - y < height && y >= height) {
       y = y - height; // move to top
+      position[1] = PanelPositionEnum.TOP;
     }
-    return { x, y };
+    return { x, y, position };
   }
   /**
    * hide menu

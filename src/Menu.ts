@@ -65,9 +65,9 @@ export default class Menu<Payload> extends Panel {
   /**
    * @override
    */
-  show(e: PanelPosition, payload?: any) {
+  show(e: Parameters<Panel['show']>[0], payload?: any) {
     this.prepareMenuShow(payload);
-    super.show(e); // calculate transform:translate
+    return super.show(e); // calculate transform:translate
   }
 
   /**
@@ -86,14 +86,15 @@ export default class Menu<Payload> extends Panel {
    * menu position
    * @override
    */
-  calcPosition(e: PanelPosition) {
-    let { x, y } = super.calcPosition(e);
+  calcPosition(...p: Parameters<Panel['calcPosition']>) {
+    const res = super.calcPosition(...p);
+    let { x, y } = res;
     // add scrollX scrollY if page has scroll bar
     if (this.level === 0 && this.panelOption?.position !== 'fixed') {
       x += window.scrollX;
       y += window.scrollY;
     }
-    return { x, y };
+    return { x, y, position: res.position };
   }
 
   removeAllHover() {

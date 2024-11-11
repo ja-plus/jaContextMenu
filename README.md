@@ -33,7 +33,9 @@ Please delete the "^"before the version number of ja-contextmenu in package.json
 (eg: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")
 <br>
 Limited energy, there is no guarantee that the use mode will not be changed when the small version is updated.
+
 ## Feature Log
+- [x] `menu.show` can set menu default position (v1.8.3)
 - [x] ContextMenu.createAsync async create menu (v1.7.2)
 - [x] MenuItemOption.onclick return true. click item not close menu. (v1.6.0)
 - [x] MenuItemOption.icon support HTMLElement. (v1.6.0)
@@ -118,6 +120,7 @@ document.body.oncontextmenu = (e) => {
 };
 // or
 someButton.onclick = (e) => {
+  e.position = ['left','top'];
   menu.show(e);
 }
 
@@ -133,9 +136,12 @@ someButton.onclick = (e) => {
 | width: number | 200 | Menu width |
 | fixMenuWhenScroll: boolean | false | Is the menu fixed when scrolling(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | Whether to close the menu when scrolling. |
+
 ## ContextMenu instance method 
+
 ### create\<PayloadType\>(option: `MenuOption`): `MenuWrapper`
 Create a menu and return a MenuWrapper object. 
+
 #### MenuOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -156,16 +162,33 @@ Create a menu and return a MenuWrapper object.
 | customItem?: `HTMLElement` |  | Custom Menu Item |
 | onclick?: function(event, payload):boolean|   | Click the event callback, and the parameter payload is the parameter passed in when calling the showMenu. return true does not close the menu after clicking.|
 | children?: `MenuOption` |     | Submenu configuration
+
 ## MenuWrapper
 ```ts
 const menu:MenuWrapper = contextMenu.create<Payload>(...)
 ```
-### 1.show(pos: { x: number, y: number }, payload?: any)
+### 1.show(pos: { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }, payload?: any): {position: [PanelPositionEnum, PanelPositionEnum]}
 Show menu
-* pos: `PointerEvent`, `MouseEvent`, T extends { x: number, y: number }
+* pos: `PointerEvent` | `MouseEvent` | T extends { x: number, y: number }
+  - x: number 
+  - y: number
+  - position: [PanelPositionEnum, PanelPositionEnum] x轴和y轴展示位置
 * payload: Return in the onclick callback of the click menu.
+* return: position: x position, y position.
 ### 2.hide()
 ### 3.destroy()
+### 4.calcPosition(pos: { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }): { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }
+Calculate the position of the menu, return the position of the menu and the position of the menu relative to the document.
+
+## PanelPositionEnum 
+```ts
+enum PanelPositionEnum {
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+```
 
 ## Typescript Demo
 ```ts

@@ -6,7 +6,7 @@ import config from './config';
 import { injectCss, windowSize } from './utils/utils';
 import { panelStyle } from './style';
 
-export type PanelPosition = { x: number; y: number };
+export type PanelPosition = { x: number; y: number; position?: [PanelPositionEnum, PanelPositionEnum] };
 export type PanelOption = {
   /** Panel width */
   width?: number;
@@ -20,6 +20,11 @@ export enum PanelPositionEnum {
   LEFT = 'left',
   RIGHT = 'right',
 }
+
+export type PanelShowResult = {
+  position: [PanelPositionEnum, PanelPositionEnum];
+};
+
 export default class Panel {
   el!: HTMLElement;
   /** panel width */
@@ -62,7 +67,7 @@ export default class Panel {
   /**
    * show menu
    */
-  show(e: PanelPosition) {
+  show(e: PanelPosition): PanelShowResult {
     if (e instanceof MouseEvent) {
       e.preventDefault();
       e.stopPropagation(); // prevent trigger ancestor's contextmenu event
@@ -77,21 +82,43 @@ export default class Panel {
   /**
    * calc menu position x,y
    */
-  calcPosition(e: PanelPosition) {
+  calcPosition(e: PanelPosition): Required<PanelPosition> {
     const { height, width } = this.el.getBoundingClientRect();
     this.height = height;
     this.width = width;
     let { x, y } = e;
     const position: [PanelPositionEnum, PanelPositionEnum] = [PanelPositionEnum.RIGHT, PanelPositionEnum.BOTTOM];
-    // right not have enough space
-    if (windowSize.cW - x < width) {
-      x = windowSize.cW - width; // move left
-      position[0] = PanelPositionEnum.LEFT;
+    if (e.position?.length === 2) {
+      position[0] = e.position[0];
+      position[1] = e.position[1];
     }
-    // bottom not have enough space
-    if (windowSize.cH - y < height && y >= height) {
-      y = y - height; // move to top
-      position[1] = PanelPositionEnum.TOP;
+    if (position[0] === PanelPositionEnum.LEFT) {
+      // left have enough space
+      if (x > width) {
+        x = x - width; // move right
+        position[0] = PanelPositionEnum.RIGHT;
+      }
+    }
+    if (position[0] === PanelPositionEnum.RIGHT) {
+      // right not have enough space
+      if (windowSize.cW - x < width) {
+        x = windowSize.cW - width; // move left
+        position[0] = PanelPositionEnum.LEFT;
+      }
+    }
+    if (position[1] === PanelPositionEnum.TOP) {
+      // top have enough space
+      if (y > height) {
+        y = y - height; // move to bottom
+        position[1] = PanelPositionEnum.BOTTOM;
+      }
+    }
+    if (position[1] === PanelPositionEnum.BOTTOM) {
+      // bottom not have enough space
+      if (windowSize.cH - y < height && y >= height) {
+        y = y - height; // move to top
+        position[1] = PanelPositionEnum.TOP;
+      }
     }
     return { x, y, position };
   }

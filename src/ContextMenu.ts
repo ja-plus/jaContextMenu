@@ -1,5 +1,5 @@
 import Menu from './Menu';
-import { PanelPosition } from './Panel';
+import { PanelPosition, PanelShowResult } from './Panel';
 import config from './config';
 import { contextMenuStyle } from './style';
 import { ContextMenuOption } from './types/ContextMenuOption';
@@ -7,9 +7,10 @@ import { MenuOption } from './types/MenuOption';
 import { injectCss } from './utils/utils';
 
 export interface MenuWrapper<T> {
-  show(position: PanelPosition, payload?: T): void;
+  show(position: PanelPosition, payload?: T): PanelShowResult;
   hide(): void;
   destroy(): void;
+  calcPosition: Menu<T>['calcPosition'];
 }
 export default class ContextMenu {
   /** store created Menu ins*/
@@ -82,7 +83,8 @@ export default class ContextMenu {
     }
     return {
       show: (position, payload) => this.showMenu(position, mainMenu, payload),
-      hide: () => mainMenu.hide(), // use arrow func, constraint `this` pointer
+      calcPosition: mainMenu.calcPosition.bind(mainMenu),
+      hide: mainMenu.hide.bind(mainMenu),
       destroy: () => this.destroy(mainMenu),
     };
   }
@@ -111,7 +113,7 @@ export default class ContextMenu {
    */
   showMenu<T>(position: PanelPosition, menu: Menu<T>, payload?: T) {
     this.hideAllMenu();
-    menu.show(position, payload);
+    return menu.show(position, payload);
   }
   hideAllMenu() {
     this.storeMenus.forEach(menu => menu.hide());

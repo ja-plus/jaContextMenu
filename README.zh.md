@@ -29,7 +29,9 @@ window.addEventListener('click', e => { menu2().show(e, payload) });
 ## 注意
 安装后请把package.json 中ja-contextmenu 的版本号前的"^"删除，防止npm的预料之外的自动更新。(例: "ja-contextmenu":"`^`1.3.0" => "ja-contextmenu":"1.3.0")  
 精力有限，不保证小版本更新时，不改动使用方式。
+
 ## 功能更新记录
+- [x] `menu.show` 可以配置菜单默认出现的位置。 (v1.8.3)
 - [x] ContextMenu.createAsync 异步创建Menu (v1.7.2)
 - [x] MenuItemOption.onclick 返回true 则点击不关闭menu (v1.6.0)
 - [x] MenuItemOption.icon 支持 HTMLElement (v1.6.0)
@@ -115,6 +117,7 @@ document.body.oncontextmenu = (e) => {
 };
 // or
 someButton.onclick = (e) => {
+  e.position = ['left','top'];
   menu.show(e);
 }
 
@@ -130,9 +133,12 @@ someButton.onclick = (e) => {
 | width: number | 200 | Menu width |
 | fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
+
 ## ContextMenu instance method 实例方法
+
 ### create\<PayloadType\>(option: `MenuOption`): `MenuWrapper`
 创建一个菜单，返回一个MenuWrapper对象   
+
 #### MenuOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
@@ -157,12 +163,29 @@ someButton.onclick = (e) => {
 ```ts
 const menu:MenuWrapper = contextMenu.create<Payload>(...)
 ```
-### 1.show(pos: { x: number, y: number }, payload?: any)
+### 1.show(pos: { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }, payload?: any): {position: [PanelPositionEnum, PanelPositionEnum]}
 展示菜单。
-* pos: `PointerEvent`, `MouseEvent`, T extends { x: number, y: number }
+* pos: `PointerEvent` | `MouseEvent` | T extends { x: number, y: number }
+  - x: number 
+  - y: number
+  - position: [PanelPositionEnum, PanelPositionEnum] x轴和y轴展示位置
 * payload: 在点击菜单的onclick回调中返回。
+* 返回：实际展示位置 x,y 左边还是右边。
 ### 2.hide()
 ### 3.destroy()
+### 4.calcPosition(pos: { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }): { x: number, y: number, position: [PanelPositionEnum, PanelPositionEnum] }
+ 计算菜单将要出现的位置
+
+ 
+## PanelPositionEnum 
+```ts
+enum PanelPositionEnum {
+  TOP = 'top',
+  BOTTOM = 'bottom',
+  LEFT = 'left',
+  RIGHT = 'right',
+}
+```
 
 ## Typescript Demo
 ```ts

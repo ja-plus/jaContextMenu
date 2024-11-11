@@ -1,3 +1,7 @@
+## v1.8.3
+* add: `menu.show` return `position`
+* add: `MenuWrapper` return `calcPosition` func
+* add: `menu.show` new parameter `e.position` 
 ## v1.8.2
 * revert: horizontal position calculate
 ## v1.8.1

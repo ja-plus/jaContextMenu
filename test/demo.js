@@ -140,8 +140,10 @@ window.addEventListener('keypress', e => {
 const block = document.querySelector('#block1');
 const block2 = document.querySelector('#block2');
 // const block3 = document.querySelector('#block3');
+const block4 = document.querySelector('#block4');
 block.addEventListener('contextmenu', e => {
-  menu2().show(e, 'payload');
+  const showResult = menu2().show(e, 'payload');
+  console.log(showResult);
 });
 
 // create panel demo
@@ -176,3 +178,10 @@ block2.addEventListener('contextmenu', e => {
 //   console.log('stop propagation');
 //   // menu3.show(e);
 // });
+
+const menu4 = contextMenu.create({ items: [{ label: 'prefer left top' }, { label: 'prefer left top' }] });
+block4.addEventListener('contextmenu', e => {
+  e.stopPropagation();
+  e.position = ['left', 'top'];
+  menu4.show(e);
+});

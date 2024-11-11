@@ -1,5 +1,5 @@
 import MenuItem from './MenuItem';
-import Panel, { PanelPosition } from './Panel';
+import Panel from './Panel';
 import { MenuOption } from './types/MenuOption';
 export default class Menu<Payload> extends Panel {
     ul: HTMLElement;
@@ -11,11 +11,12 @@ export default class Menu<Payload> extends Panel {
     createUl(): void;
     updateMenuAttr(): void;
     renderMenuItem(): void;
-    show(e: PanelPosition, payload?: any): void;
+    show(e: Parameters<Panel['show']>[0], payload?: any): import("./Panel").PanelShowResult;
     prepareMenuShow(payload: any): void;
-    calcPosition(e: PanelPosition): {
+    calcPosition(...p: Parameters<Panel['calcPosition']>): {
         x: number;
         y: number;
+        position: [import("./Panel").PanelPositionEnum, import("./Panel").PanelPositionEnum];
     };
     removeAllHover(): void;
     removeChildMenus(): void;

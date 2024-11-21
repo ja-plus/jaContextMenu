@@ -47,9 +47,9 @@ let menu = contextMenu.create({
       icon: MinusIcon,
       label: '3',
       children: {
-        width: 100,
+        width: 150,
         items: [
-          { label: 'w:100', disabled: true },
+          { label: 'sticky bottom', disabled: true },
           { type: '---' },
           {
             label: '2-1',
@@ -59,11 +59,11 @@ let menu = contextMenu.create({
           },
           { label: '2-2' },
           {
-            label: '2-3->',
+            label: 'more items',
             children: {
               width: 200,
               items: [
-                { label: 'width:200', disabled: true },
+                { label: 'H > pageH', disabled: true },
                 { type: '---' },
                 {
                   label: '3-1',
@@ -71,12 +71,15 @@ let menu = contextMenu.create({
                     console.log('3-1 click,', payload);
                   },
                 },
-                {
-                  label: '3-2',
-                },
+                ...Array.from({ length: 30 }, (_, i) => ({
+                  label: `3-${i}`,
+                })),
               ],
             },
           },
+          ...Array.from({ length: 10 }, (_, i) => ({
+            label: `2-${4 + i}`,
+          })),
         ],
       },
     },

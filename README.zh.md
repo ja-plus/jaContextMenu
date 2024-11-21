@@ -1,6 +1,15 @@
 # ja-contextmenu
 Demo: npm run dev 本项目即可
+
+基本:
+
 ![img](https://gitee.com/japlus/ja-context-menu/raw/master/md-imgs/main.png)
+
+特殊情况: 
+
+![img](https://gitee.com/japlus/ja-context-menu/raw/master/md-imgs/special.png)
+
+
 ## 简介
 * 原生js右键菜单封装。也可用于onclick事件打开菜单。
 * 默认样式通过js插入style标签完成，注意class命名空间。
@@ -31,6 +40,8 @@ window.addEventListener('click', e => { menu2().show(e, payload) });
 精力有限，不保证小版本更新时，不改动使用方式。
 
 ## 功能更新记录
+- [x] 子菜单高度大于页面时，出现滚动条。 (v1.9.0)
+- [x] 子菜单展示时，如果下方位置不够，则菜单底部与页面底部对齐。 (v1.9.0)
 - [x] `menu.show` 可以配置菜单默认出现的位置。 (v1.8.3)
 - [x] ContextMenu.createAsync 异步创建Menu (v1.7.2)
 - [x] MenuItemOption.onclick 返回true 则点击不关闭menu (v1.6.0)

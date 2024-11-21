@@ -15,6 +15,10 @@ export const panelStyle = () => `
   .${config.panelClass}.hide{
     display: none;
   }
+  .${config.panelClass}.scroll{
+    overflow: auto;
+    overflow: overlay;
+  }
 `;
 
 export const contextMenuStyle = () => `

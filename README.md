@@ -1,6 +1,13 @@
 # ja-contextmenu
 Demo: npm run dev (this project)
+
+basic:
+
 ![img](https://github.com/ja-plus/jaContextMenu/blob/master/md-imgs/main.png?raw=true)
+
+special situation: 
+
+![img](https://github.com/ja-plus/jaContextMenu/blob/master/md-imgs/special.png?raw=true)
 
 ## Brief introduction
 * Native js right-click menu encapsulation. It can also be used for the onclick event to open the menu.
@@ -35,6 +42,8 @@ Please delete the "^"before the version number of ja-contextmenu in package.json
 Limited energy, there is no guarantee that the use mode will not be changed when the small version is updated.
 
 ## Feature Log
+- [x] Sub menu height > page height, auto scroll (v1.9.0)
+- [x] If the bottom position of the submenu is not enough, the bottom of the menu aligns with the bottom of the page.(v1.9.0)
 - [x] `menu.show` can set menu default position (v1.8.3)
 - [x] ContextMenu.createAsync async create menu (v1.7.2)
 - [x] MenuItemOption.onclick return true. click item not close menu. (v1.6.0)

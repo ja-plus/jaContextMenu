@@ -104,10 +104,20 @@ export default class MenuItem<T> {
     if (windowSize.cW - liPosition.x - parentWidth < parentWidth) {
       translateX = -childWidth + 5;
     }
-    // bottom available space
-    if (windowSize.cH - liPosition.y + 2 < childMenuHeight) {
-      translateY = -childMenuHeight + config.itemH + 2 + 1; // 1px border
+    if (childMenuHeight > windowSize.cH) {
+      translateY = -liPosition.y;
+      // if child menu height is larger than window height
+      childMenuEle.style.maxHeight = `${windowSize.cH}px`;
+      childMenuEle.classList.add('scroll');
+    } else if (windowSize.cH - liPosition.y + 2 < childMenuHeight) {
+      // bottom available space
+      // sticky bottom
+      translateY = windowSize.cH - liPosition.y - childMenuHeight;
+      //#region to top
+      // translateY = -childMenuHeight + config.itemH + 2 + 1; // 1px border
+      //#endregion
     }
+
     // this.childMenu.removeChildMenus();
     childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
     // return { x: translateX, y: translateY };

@@ -76,7 +76,7 @@ export default class ContextMenu {
     // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;
     if (this.contextMenuOption.fixMenuWhenScroll) menuOption.position = 'fixed';
 
-    const mainMenu = new Menu(0, menuOption);
+    const mainMenu = new Menu(menuOption);
     this.storeMenus.push(mainMenu);
     if (mainMenu.el) {
       document.body.appendChild(mainMenu.el);

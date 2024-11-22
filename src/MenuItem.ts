@@ -73,7 +73,7 @@ export default class MenuItem<T> {
     if (item.children) {
       // 不设置宽度则继承父菜单宽度
       if (!item.children.width) item.children.width = this.parentMenu.width;
-      this.childMenu = new Menu(this.level + 1, item.children);
+      this.childMenu = new Menu(item.children, { level: this.level + 1, id: this.parentMenu.id });
     }
   }
   /**
@@ -86,7 +86,7 @@ export default class MenuItem<T> {
       (e.target as HTMLElement).classList.add(config.wrapperClass + '_hover');
       childMenuEle.classList.remove('hide');
     }
-    this.el.appendChild(childMenuEle);
+    document.body.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // payload传入子菜单
     this.childMenu.prepareMenuShow(this.childMenu.payload);
     this.calcPosition(); // recalculate position
@@ -94,32 +94,38 @@ export default class MenuItem<T> {
 
   calcPosition() {
     const childMenuEle = this.childMenu.el;
-    const childMenuHeight = childMenuEle.getBoundingClientRect().height;
+    const { height: childMenuHeight, width: childMenuWidth } = childMenuEle.getBoundingClientRect();
     const liPosition = this.el.getBoundingClientRect();
     const parentWidth = this.parentMenu.width || config.defW;
     const childWidth = this.childMenu.width || config.defW;
-    let translateX = parentWidth - 5;
-    let translateY = -2; // paddingTop
-    // right available space
-    if (windowSize.cW - liPosition.x - parentWidth < parentWidth) {
-      translateX = -childWidth + 5;
-    }
-    if (childMenuHeight > windowSize.cH) {
-      translateY = -liPosition.y;
-      // if child menu height is larger than window height
-      childMenuEle.style.maxHeight = `${windowSize.cH}px`;
-      childMenuEle.classList.add('scroll');
-    } else if (windowSize.cH - liPosition.y + 2 < childMenuHeight) {
-      // bottom available space
-      // sticky bottom
-      translateY = windowSize.cH - liPosition.y - childMenuHeight;
-      //#region to top
-      // translateY = -childMenuHeight + config.itemH + 2 + 1; // 1px border
-      //#endregion
-    }
+    // let translateX = parentWidth - 5;
+    // let translateY = -2; // paddingTop
+    const x = liPosition.x + liPosition.width - 5;
+    const y = liPosition.y - 2;
+    console.log('🚀 ~ MenuItem<T> ~ calcPosition ~ childMenuWidth:', childMenuWidth, liPosition, this.el);
+    // // right available space
+    // if (windowSize.cW - liPosition.x - parentWidth < parentWidth) {
+    //   translateX = -childWidth + 5;
+    // }
+    // if (childMenuHeight > windowSize.cH) {
+    //   translateY = -liPosition.y;
+    //   // if child menu height is larger than window height
+    //   childMenuEle.style.maxHeight = `${windowSize.cH}px`;
+    //   childMenuEle.classList.add('scroll');
+    // } else if (windowSize.cH - liPosition.y + 2 < childMenuHeight) {
+    //   // bottom available space
+    //   // sticky bottom
+    //   translateY = windowSize.cH - liPosition.y - childMenuHeight;
+    //   //#region to top
+    //   // translateY = -childMenuHeight + config.itemH + 2 + 1; // 1px border
+    //   //#endregion
+    // }
 
     // this.childMenu.removeChildMenus();
-    childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    // childMenuEle.style.transform = `translate(${translateX}px, ${translateY}px)`;
+    childMenuEle.style.top = `${y}px`;
+    childMenuEle.style.left = `${x}px`;
+
     // return { x: translateX, y: translateY };
   }
   hideOtherChildMenu() {

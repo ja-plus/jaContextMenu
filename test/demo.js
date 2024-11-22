@@ -66,6 +66,12 @@ let menu = contextMenu.create({
                 { label: 'H > pageH', disabled: true },
                 { type: '---' },
                 {
+                  label: '3-0',
+                  children: {
+                    items: [{ label: '3-0-0' }],
+                  },
+                },
+                {
                   label: '3-1',
                   onclick: (e, payload) => {
                     console.log('3-1 click,', payload);

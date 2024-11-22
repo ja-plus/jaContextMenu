@@ -10,6 +10,9 @@ import { dealBaseAttr } from './utils/utils';
  * 第二层后的menu使用remove来控制显示隐藏
  */
 export default class Menu<Payload> extends Panel {
+  /** 随机数id */
+  id: string | undefined;
+
   ul!: HTMLElement;
   /** 表示第几级的菜单*/
   level: number;
@@ -19,11 +22,14 @@ export default class Menu<Payload> extends Panel {
   /** 传入的参数 */
   payload?: Payload;
 
-  constructor(level: number, menuOption: MenuOption<Payload>) {
+  constructor(menuOption: MenuOption<Payload>, init?: { level?: number; id?: string }) {
     super(menuOption);
+    if (!init?.id) {
+      this.id = Math.random().toString(36).slice(2, 10);
+    }
     // if(level > 1) delete menuOption.position,baseZIndex?
     this.menuOption = menuOption;
-    this.level = level;
+    this.level = init?.level || 0;
     this.createUl();
     // this.renderMenuItem();//初始化时不渲染MenuItem
   }
@@ -42,6 +48,7 @@ export default class Menu<Payload> extends Panel {
     this.el?.appendChild(this.ul);
   }
   updateMenuAttr() {
+    this.el.dataset.cmId = this.id;
     this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
   renderMenuItem() {
@@ -102,13 +109,22 @@ export default class Menu<Payload> extends Panel {
       item.el.classList.remove(`${config.wrapperClass}_hover`);
     });
   }
+  private closeMenus(lv: number, hide = true) {
+    const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClass}`);
+    menus.forEach(menu => {
+      const level = menu.dataset.lv;
+      if (level && +level > lv && menu.dataset.cmId === this.id) {
+        menu.remove();
+      } else if (hide) {
+        menu.classList.add('hide');
+      }
+    });
+  }
   /**
    * remove all child menus
    */
   removeChildMenus() {
-    this.children.forEach(item => {
-      item.childMenu?.el?.remove();
-    });
+    this.closeMenus(this.level, false);
   }
 
   /**
@@ -119,17 +135,19 @@ export default class Menu<Payload> extends Panel {
       childItem.el.classList.remove(`${config.wrapperClass}_hover`);
     });
   }
+
   closeAllMenus() {
-    const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClass}`);
-    menus.forEach(menu => {
-      const level = menu.dataset.lv;
-      if (level && +level > 0) {
-        menu.remove();
-      } else {
-        menu.classList.add('hide');
-      }
-    });
+    this.closeMenus(0, true);
   }
+
+  /**
+   * @override
+   */
+  hide() {
+    this.closeAllMenus();
+    super.hide();
+  }
+
   destroy() {
     super.destroy();
     this.menuOption = null;

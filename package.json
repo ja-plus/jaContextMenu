@@ -6,7 +6,8 @@
   "module": "lib/ja-contextmenu.esm.js",
   "types": "lib/types/index.d.ts",
   "scripts": {
-    "dev": "parcel ./test/demo.html",
+    "dev": "vite",
+    "parcel": "parcel ./test/demo.html",
     "bd": "rollup -c"
   },
   "repository": {
@@ -37,7 +38,6 @@
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-typescript": "^7.21.4",
-    "@parcel/transformer-less": "^2.8.3",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "^11.1.0",
@@ -48,10 +48,10 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "parcel": "^2.11.0",
     "prettier": "^2.8.7",
     "rollup": "^3.20.2",
     "tslib": "^2.3.1",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.3",
+    "vite": "^5.4.11"
   }
 }

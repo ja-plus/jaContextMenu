@@ -24,9 +24,7 @@ export default class Menu<Payload> extends Panel {
 
   constructor(menuOption: MenuOption<Payload>, init?: { level?: number; id?: string }) {
     super(menuOption);
-    if (!init?.id) {
-      this.id = Math.random().toString(36).slice(2, 10);
-    }
+    this.id = init?.id || Math.random().toString(36).slice(2, 10);
     // if(level > 1) delete menuOption.position,baseZIndex?
     this.menuOption = menuOption;
     this.level = init?.level || 0;
@@ -36,9 +34,6 @@ export default class Menu<Payload> extends Panel {
   createUl() {
     this.ul = h(`ul`, {
       classList: [config.wrapperClass, `${config.wrapperClass}-lv${this.level}`],
-      dataset: {
-        lv: this.level,
-      },
       onclick: e => e.stopPropagation(),
       oncontextmenu: e => {
         e.stopPropagation();
@@ -49,6 +44,7 @@ export default class Menu<Payload> extends Panel {
   }
   updateMenuAttr() {
     this.el.dataset.cmId = this.id;
+    this.el.dataset.lv = this.level.toString();
     this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
   renderMenuItem() {

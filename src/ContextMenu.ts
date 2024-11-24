@@ -71,7 +71,7 @@ export default class ContextMenu {
    */
   create<Payload>(menuOption: MenuOption<Payload>): MenuWrapper<Payload> {
     injectCss(config.menuCssId, contextMenuStyle());
-    // if not transfer width ,use default width
+    // if not set width ,use default width
     if (!menuOption.width) menuOption.width = this.contextMenuOption.width;
     // if (!menuOption.zIndex) menuOption.zIndex = this.contextMenuOption.baseZIndex;
     if (this.contextMenuOption.fixMenuWhenScroll) menuOption.position = 'fixed';

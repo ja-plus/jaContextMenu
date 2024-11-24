@@ -1,5 +1,5 @@
 import MenuItem from './MenuItem';
-import Panel, { PanelPosition } from './Panel';
+import Panel from './Panel';
 import config from './config';
 import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
@@ -10,16 +10,16 @@ import { dealBaseAttr } from './utils/utils';
  * 第二层后的menu使用remove来控制显示隐藏
  */
 export default class Menu<Payload> extends Panel {
-  /** 随机数id */
+  /** menu id */
   id: string | undefined;
 
   ul!: HTMLElement;
-  /** 表示第几级的菜单*/
+  /** menu level*/
   level: number;
   /** config*/
   menuOption: MenuOption<Payload> | null;
   children: MenuItem<Payload>[] = [];
-  /** 传入的参数 */
+  /** menu show payload */
   payload?: Payload;
 
   constructor(menuOption: MenuOption<Payload>, init?: { level?: number; id?: string }) {
@@ -29,7 +29,7 @@ export default class Menu<Payload> extends Panel {
     this.menuOption = menuOption;
     this.level = init?.level || 0;
     this.createUl();
-    // this.renderMenuItem();//初始化时不渲染MenuItem
+    // this.renderMenuItem();// called when show
   }
   createUl() {
     this.ul = h(`ul`, {
@@ -43,7 +43,7 @@ export default class Menu<Payload> extends Panel {
     this.el?.appendChild(this.ul);
   }
   updateMenuAttr() {
-    this.el.dataset.cmId = this.id;
+    this.el.dataset.jaMenuId = this.id;
     this.el.dataset.lv = this.level.toString();
     this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
@@ -100,20 +100,21 @@ export default class Menu<Payload> extends Panel {
     return { x, y, position: res.position };
   }
 
-  removeAllHover() {
-    this.children.forEach(item => {
-      item.el.classList.remove(`${config.wrapperClass}_hover`);
-    });
-  }
   private closeMenus(lv: number, hide = true) {
     const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClass}`);
     menus.forEach(menu => {
       const level = menu.dataset.lv;
-      if (level && +level > lv && menu.dataset.cmId === this.id) {
+      if (level && +level > lv && menu.dataset.jaMenuId === this.id) {
         menu.remove();
       } else if (hide) {
         menu.classList.add('hide');
       }
+    });
+  }
+
+  removeAllHover() {
+    this.children.forEach(item => {
+      item.el.classList.remove(`${config.wrapperClass}_hover`);
     });
   }
   /**

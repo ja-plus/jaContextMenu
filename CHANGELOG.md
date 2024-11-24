@@ -1,3 +1,8 @@
+## v1.10.0
+* change: All child menu panel's element append to document.body. In order to resolve 'scroll menu can't show it's child menu`.
+## v1.9.0
+* feature: Sub menu height > page height, auto scroll (v1.9.0)
+* feature: If the bottom position of the submenu is not enough, the bottom of the menu aligns with the bottom of the page.
 ## v1.8.3
 * add: `menu.show` return `position`
 * add: `MenuWrapper` return `calcPosition` func

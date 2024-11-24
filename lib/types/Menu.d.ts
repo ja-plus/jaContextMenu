@@ -2,12 +2,16 @@ import MenuItem from './MenuItem';
 import Panel from './Panel';
 import { MenuOption } from './types/MenuOption';
 export default class Menu<Payload> extends Panel {
+    id: string | undefined;
     ul: HTMLElement;
     level: number;
     menuOption: MenuOption<Payload> | null;
     children: MenuItem<Payload>[];
     payload?: Payload;
-    constructor(level: number, menuOption: MenuOption<Payload>);
+    constructor(menuOption: MenuOption<Payload>, init?: {
+        level?: number;
+        id?: string;
+    });
     createUl(): void;
     updateMenuAttr(): void;
     renderMenuItem(): void;
@@ -18,9 +22,11 @@ export default class Menu<Payload> extends Panel {
         y: number;
         position: [import("./Panel").PanelPositionEnum, import("./Panel").PanelPositionEnum];
     };
+    private closeMenus;
     removeAllHover(): void;
     removeChildMenus(): void;
     removeItemHover(): void;
     closeAllMenus(): void;
+    hide(): void;
     destroy(): void;
 }

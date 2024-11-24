@@ -1,13 +1,12 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "VanillaJS contextmenu in ESModule",
   "main": "lib/ja-contextmenu.js",
   "module": "lib/ja-contextmenu.esm.js",
   "types": "lib/types/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "parcel": "parcel ./test/demo.html",
     "bd": "rollup -c"
   },
   "repository": {

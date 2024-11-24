@@ -4,7 +4,7 @@
   "description": "VanillaJS contextmenu in ESModule",
   "main": "lib/ja-contextmenu.js",
   "module": "lib/ja-contextmenu.esm.js",
-  "types": "lib/types/index.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "dev": "vite",
     "bd": "rollup -c"
@@ -37,9 +37,9 @@
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-typescript": "^7.21.4",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-terser": "^0.4.1",
-    "@rollup/plugin-typescript": "^11.1.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
     "core-js": "^3.30.0",
@@ -48,9 +48,9 @@
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.8.7",
-    "rollup": "^3.20.2",
+    "rollup": "^4.27.4",
     "tslib": "^2.3.1",
-    "typescript": "^5.0.3",
+    "typescript": "^5.7.2",
     "vite": "^5.4.11"
   }
 }

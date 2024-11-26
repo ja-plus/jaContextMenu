@@ -42,6 +42,7 @@ Please delete the "^"before the version number of ja-contextmenu in package.json
 Limited energy, there is no guarantee that the use mode will not be changed when the small version is updated.
 
 ## Feature Log
+- [x] `MenuItemOption['customItem']` support callback (v1.10.1)
 - [x] Sub menu height > page height, auto scroll (v1.9.0)
 - [x] If the bottom position of the submenu is not enough, the bottom of the menu aligns with the bottom of the page.(v1.9.0)
 - [x] `menu.show` can set menu default position (v1.8.3)

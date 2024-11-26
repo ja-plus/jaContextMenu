@@ -40,6 +40,7 @@ window.addEventListener('click', e => { menu2().show(e, payload) });
 精力有限，不保证小版本更新时，不改动使用方式。
 
 ## 功能更新记录
+- [x] `MenuItemOption['customItem']` 支持传入函数。(v1.10.1)
 - [x] 子菜单高度大于页面时，出现滚动条。 (v1.9.0)
 - [x] 子菜单展示时，如果下方位置不够，则菜单底部与页面底部对齐。 (v1.9.0)
 - [x] `menu.show` 可以配置菜单默认出现的位置。 (v1.8.3)

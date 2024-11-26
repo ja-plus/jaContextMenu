@@ -35,7 +35,9 @@ export default class ContextMenu {
     /* capture:true: prevent click the element that stopPropagation in click event. */
     window.addEventListener('click', this.clickEventFunc.bind(this), { capture: true });
   }
-  /** */
+  /**
+   * if click outside the contextmenu hide all menu. Inside menu click will do its own thing in `onclick` callback to hide menu.
+   */
   private clickEventFunc(this: ContextMenu, e: MouseEvent | PointerEvent) {
     this.storeMenus.forEach(menu => {
       if (!menu.el) return;
@@ -45,7 +47,7 @@ export default class ContextMenu {
         let el: HTMLElement | null = { parentElement: e.target } as HTMLElement;
         // eslint-disable-next-line no-cond-assign
         while ((el = el.parentElement)) {
-          if (el === menu.el) {
+          if (el.classList.contains(config.panelClass)) {
             isInside = true;
             break;
           }

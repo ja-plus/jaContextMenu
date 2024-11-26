@@ -1,3 +1,6 @@
+## v1.10.1
+* feature: MenuOption['customItem'] support function.
+* fix: child menuItem onclick return true, the parent menu item  should not hide.
 ## v1.10.0
 * change: All child menu panel's element append to document.body. In order to resolve 'scroll menu can't show it's child menu`.
 ## v1.9.0

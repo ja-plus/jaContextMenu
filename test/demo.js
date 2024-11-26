@@ -124,6 +124,31 @@ let menu2Option = {
               menu2().destroy();
             },
           },
+          {
+            label: 'Disabled status',
+            disabled: true,
+          },
+          {
+            label: 'Add icon',
+            icon: () => h('div', { style: { cssText: 'width: 14px;height:14px;border: 2px dashed;' } }),
+          },
+          {
+            label: 'Custom item',
+            onclick: e => {
+              return true; // not close menu
+            },
+            customItem: () => {
+              return h('div', { style: { cssText: 'display:flex;align-items:center;' } }, [
+                h('div', 'Custom items'), //
+                h('input', {
+                  type: 'range',
+                  style: {
+                    cssText: 'width: 50px',
+                  },
+                }),
+              ]);
+            },
+          },
         ],
       },
     },

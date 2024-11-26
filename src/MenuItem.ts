@@ -61,7 +61,7 @@ export default class MenuItem<T> {
         },
         [
           iconEl,
-          item.customItem ||
+          dealBaseAttr(item.customItem, this.parentMenu.payload) ||
             h('span.menu-item-label', {
               textContent: dealBaseAttr(item.label, this.parentMenu.payload),
             }),
@@ -92,13 +92,12 @@ export default class MenuItem<T> {
 
   calcPosition() {
     const childMenuEle = this.childMenu.el;
-    const { height: childMenuHeight, width: childMenuWidth } = childMenuEle.getBoundingClientRect();
+    const { height: childMenuHeight } = childMenuEle.getBoundingClientRect();
     const liPosition = this.el.getBoundingClientRect();
     const parentWidth = this.parentMenu.width || config.defW;
     const childWidth = this.childMenu.width || config.defW;
     let x = liPosition.x + liPosition.width - 5;
-    let y = liPosition.y - 2;
-    console.log('🚀 ~ MenuItem<T> ~ calcPosition ~ childMenuWidth:', childMenuWidth, liPosition, this.el);
+    let y = liPosition.y - 3;
     // right not available space
     if (windowSize.cW - liPosition.x - parentWidth < childWidth) {
       x = liPosition.x - childWidth + 5;

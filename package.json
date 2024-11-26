@@ -1,6 +1,6 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "VanillaJS contextmenu in ESModule",
   "main": "lib/ja-contextmenu.js",
   "module": "lib/ja-contextmenu.esm.js",

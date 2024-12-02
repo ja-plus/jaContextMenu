@@ -42,6 +42,8 @@ Please delete the "^"before the version number of ja-contextmenu in package.json
 Limited energy, there is no guarantee that the use mode will not be changed when the small version is updated.
 
 ## Feature Log
+- [x] `ContextMenuOption['arrowIcon']`, `MenuItemOption['arrowIcon']`(v1.10.3)
+- [x] `MenuItemOption['arrowIcon']` custom sub menu arrow right (v1.10.2)
 - [x] `MenuItemOption['customItem']` support callback (v1.10.1)
 - [x] Sub menu height > page height, auto scroll (v1.9.0)
 - [x] If the bottom position of the submenu is not enough, the bottom of the menu aligns with the bottom of the page.(v1.9.0)
@@ -87,6 +89,7 @@ const menuOption = {
       // support function
       label: payload => 'menu2', 
       icon: payload => 'icon href2',
+      arrowIcon: payload => h('div', '>'),
       class: payload => 'class2',
       tip: payload => 'tip2',
       show: payload => true,
@@ -146,6 +149,7 @@ someButton.onclick = (e) => {
 | width: number | 200 | Menu width |
 | fixMenuWhenScroll: boolean | false | Is the menu fixed when scrolling(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | Whether to close the menu when scrolling. |
+| arrowIcon: MenuItemOption<any>['arrowIcon'] | -- | Custom all sub menu's arrow,created by this contextMenu instance. |
 
 ## ContextMenu instance method 
 
@@ -156,22 +160,24 @@ Create a menu and return a MenuWrapper object.
 | param: type | default | desc |
 | ---- | ---- | ---- |
 | width?: number| 200 | Menu width. If the submenu is not configured, the width of the parent menu will be inherited. |
-| class?: string\|(payload)=>string | | Menu ul class |
-| items: `MenuItemOption` |    | List configuration item |
+| class?: string\|(payload)=>string | -- | Menu ul class |
+| arrowIcon: MenuItemOption<Payload>['arrowIcon'] | -- | this menu's arrow right icon (will inherit parent's menu's arrowIcon) |
+| items: `MenuItemOption` | -- | List configuration item |
 
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string\|HTMLElement\|(payload)=>string\|HTMLElement |    | icon url |
-| class?: string\|(payload)=>string |    | Menu item 'li' class |
-| label?: string\|(payload)=>string |    | Item text |
-| tip?: string\|(payload)=>string |    | Prompt text to the right of menu item |
+| icon?: string\|HTMLElement\|(payload)=>string\|HTMLElement | -- | icon url |
+| arrowIcon:HTMLElement \| (payload) => HTMLElement | -- | this items's arrow right icon |
+| class?: string\|(payload)=>string | -- | Menu item 'li' class |
+| label?: string\|(payload)=>string | -- | Item text |
+| tip?: string\|(payload)=>string | -- | Prompt text to the right of menu item |
 | show?: boolean\|(payload)=>boolean |  true  | Whether to show |
 | disabled?: boolean\|(payload)=>boolean |  false  | Whether to disabled |
-| type?: `MenuItemType` |     | value '---' \| 'hr' => &lt;hr&gt; split line | 
-| customItem?: `HTMLElement` |  | Custom Menu Item |
-| onclick?: function(event, payload):boolean|   | Click the event callback, and the parameter payload is the parameter passed in when calling the showMenu. return true does not close the menu after clicking.|
-| children?: `MenuOption` |     | Submenu configuration
+| type?: `MenuItemType` | -- | value '---' \| 'hr' => &lt;hr&gt; split line | 
+| customItem?: `HTMLElement` | -- | Custom Menu Item |
+| onclick?: function(event, payload):boolean| -- | Click the event callback, and the parameter payload is the parameter passed in when calling the showMenu. return true does not close the menu after clicking.|
+| children?: `MenuOption` | -- | Submenu configuration
 
 ## MenuWrapper
 ```ts

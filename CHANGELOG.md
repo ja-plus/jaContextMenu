@@ -1,3 +1,7 @@
+## v1.10.3
+feature: add `ContextMenuOption['arrowIcon']` to custom arrow right icon.
+feature: add `MenuOption['arrowIcon']` to custom arrow right icon.
+fix: when show child menu, the other child menu should be hidden.
 ## v1.10.2
 * feature: add `MenuItemOption['arrowIcon']` to custom arrow right icon.
 ## v1.10.1

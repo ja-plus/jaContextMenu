@@ -40,6 +40,8 @@ window.addEventListener('click', e => { menu2().show(e, payload) });
 精力有限，不保证小版本更新时，不改动使用方式。
 
 ## 功能更新记录
+- [x] `ContextMenuOption['arrowIcon']`, `MenuItemOption['arrowIcon']`(v1.10.3)
+- [x] `MenuItemOption['arrowIcon']` 自定义子菜单的箭头 (v1.10.2)
 - [x] `MenuItemOption['customItem']` 支持传入函数。(v1.10.1)
 - [x] 子菜单高度大于页面时，出现滚动条。 (v1.9.0)
 - [x] 子菜单展示时，如果下方位置不够，则菜单底部与页面底部对齐。 (v1.9.0)
@@ -85,6 +87,7 @@ const menuOption = {
       // 支持选项内容根据payload变动
       label: payload => 'menu2', 
       icon: payload => 'icon href2',
+      arrowIcon: payload => h('div', '>'),
       class: payload => 'class2',
       tip: payload => 'tip2',
       show: payload => true,
@@ -145,6 +148,7 @@ someButton.onclick = (e) => {
 | width: number | 200 | Menu width |
 | fixMenuWhenScroll: boolean | false | 滚动时菜单是否固定(hideMenuWhenScroll=false) |
 | hideMenuWhenScroll: boolean | true | 滚动时是否关闭菜单 |
+| arrowIcon: MenuItemOption<any>['arrowIcon'] | -- | 自定义所有菜单项的右箭头 |
 
 ## ContextMenu instance method 实例方法
 
@@ -155,22 +159,24 @@ someButton.onclick = (e) => {
 | param: type | default | desc |
 | ---- | ---- | ---- |
 | width?: number| 200 | 菜单宽度，子菜单不配置，则继承父菜单宽度 |
-| class?: string\|(payload)=>string | | Menu ul class |
-| items: `MenuItemOption` |    | 列表配置项 |
+| class?: string\|(payload)=>string | -- | Menu ul class |
+| arrowIcon: MenuItemOption<Payload>['arrowIcon'] | -- | 这个子菜单的右箭头自定义（会继承父菜单的此项配置） |
+| items: `MenuItemOption` | -- | 列表配置项 |
 
 #### MenuItemOption
 | param: type | default | desc |
 | ---- | ---- | ---- |
-| icon?: string\|HTMLElement\|(payload)=>string\|HTMLElement |    | 图标icon url |
-| class?: string\|(payload)=>string |    | 菜单项li class |
-| label?: string\|(payload)=>string |    | 选项文字 |
-| tip?: string\|(payload)=>string |    | 选项右侧提示文字 |
+| icon?: string\|HTMLElement\|(payload)=>string\|HTMLElement | -- | 图标icon url |
+| arrowIcon:HTMLElement \| (payload) => HTMLElement | -- | this items's arrow right icon |
+| class?: string\|(payload)=>string | -- | 菜单项li class |
+| label?: string\|(payload)=>string | -- | 选项文字 |
+| tip?: string\|(payload)=>string | -- | 选项右侧提示文字 |
 | show?: boolean\|(payload)=>boolean |  true  | 是否展示 |
 | disabled?: boolean\|(payload)=>boolean |  false  | 是否禁用 |
-| type?: `MenuItemType` |     | 取值 '---' \| 'hr' => &lt;hr&gt; 分割线 | 
-| customItem?: `HTMLElement` |  | 自定义菜单项 |
-| onclick?: function(event, payload):boolean|   | 点击事件回调,参数payload为调用showMenu时传入的参数.return true 则点击后不关闭菜单. |
-| children?: `MenuOption` |     | 子菜单配置
+| type?: `MenuItemType` | -- | 取值 '---' \| 'hr' => &lt;hr&gt; 分割线 | 
+| customItem?: `HTMLElement` | -- | 自定义菜单项 |
+| onclick?: function(event, payload):boolean| -- | 点击事件回调,参数payload为调用showMenu时传入的参数.return true 则点击后不关闭菜单. |
+| children?: `MenuOption` | -- | 子菜单配置
 ## MenuWrapper
 ```ts
 const menu:MenuWrapper = contextMenu.create<Payload>(...)

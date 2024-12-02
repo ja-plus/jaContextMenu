@@ -55,16 +55,12 @@ export default class MenuItem<T> {
               if (!item.children && !stay) this.parentMenu.closeAllMenus();
             }
           },
-          // onmouseenter: it.children?.length
-          //   ? (e) => this.#showChildMenu(e, it.children, contextMenuEle)
-          //   : () => this.#hideChildMenu(contextMenuEle),
-          onmouseenter: item.children
-            ? e => {
-                this.showChildMenu(e);
-              }
-            : () => {
-                this.hideOtherChildMenu(); // remove all child menu
-              },
+          onmouseenter: e => {
+            this.hideOtherChildMenu(); // remove all child menu
+            if (item.children) {
+              this.showChildMenu(e);
+            }
+          },
         },
         [
           iconEl,

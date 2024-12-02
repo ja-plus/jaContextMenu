@@ -76,10 +76,18 @@ export const contextMenuStyle = () => `
   }
   .${config.wrapperClass} li .right-arrow {
     position: absolute;
-    right: 8px; top: 9px;
-    border-top: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    border-left: 4px solid;
+    right: 4px; top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+  }
+  .${config.wrapperClass} li .right-arrow-icon {
+      position: absolute;
+      left:50%;top:50%;
+      transform: translate(-50%,-50%);
+      border-top: 4px solid transparent;
+      border-right: none;
+      border-bottom: 4px solid transparent;
+      border-left: 4px solid;
   }
   `;

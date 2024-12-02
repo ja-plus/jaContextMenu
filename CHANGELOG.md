@@ -1,3 +1,5 @@
+## v1.10.2
+* feature: add `MenuItemOption['arrowIcon']` to custom arrow right icon.
 ## v1.10.1
 * feature: MenuOption['customItem'] support function.
 * fix: child menuItem onclick return true, the parent menu item  should not hide.

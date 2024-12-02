@@ -4,6 +4,10 @@ export type MenuItemType = 'hr' | '---';
 export interface MenuItemOption<Payload> {
   /** item icon url or base64 */
   icon?: BaseAttr<string | HTMLElement, Payload>;
+  /**
+   * custom right arrow '>'
+   */
+  arrowIcon?: BaseAttr<HTMLElement, Payload>;
   /** item class name */
   class?: BaseAttr<string, Payload>;
   /** item text */
@@ -19,9 +23,12 @@ export interface MenuItemOption<Payload> {
   /**
    * custom <li>
    * @example
-   * customItem: document.createElement('div')
+   * ```
+   * customItem: document.createElement('div');
+   * customItem: (payload) => document.createElement('div');
+   * ```
    */
-  customItem?: HTMLElement;
+  customItem?: BaseAttr<HTMLElement, Payload>;
   /**
    * Item click event
    * @param {MouseEvent} e

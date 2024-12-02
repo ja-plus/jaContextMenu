@@ -3,6 +3,7 @@ import config from './config';
 import { MenuItemOption } from './types/MenuItemOption';
 import h from './utils/h';
 import { dealBaseAttr, windowSize } from './utils/utils';
+
 /**
  * Menu item
  */
@@ -33,8 +34,14 @@ export default class MenuItem<T> {
       let iconEl;
       if (item.icon) {
         const icon = dealBaseAttr(item.icon, this.parentMenu.payload);
-        iconEl = icon instanceof HTMLElement ? h('div.menu-item-icon', [icon]) : h('img.menu-item-icon', { src: icon }); // 图标
+        iconEl = icon instanceof HTMLElement ? h('div.menu-item-icon', [icon]) : h('img.menu-item-icon', { src: icon });
       }
+      let arrowIconEl = h('span.right-arrow-icon');
+      const arrowIcon = item.arrowIcon || this.parentMenu.menuOption?.arrowIcon;
+      if (arrowIcon) {
+        arrowIconEl = dealBaseAttr(arrowIcon, this.parentMenu.payload) || arrowIconEl;
+      }
+
       this.el = h(
         'li',
         {
@@ -66,13 +73,19 @@ export default class MenuItem<T> {
               textContent: dealBaseAttr(item.label, this.parentMenu.payload),
             }),
           item.tip && h('span.menu-item-tip', dealBaseAttr(item.tip, this.parentMenu.payload)),
-          item.children && h('span.right-arrow'),
+          item.children && h('span.right-arrow', [arrowIconEl]),
         ],
       );
     }
     if (item.children) {
       // extend parent width
-      if (!item.children.width) item.children.width = this.parentMenu.width;
+      if (!item.children.width) {
+        item.children.width = this.parentMenu.width;
+      }
+      // extend parent arrowIcon
+      if (!item.children.arrowIcon && item.children.arrowIcon !== null) {
+        item.children.arrowIcon = this.parentMenu.menuOption?.arrowIcon;
+      }
       this.childMenu = new Menu(item.children, { level: this.level + 1, id: this.parentMenu.id });
     }
   }

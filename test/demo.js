@@ -3,6 +3,7 @@ import { default as ContextMenu, Panel, h } from '../src/index.ts';
 // import ContextMenu, { Panel, h } from '../lib/ja-contextmenu.esm.js';
 import PlusIcon from './icon/plus.svg';
 import MinusIcon from './icon/minus.svg';
+import RightArrowIcon from './icon/right-arrow.svg';
 let contextMenu = new ContextMenu({
   fixMenuWhenScroll: false,
   hideMenuWhenScroll: false,
@@ -29,6 +30,7 @@ let menu = contextMenu.create({
     },
     {
       class: payload => (payload ? 'custom-' + payload[payload.length - 1] : 'custom-class'),
+      arrowIcon: () => h('img', { src: RightArrowIcon, style: { cssText: 'width:16px;height:16px' } }),
       customItem: h('div.customClassName#customItemId', {
         textContent: 'customRender',
         style: {
@@ -42,6 +44,9 @@ let menu = contextMenu.create({
           `,
         },
       }),
+      children: {
+        items: [{ label: 'custom render item' }],
+      },
     },
     {
       icon: MinusIcon,

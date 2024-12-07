@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "vite",
     "bd": "rollup -c",
-    "test": "vite"
+    "test": "jest",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,8 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-html": "^7.1.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.7.0",
+    "jsdom": "^25.0.1",
     "prettier": "^2.8.7",
     "rollup": "^4.27.4",
     "tslib": "^2.3.1",

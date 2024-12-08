@@ -4,17 +4,17 @@ export default {
   input: 'src/index.ts',
   output: [
     {
-      file: 'lib/ja-contextmenu.esm.js',
-      format: 'esm',
-      sourcemap: true,
-    },
-    {
-      file: 'lib/ja-contextmenu.js',
+      file: 'lib/ja-contextmenu.cjs',
       format: 'cjs',
       sourcemap: true,
     },
     {
-      file: 'lib/ja-contextmenu.esm.min.js',
+      file: 'lib/ja-contextmenu.js',
+      format: 'esm',
+      sourcemap: true,
+    },
+    {
+      file: 'lib/ja-contextmenu.min.js',
       format: 'esm',
       sourcemap: true,
       plugins: [terser()],

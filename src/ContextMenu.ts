@@ -7,6 +7,7 @@ import { MenuOption } from './types/MenuOption';
 import { injectCss } from './utils/utils';
 
 export interface MenuWrapper<T> {
+  menu: Menu<T>;
   show(position: PanelPosition, payload?: T): PanelShowResult;
   hide(): void;
   destroy(): void;
@@ -91,6 +92,7 @@ export default class ContextMenu {
       document.body.appendChild(mainMenu.el);
     }
     return {
+      menu: mainMenu,
       show: (position, payload) => this.showMenu(position, mainMenu, payload),
       calcPosition: mainMenu.calcPosition.bind(mainMenu),
       hide: mainMenu.hide.bind(mainMenu),

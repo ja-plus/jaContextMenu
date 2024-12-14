@@ -6,8 +6,8 @@ import h from './utils/h';
 import { dealBaseAttr } from './utils/utils';
 
 /**
- * 第一层menu保留el，使用display控制显示隐藏
- * 第二层后的menu使用remove来控制显示隐藏
+ * first layer menu keep el, use display to control show/hide
+ * second layer and after menu use remove to control show/hide
  */
 export default class Menu<Payload> extends Panel {
   /** menu id */

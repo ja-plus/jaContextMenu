@@ -2,7 +2,7 @@ import Menu from './Menu';
 import config from './config';
 import { MenuItemOption } from './types/MenuItemOption';
 import h from './utils/h';
-import { dealBaseAttr, windowSize } from './utils/utils';
+import { dealBaseAttr, getWindowSize } from './utils/utils';
 
 /**
  * Menu item
@@ -99,7 +99,11 @@ export default class MenuItem<T> {
     this.calcPosition(); // recalculate position
   }
 
+  /**
+   * @override
+   */
   calcPosition() {
+    const windowSize = getWindowSize();
     const childMenuEle = this.childMenu.el;
     const { height: childMenuHeight } = childMenuEle.getBoundingClientRect();
     const liPosition = this.el.getBoundingClientRect();

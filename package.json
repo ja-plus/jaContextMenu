@@ -10,6 +10,7 @@
     "dev": "vite",
     "bd": "rollup -c",
     "test": "vitest",
+    "coverage": "vitest run --coverage",
     "lint": "eslint ./src"
   },
   "repository": {
@@ -45,6 +46,7 @@
     "@rollup/plugin-typescript": "^12.1.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
+    "@vitest/coverage-v8": "^2.1.8",
     "core-js": "^3.30.0",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",

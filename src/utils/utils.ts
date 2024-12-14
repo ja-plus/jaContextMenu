@@ -13,28 +13,33 @@ interface WindowSize {
   /** html.clientHeight， minus scrollbars size */
   cH: number;
 }
+
 let _storeWindowSize: WindowSize;
+let _resize = false;
 
 export function getWindowSize(): WindowSize {
-  const html = document.querySelector('html') as HTMLElement;
-  const { innerWidth, innerHeight } = window;
-  const { clientWidth, clientHeight } = html;
-  _storeWindowSize = {
-    htmlEl: html,
-    sW: innerWidth - clientWidth,
-    sH: innerHeight - clientHeight,
-    cW: clientWidth,
-    cH: clientHeight,
-  };
+  if (!_storeWindowSize || _resize) {
+    const html = document.querySelector('html') as HTMLElement;
+    const { innerWidth, innerHeight } = window;
+    const { clientWidth, clientHeight } = html;
+    _storeWindowSize = {
+      htmlEl: html,
+      sW: innerWidth - clientWidth,
+      sH: innerHeight - clientHeight,
+      cW: clientWidth,
+      cH: clientHeight,
+    };
+    if (!_resize) {
+      _resize = false;
+    }
+  }
   return _storeWindowSize;
 }
 
-getWindowSize();
 window.addEventListener('resize', () => {
-  getWindowSize();
+  _resize = true;
 });
 
-export { _storeWindowSize as windowSize };
 /**
  * Determine whether the attribute is a function, if it is, return the result after calling, otherwise return the value
  */

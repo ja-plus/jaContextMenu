@@ -1,10 +1,10 @@
 /**
  * absolute position panel
  */
-import h from './utils/h';
 import config from './config';
-import { injectCss, windowSize } from './utils/utils';
 import { panelStyle } from './style';
+import h from './utils/h';
+import { getWindowSize, injectCss } from './utils/utils';
 
 export type PanelPosition = { x: number; y: number; position?: [PanelPositionEnum, PanelPositionEnum] };
 export type PanelOption = {
@@ -26,7 +26,7 @@ export type PanelShowResult = {
 };
 
 export default class Panel {
-  el!: HTMLElement;
+  el: HTMLElement | null = null;
   /** panel width */
   width?: number;
   /** panel height (getBoundingClientRect) */
@@ -72,6 +72,9 @@ export default class Panel {
       e.preventDefault();
       e.stopPropagation(); // prevent trigger ancestor's contextmenu event
     }
+    if (!this.el) {
+      throw new Error('Panel element not found');
+    }
     this.el.classList.remove('hide');
     const { x, y, position } = this.calcPosition(e);
     this.el.style.transform = `translate(${x}px,${y}px)`;
@@ -83,6 +86,8 @@ export default class Panel {
    * calc menu position x,y
    */
   calcPosition(e: PanelPosition): Required<PanelPosition> {
+    if (!this.el) throw new Error('error');
+    const windowSize = getWindowSize();
     const { height, width } = this.el.getBoundingClientRect();
     this.height = height;
     this.width = width;
@@ -126,12 +131,14 @@ export default class Panel {
    * hide menu
    */
   hide() {
-    this.el.classList.add('hide');
+    this.el?.classList.add('hide');
   }
   /** dom remove*/
   destroy() {
+    if (!this.el) return;
     this.el.removeEventListener('click', this.eventListenerCb);
     this.el.removeEventListener('contextmenu', this.eventListenerCb);
     this.el.remove();
+    this.el = null;
   }
 }

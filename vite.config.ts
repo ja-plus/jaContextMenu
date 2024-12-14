@@ -5,5 +5,10 @@ export default defineConfig({
   test: {
     // ...
     environment: 'happy-dom',
+    coverage: {
+      provider: 'v8', // or 'istanbul'
+      clean: true,
+      include: ['src/**/*.{js,ts}'],
+    },
   },
 });

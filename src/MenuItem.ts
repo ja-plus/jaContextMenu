@@ -88,6 +88,7 @@ export default class MenuItem<T> {
 
   showChildMenu(e: MouseEvent) {
     const childMenuEle = this.childMenu.el;
+    if (!childMenuEle) return;
     // if childMenuEle is hidden
     if (!(e.target as HTMLElement).contains(childMenuEle)) {
       (e.target as HTMLElement).classList.add(config.wrapperClass + '_hover');
@@ -105,6 +106,7 @@ export default class MenuItem<T> {
   calcPosition() {
     const windowSize = getWindowSize();
     const childMenuEle = this.childMenu.el;
+    if (!childMenuEle) return;
     const { height: childMenuHeight } = childMenuEle.getBoundingClientRect();
     const liPosition = this.el.getBoundingClientRect();
     const parentWidth = this.parentMenu.width || config.defW;

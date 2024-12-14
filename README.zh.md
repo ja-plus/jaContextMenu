@@ -1,11 +1,8 @@
 # ja-contextmenu
 
 ![NPM License](https://img.shields.io/npm/l/ja-contextmenu)
-
 ![NPM Version](https://img.shields.io/npm/v/ja-contextmenu)
-
 ![NPM Type Definitions](https://img.shields.io/npm/types/ja-contextmenu)
-
 ![NPM Downloads](https://img.shields.io/npm/dw/ja-contextmenu)
 
 Demo: npm run dev 本项目即可

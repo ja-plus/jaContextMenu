@@ -43,8 +43,10 @@ export default class Menu<Payload> extends Panel {
     this.el?.appendChild(this.ul);
   }
   updateMenuAttr() {
-    this.el.dataset.jaMenuId = this.id;
-    this.el.dataset.lv = this.level.toString();
+    if (this.el) {
+      this.el.dataset.jaMenuId = this.id;
+      this.el.dataset.lv = this.level.toString();
+    }
     this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
   }
   renderMenuItem() {

@@ -47,14 +47,18 @@ describe('create menu', () => {
     const style = getComputedStyle(panelEl);
     expect(style.display).toBe('none');
   });
+
   test('destroy', () => {
     const contextMenu = new ContextMenu();
     const menu = contextMenu.create({
       items: [{ label: 'A' }],
     });
+    const menuId = menu.menu.id;
     menu.show({ x: 0, y: 0 });
     menu.destroy();
     expect(menu.menu.el).toBeNull();
+    const panelEl = document.querySelector(`[data-ja-menu-id=${menuId}]`);
+    expect(panelEl).toBeNull();
   });
 
   test('attr: width ', () => {

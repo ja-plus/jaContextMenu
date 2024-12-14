@@ -18,7 +18,7 @@ export type PanelShowResult = {
     position: [PanelPositionEnum, PanelPositionEnum];
 };
 export default class Panel {
-    el: HTMLElement;
+    el: HTMLElement | null;
     width?: number;
     height: number;
     panelOption?: PanelOption;

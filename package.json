@@ -25,14 +25,14 @@
   ],
   "keywords": [
     "contextmenu",
-    "vanilla",
     "js",
     "ts",
+    "esm",
+    "vanilla",
+    "es6",
     "typescript",
     "browser",
     "ESModule",
-    "ES6",
-    "ES2015"
   ],
   "author": "JA+",
   "license": "MIT",

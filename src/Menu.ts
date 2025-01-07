@@ -24,10 +24,11 @@ export default class Menu<Payload> extends Panel {
 
   constructor(menuOption: MenuOption<Payload>, init?: { level?: number; id?: string }) {
     super(menuOption);
-    this.id = init?.id || Math.random().toString(36).slice(2, 10);
+    const {id,level} = init || {};
+    this.id = id || Math.random().toString(36).slice(2, 10);
     // if(level > 1) delete menuOption.position,baseZIndex?
     this.menuOption = menuOption;
-    this.level = init?.level || 0;
+    this.level = level || 0;
     this.createUl();
     // this.renderMenuItem();// called when show
   }
@@ -40,7 +41,7 @@ export default class Menu<Payload> extends Panel {
         e.preventDefault();
       },
     });
-    this.el?.appendChild(this.ul);
+    this.el && this.el.appendChild(this.ul);
   }
   updateMenuAttr() {
     if (this.el) {
@@ -95,18 +96,18 @@ export default class Menu<Payload> extends Panel {
     const res = super.calcPosition(...p);
     let { x, y } = res;
     // add scrollX scrollY if page has scroll bar
-    if (this.level === 0 && this.panelOption?.position !== 'fixed') {
+    if (this.level === 0 && this.panelOption && this.panelOption.position !== 'fixed') {
       x += window.scrollX;
       y += window.scrollY;
     }
     return { x, y, position: res.position };
   }
 
-  private closeMenus(lv: number, hide = true) {
+  private closeMenus(level: number, hide = true) {
     const menus = document.querySelectorAll<HTMLElement>(`.${config.panelClass}`);
     menus.forEach(menu => {
-      const level = menu.dataset.lv;
-      if (level && +level > lv && menu.dataset.jaMenuId === this.id) {
+      const { lv, jaMenuId } = menu.dataset || {};
+      if (lv && +lv > level && jaMenuId === this.id) {
         menu.remove();
       } else if (hide) {
         menu.classList.add('hide');
@@ -115,8 +116,9 @@ export default class Menu<Payload> extends Panel {
   }
 
   removeAllHover() {
+    const className = `${config.wrapperClass}_hover`
     this.children.forEach(item => {
-      item.el.classList.remove(`${config.wrapperClass}_hover`);
+      item.el.classList.remove(className);
     });
   }
   /**
@@ -124,15 +126,6 @@ export default class Menu<Payload> extends Panel {
    */
   removeChildMenus() {
     this.closeMenus(this.level, false);
-  }
-
-  /**
-   * remove item hover status
-   */
-  removeItemHover() {
-    this.children.forEach(childItem => {
-      childItem.el.classList.remove(`${config.wrapperClass}_hover`);
-    });
   }
 
   closeAllMenus() {

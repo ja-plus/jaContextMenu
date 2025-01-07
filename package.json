@@ -1,6 +1,6 @@
 {
   "name": "ja-contextmenu",
-  "version": "1.10.4",
+  "version": "1.10.5",
   "description": "VanillaJS contextmenu in ESModule",
   "main": "lib/ja-contextmenu.js",
   "module": "lib/ja-contextmenu.esm.js",
@@ -32,7 +32,7 @@
     "es6",
     "typescript",
     "browser",
-    "ESModule",
+    "ESModule"
   ],
   "author": "JA+",
   "license": "MIT",

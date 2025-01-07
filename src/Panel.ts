@@ -35,29 +35,34 @@ export default class Panel {
 
   constructor(panelOption?: PanelOption) {
     this.panelOption = panelOption;
-    this.width = this.panelOption?.width;
-    if (typeof this.panelOption?.width === 'string') {
-      throw new TypeError('Invalid width type.');
+    const width = this.panelOption ? this.panelOption.width : void 0;
+    if (typeof width === 'string') {
+      throw new TypeError('Invalid width');
     }
+    this.width = width;
     injectCss(config.panelCssId, panelStyle());
     this.createEl();
     this.addEventListener();
   }
 
   createEl() {
+    const {zIndex,position} = this.panelOption || {};
     this.el = h(`div.${config.panelClass}`, {
       style: {
         width: this.width ? this.width + 'px' : void 0,
-        zIndex: this.panelOption?.zIndex,
-        position: this.panelOption?.position, // fix
+        zIndex,
+        position
       },
       classList: ['hide'],
     });
   }
 
   private addEventListener() {
-    this.el?.addEventListener('click', this.eventListenerCb);
-    this.el?.addEventListener('contextmenu', this.eventListenerCb);
+    const el = this.el;
+    if(el){
+      el.addEventListener('click', this.eventListenerCb);
+      el.addEventListener('contextmenu', this.eventListenerCb);
+    }
   }
 
   private eventListenerCb(e: Event) {
@@ -131,7 +136,7 @@ export default class Panel {
    * hide menu
    */
   hide() {
-    this.el?.classList.add('hide');
+    this.el && this.el.classList.add('hide');
   }
   /** dom remove*/
   destroy() {

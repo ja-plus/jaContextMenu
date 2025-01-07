@@ -1,3 +1,6 @@
+## v1.10.5
+* optimize: `h` function performance;
+
 ## v1.10.4
 * change: deal side effect about get window size js module.
 * feature: add unit test(vitest)

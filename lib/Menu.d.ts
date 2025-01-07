@@ -25,7 +25,6 @@ export default class Menu<Payload> extends Panel {
     private closeMenus;
     removeAllHover(): void;
     removeChildMenus(): void;
-    removeItemHover(): void;
     closeAllMenus(): void;
     hide(): void;
     destroy(): void;

@@ -138,6 +138,6 @@ export default class MenuItem<T> {
 
   hideOtherChildMenu() {
     this.parentMenu?.removeChildMenus();
-    this.parentMenu?.removeItemHover();
+    this.parentMenu?.removeAllHover();
   }
 }

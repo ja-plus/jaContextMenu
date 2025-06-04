@@ -1,3 +1,6 @@
+## v1.10.6
+* feature: `PanelOption` support `class`
+
 ## v1.10.5
 * optimize: `h` function performance;
 

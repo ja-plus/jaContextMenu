@@ -7,6 +7,7 @@ export type PanelOption = {
     width?: number;
     position?: 'fixed' | null;
     zIndex?: number;
+    class?: string;
 };
 export declare enum PanelPositionEnum {
     TOP = "top",

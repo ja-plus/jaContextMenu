@@ -12,6 +12,7 @@ export type PanelOption = {
   width?: number;
   position?: 'fixed' | null;
   zIndex?: number;
+  class?: string;
 };
 
 export enum PanelPositionEnum {
@@ -46,20 +47,20 @@ export default class Panel {
   }
 
   createEl() {
-    const {zIndex,position} = this.panelOption || {};
+    const { zIndex, position } = this.panelOption || {};
     this.el = h(`div.${config.panelClass}`, {
       style: {
         width: this.width ? this.width + 'px' : void 0,
         zIndex,
-        position
+        position,
       },
-      classList: ['hide'],
+      classList: ['hide', this.panelOption?.class || ''],
     });
   }
 
   private addEventListener() {
     const el = this.el;
-    if(el){
+    if (el) {
       el.addEventListener('click', this.eventListenerCb);
       el.addEventListener('contextmenu', this.eventListenerCb);
     }

@@ -3,8 +3,9 @@
  */
 import config from './config';
 import { panelStyle } from './style';
+import { BaseAttr } from './types/common';
 import h from './utils/h';
-import { getWindowSize, injectCss } from './utils/utils';
+import { dealBaseAttr, getWindowSize, injectCss } from './utils/utils';
 
 export type PanelPosition = { x: number; y: number; position?: [PanelPositionEnum, PanelPositionEnum] };
 export type PanelOption = {
@@ -12,7 +13,7 @@ export type PanelOption = {
   width?: number;
   position?: 'fixed' | null;
   zIndex?: number;
-  class?: string;
+  class?: BaseAttr<string, void>;
 };
 
 export enum PanelPositionEnum {
@@ -48,13 +49,13 @@ export default class Panel {
 
   createEl() {
     const { zIndex, position } = this.panelOption || {};
-    this.el = h(`div.${config.panelClass}`, {
+    this.el = h(`div`, {
       style: {
         width: this.width ? this.width + 'px' : void 0,
         zIndex,
         position,
       },
-      classList: ['hide', this.panelOption?.class || ''],
+      classList: [config.panelClass, 'hide'],
     });
   }
 
@@ -73,20 +74,27 @@ export default class Panel {
   /**
    * show menu
    */
-  show(e: PanelPosition): PanelShowResult {
+  show(e: PanelPosition, payload?: any): PanelShowResult {
     if (e instanceof MouseEvent) {
       e.preventDefault();
       e.stopPropagation(); // prevent trigger ancestor's contextmenu event
     }
+    this.updatePanelAttr(payload);
     if (!this.el) {
       throw new Error('Panel element not found');
     }
-    this.el.classList.remove('hide');
+    // this.el.classList.remove('hide');
     const { x, y, position } = this.calcPosition(e);
     this.el.style.transform = `translate(${x}px,${y}px)`;
     return {
       position,
     };
+  }
+
+  updatePanelAttr(payload?: any) {
+    if (!this.el) throw new Error('error');
+    const className = dealBaseAttr(this.panelOption?.class, payload) || '';
+    this.el.className = `${config.panelClass} ${className}`;
   }
   /**
    * calc menu position x,y

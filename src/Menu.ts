@@ -24,7 +24,7 @@ export default class Menu<Payload> extends Panel {
 
   constructor(menuOption: MenuOption<Payload>, init?: { level?: number; id?: string }) {
     super(menuOption);
-    const {id,level} = init || {};
+    const { id, level } = init || {};
     this.id = id || Math.random().toString(36).slice(2, 10);
     // if(level > 1) delete menuOption.position,baseZIndex?
     this.menuOption = menuOption;
@@ -48,7 +48,7 @@ export default class Menu<Payload> extends Panel {
       this.el.dataset.jaMenuId = this.id;
       this.el.dataset.lv = this.level.toString();
     }
-    this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level} ${dealBaseAttr(this.menuOption?.class, this.payload)}`;
+    this.ul.className = `${config.wrapperClass} ${config.wrapperClass}-lv${this.level}}`;
   }
   renderMenuItem() {
     if (!Array.isArray(this.menuOption?.items)) {
@@ -73,7 +73,7 @@ export default class Menu<Payload> extends Panel {
    */
   show(e: Parameters<Panel['show']>[0], payload?: any) {
     this.prepareMenuShow(payload);
-    return super.show(e); // calculate transform:translate
+    return super.show(e, payload); // calculate transform:translate
   }
 
   /**
@@ -116,7 +116,7 @@ export default class Menu<Payload> extends Panel {
   }
 
   removeAllHover() {
-    const className = `${config.wrapperClass}_hover`
+    const className = `${config.wrapperClass}_hover`;
     this.children.forEach(item => {
       item.el.classList.remove(className);
     });

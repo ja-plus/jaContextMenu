@@ -1,3 +1,8 @@
+## v1.10.7
+* fix: `package.json` module.
+* fix: `PanelOption.class` support multiple class name.
+* break: `MenuOption.class` will append to `.ja-panel`.
+
 ## v1.10.6
 * feature: `PanelOption` support `class`
 

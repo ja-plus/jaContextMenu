@@ -10,7 +10,7 @@ let contextMenu = new ContextMenu({
 });
 let menu = contextMenu.create({
   width: 150,
-  class: payload => 'my-contextmenu' + payload[payload.length - 1],
+  class: () => 'my-contextmenu' + ' ' + Math.random().toString(36).substring(2),
   items: [
     {
       icon: () =>

@@ -3,7 +3,7 @@
   "version": "1.10.6",
   "description": "VanillaJS contextmenu in ESModule",
   "main": "lib/ja-contextmenu.js",
-  "module": "lib/ja-contextmenu.esm.js",
+  "module": "lib/ja-contextmenu.js",
   "types": "lib/index.d.ts",
   "type": "module",
   "scripts": {

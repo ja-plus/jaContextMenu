@@ -1,4 +1,4 @@
-import { BaseAttr } from './types/common';
+import { BaseAttr, ThemeAttr } from './types/common';
 export type PanelPosition = {
     x: number;
     y: number;
@@ -6,6 +6,7 @@ export type PanelPosition = {
 };
 export type PanelOption = {
     width?: number;
+    theme?: ThemeAttr;
     position?: 'fixed' | null;
     zIndex?: number;
     class?: BaseAttr<string, void>;

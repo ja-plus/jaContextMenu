@@ -1,4 +1,5 @@
 ## v1.10.7
+* feature: support `dark` theme.
 * fix: `package.json` module.
 * fix: `PanelOption.class` support multiple class name.
 * break: `MenuOption.class` will append to `.ja-panel`.

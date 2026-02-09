@@ -78,6 +78,9 @@ export default class MenuItem<T> {
       if (!item.children.width) {
         item.children.width = this.parentMenu.width;
       }
+      if (!item.children.theme) {
+        item.children.theme = this.parentMenu.menuOption?.theme;
+      }
       // extend parent arrowIcon
       if (!item.children.arrowIcon && item.children.arrowIcon !== null) {
         item.children.arrowIcon = this.parentMenu.menuOption?.arrowIcon;
@@ -97,6 +100,7 @@ export default class MenuItem<T> {
     document.body.appendChild(childMenuEle);
     this.childMenu.payload = this.parentMenu.payload; // parent payload to child menu
     this.childMenu.prepareMenuShow(this.childMenu.payload);
+    this.childMenu.updatePanelAttr(this.childMenu.payload);
     this.calcPosition(); // recalculate position
   }
 

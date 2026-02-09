@@ -4,13 +4,15 @@ import { default as ContextMenu, Panel, h } from '../src/index.ts';
 import PlusIcon from './icon/plus.svg';
 import MinusIcon from './icon/minus.svg';
 import RightArrowIcon from './icon/right-arrow.svg';
+import '../styles/dark.css';
+
 let contextMenu = new ContextMenu({
   fixMenuWhenScroll: false,
   hideMenuWhenScroll: false,
 });
 let menu = contextMenu.create({
   width: 150,
-  class: () => 'my-contextmenu' + ' ' + Math.random().toString(36).substring(2),
+  // class: () => 'my-contextmenu' + ' ' + Math.random().toString(36).substring(2),
   items: [
     {
       icon: () =>
@@ -160,7 +162,7 @@ let menu2Option = {
     { type: '---' },
     { label: 'Return', tip: 'Alt+A', onclick: () => console.log('Return') },
     { label: 'Forward', tip: 'Alt+B', onclick: () => console.log('Forward') },
-    { label: 'Press Q to close menu', tip: '', disabled: true },
+    { label: 'Press Q to close menu', tip: 'Q', disabled: true },
   ],
 };
 let menu2 = contextMenu.createAsync(menu2Option);
@@ -180,6 +182,7 @@ const block = document.querySelector('#block1');
 const block2 = document.querySelector('#block2');
 // const block3 = document.querySelector('#block3');
 const block4 = document.querySelector('#block4');
+const block5 = document.querySelector('#block5');
 block.addEventListener('contextmenu', e => {
   const showResult = menu2().show(e, 'payload');
   console.log(showResult);
@@ -223,4 +226,26 @@ block4.addEventListener('contextmenu', e => {
   e.stopPropagation();
   e.position = ['left', 'top'];
   menu4.show(e);
+});
+
+let darkContextMenu = new ContextMenu({
+  theme: () => 'dark',
+  fixMenuWhenScroll: false,
+  hideMenuWhenScroll: false,
+});
+let darkMenu = darkContextMenu.create({
+  items: [
+    { label: 'dark theme', tip: 'dark' },
+    {
+      label: 'child',
+      children: {
+        items: [{ label: 'child1' }, { label: 'child2' }],
+      },
+    },
+    { label: 'disabled', disabled: true, tip: 'dis' },
+  ],
+});
+block5.addEventListener('contextmenu', e => {
+  e.stopPropagation();
+  darkMenu.show(e);
 });

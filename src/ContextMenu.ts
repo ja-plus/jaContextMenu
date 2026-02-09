@@ -85,6 +85,9 @@ export default class ContextMenu {
     if (this.contextMenuOption.arrowIcon) {
       menuOption.arrowIcon = this.contextMenuOption.arrowIcon;
     }
+    if (this.contextMenuOption.theme) {
+      menuOption.theme = this.contextMenuOption.theme;
+    }
 
     const mainMenu = new Menu(menuOption);
     this.storeMenus.push(mainMenu);

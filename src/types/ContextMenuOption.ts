@@ -1,6 +1,9 @@
+import { ThemeAttr } from './common';
 import { MenuItemOption } from './MenuItemOption';
 
 export type ContextMenuOption = {
+  /** menu theme */
+  theme?: ThemeAttr;
   /** default menu width */
   width?: number;
   /**  if hide menu when scroll */

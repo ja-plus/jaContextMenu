@@ -3,7 +3,6 @@ import Panel from './Panel';
 import config from './config';
 import { MenuOption } from './types/MenuOption';
 import h from './utils/h';
-import { dealBaseAttr } from './utils/utils';
 
 /**
  * first layer menu keep el, use display to control show/hide

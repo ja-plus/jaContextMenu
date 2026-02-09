@@ -18,10 +18,11 @@ special situation:
 
 ## Brief introduction
 * Native js right-click menu encapsulation. It can also be used for the onclick event to open the menu.
-* The default style is completed by inserting the style tag through js, paying attention to the class namespace.。
+* The default style is completed by inserting the style tag through js, paying attention to the class namespace.
 * Only the most basic styles are provided.
 * TypeScript ✔
 * default z-index = 5000;
+* Dark mode support ✔
 * [Gitee](https://gitee.com/japlus/ja-context-menu)
 * [中文🇨🇳](https://gitee.com/japlus/ja-context-menu/blob/master/README.zh.md)
 ## Usage
@@ -30,7 +31,7 @@ special situation:
 import ContextMenu from 'ja-contextmenu';
 const contextMenu = new ContextMenu();
 const menuOption = {
-  item:[
+  items:[
     { label:'go', onclick(e, payload){...} }
   ]
 };
@@ -40,6 +41,15 @@ window.addEventListener('contextmenu', e => { menu.show(e, payload) });
 // async create menu
 const menu2 = contextMenu.createAsync(menuOption);
 window.addEventListener('click', e => { menu2().show(e, payload) });
+
+// Dark mode
+import '../styles/dark.css';
+const darkMenu = contextMenu.create({
+  class: 'dark',
+  items:[
+    { label:'Dark Mode', onclick(e, payload){...} }
+  ]
+});
 
 ```
 ## Attention
@@ -119,7 +129,7 @@ const menuOption = {
                 // {[element.key]:value}
                 textContent: 'hello', // element.textContent = 'hello'
                 style:{
-                  fontWeight:'bolder'.// element.style.fontWeight = 'holder'
+                  fontWeight:'bolder',// element.style.fontWeight = 'holder'
                   cssText: 'font-size:14px;' // element.style.cssText = 'font-size:14px;'
                 }, 
                 className:'class-name', 

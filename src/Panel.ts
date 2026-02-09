@@ -3,7 +3,7 @@
  */
 import config from './config';
 import { panelStyle } from './style';
-import { BaseAttr } from './types/common';
+import { BaseAttr, ThemeAttr } from './types/common';
 import h from './utils/h';
 import { dealBaseAttr, getWindowSize, injectCss } from './utils/utils';
 
@@ -11,6 +11,7 @@ export type PanelPosition = { x: number; y: number; position?: [PanelPositionEnu
 export type PanelOption = {
   /** Panel width */
   width?: number;
+  theme?: ThemeAttr;
   position?: 'fixed' | null;
   zIndex?: number;
   class?: BaseAttr<string, void>;
@@ -93,8 +94,12 @@ export default class Panel {
 
   updatePanelAttr(payload?: any) {
     if (!this.el) throw new Error('error');
-    const className = dealBaseAttr(this.panelOption?.class, payload) || '';
-    this.el.className = `${config.panelClass} ${className}`;
+    const optionClass = dealBaseAttr(this.panelOption?.class, payload) || '';
+    const className: string[] = [config.panelClass, optionClass];
+    if (this.panelOption?.theme) {
+      className.push(`theme-${dealBaseAttr(this.panelOption.theme, payload)}`);
+    }
+    this.el.className = className.join(' ');
   }
   /**
    * calc menu position x,y

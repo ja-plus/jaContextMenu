@@ -1,3 +1,4 @@
+import { BaseAttr } from './types/common';
 export type PanelPosition = {
     x: number;
     y: number;
@@ -7,7 +8,7 @@ export type PanelOption = {
     width?: number;
     position?: 'fixed' | null;
     zIndex?: number;
-    class?: string;
+    class?: BaseAttr<string, void>;
 };
 export declare enum PanelPositionEnum {
     TOP = "top",
@@ -27,7 +28,8 @@ export default class Panel {
     createEl(): void;
     private addEventListener;
     private eventListenerCb;
-    show(e: PanelPosition): PanelShowResult;
+    show(e: PanelPosition, payload?: any): PanelShowResult;
+    updatePanelAttr(payload?: any): void;
     calcPosition(e: PanelPosition): Required<PanelPosition>;
     hide(): void;
     destroy(): void;

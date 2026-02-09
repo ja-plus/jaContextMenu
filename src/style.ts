@@ -5,10 +5,11 @@ export const panelStyle = () => `
   box-sizing: border-box;
 }
 .${config.panelClass}{
+  --bg-color: #fff;
   --border-color: #dee0e3;
   border: 1px solid var(--border-color);
   left: 0; top: 0;
-  background-color: #fff;
+  background-color: var(--bg-color);
   position: absolute;
   z-index: ${config.defZ};
 }
@@ -24,7 +25,6 @@ export const contextMenuStyle = () => `
 .${config.wrapperClass}{
   --item-background--hover: #e8e8e9;
   --disabled-color: #777;
-  --tip-color: #5f6368;
   --li-height: ${config.itemH}px;
   user-select: none;
   padding: 2px 0 2px 0px;
@@ -63,9 +63,6 @@ export const contextMenuStyle = () => `
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.${config.wrapperClass} li .menu-item-tip {
-  color: var(--tip-color);
 }
 .${config.wrapperClass} li:hover:not(.divide):not(.disabled),
 .${config.wrapperClass} li.${config.wrapperClass}_hover {

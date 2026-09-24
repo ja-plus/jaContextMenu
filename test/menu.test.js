@@ -132,6 +132,35 @@ describe('menu item', () => {
     menu.destroy();
   });
 
+  test('hr with show', () => {
+    const contextMenu = new ContextMenu();
+    const menu = contextMenu.create({
+      items: [{ label: 'A' }, { type: 'hr', show: () => false }, { type: 'hr', show: () => true }, { label: 'B' }],
+    });
+    menu.show({ x: 0, y: 0 });
+    const hrEls = menu.menu.el.querySelectorAll('.ja-contextmenu li.divide');
+    expect(hrEls.length).toBe(2);
+    expect(hrEls[0].style.display).toBe('none');
+    expect(hrEls[1].style.display).toBe('');
+    menu.destroy();
+  });
+
+  test('hr with show and payload', () => {
+    const contextMenu = new ContextMenu();
+    const menu = contextMenu.create({
+      items: [{ label: 'A' }, { type: 'hr', show: row => row.folder }, { label: 'B' }],
+    });
+    // payload.folder 为 false：分割线隐藏
+    menu.show({ x: 0, y: 0 }, { folder: false });
+    let hrEl = menu.menu.el.querySelector('.ja-contextmenu li.divide');
+    expect(hrEl.style.display).toBe('none');
+    // payload.folder 为 true：重新 show 后分割线显示
+    menu.show({ x: 0, y: 0 }, { folder: true });
+    hrEl = menu.menu.el.querySelector('.ja-contextmenu li.divide');
+    expect(hrEl.style.display).toBe('');
+    menu.destroy();
+  });
+
   test('icon', () => {
     const contextMenu = new ContextMenu();
     const iconImgSrc = 'http://aa.com/test-icon';

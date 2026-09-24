@@ -24,7 +24,13 @@ export default class MenuItem<T> {
   init() {
     const item = this.itemOption;
     if (item.type === 'hr' || item.type === '---') {
-      this.el = h('li.divide');
+      // hr 同样支持 show：为 false 时隐藏（display:none），与普通菜单项行为一致
+      const show = item.show === void 0 ? true : dealBaseAttr(item.show, this.parentMenu.payload);
+      this.el = h('li.divide', {
+        style: {
+          display: show ? '' : 'none',
+        },
+      });
     } else {
       const liDisabled = dealBaseAttr(item.disabled, this.parentMenu.payload);
       const liClassList = [dealBaseAttr(item.class, this.parentMenu.payload)];

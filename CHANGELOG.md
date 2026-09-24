@@ -1,3 +1,7 @@
+## v1.11.1
+* fix: `MenuItemOption.show` not work on `hr`(divide line) menu item. The divide line now hides (`display:none`) when `show` returns false, same as normal menu item.
+* test: add regression tests for `hr` item `show` (constant / function with payload).
+
 ## v1.10.7
 * feature: support `dark` theme.
 * fix: `package.json` module.
